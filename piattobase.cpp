@@ -1,4 +1,7 @@
 #include "piattobase.h"
+#include"primo.h"
+#include"secondo.h"
+#include"contorno.h"
 using std::string;
 
 //costruttore piattoBase
@@ -48,3 +51,27 @@ bool piattoBase::getPrezzoBase() const {
 //    return OS;
 //}
 
+
+//Metodo per convertire il mio oggetto in ina string (necessario per passare a Qstring
+//metodo per estrappolare i dati e metterli in stringa
+string piattoBase::piattoInString(piattoBase* pb) const {
+    string ptString;
+    if(dynamic_cast<primo*>(pb))
+        ptString="Primo";
+    if(dynamic_cast<secondo*>(pb))
+        ptString="Secondo";
+    if(dynamic_cast<contorno*>(pb))
+        ptString="Contorno";
+    string strF = "";
+    strF.append("Tipo di piatto: " + ptString)
+            .append("\nNome: " + getNome());
+    if(pb->getGlutenFree())
+        strF.append("\nSenza glutine: si");
+    else
+        strF.append("\nSenza glutine: no");
+    if(pb->getVegano())
+        strF.append("\nVegano: si");
+    else
+        strF.append("\nVegano: no");
+    return strF;
+}

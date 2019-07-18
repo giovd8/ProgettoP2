@@ -121,7 +121,7 @@ typename container<T>::iteratore container<T>::begin() const {
 
 template<typename T>
 typename container<T>::iteratore container<T>::end() const {
-    return iteratore(ultimo+1);
+    return iteratore(ultimo->next);
 }
 
 template<typename T>

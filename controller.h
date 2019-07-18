@@ -13,12 +13,12 @@ class controller: public QWidget {
 private:
     QString xmlFile;
     modello* m;
-    //listaPiatti* lp;
     menuprincipale* mp;
     modifichedati* md;
-    viewprodotti* vp;
+    viewpiatti* viewP;
 public slots:
-    //void caricaPiatti();
+    void caricaPiatti();
+
 
 public:
     controller(QWidget * parent= nullptr);

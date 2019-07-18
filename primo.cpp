@@ -63,3 +63,22 @@ double primo::prezzoFinale() const {
     return prezzoTemp;
 }
 
+string primo::piattoInString(piattoBase* pb) const {
+    string strF = piattoBase::piattoInString(pb);
+    primo* x=dynamic_cast<primo*>(pb);
+    if(x){
+        if(x->getSoia())
+            strF.append("\nPasta di soia: si");
+        else
+            strF.append("\nPasta di soia: no");
+    strF.append("\nTipo di Pasta: " + x->getPasta()).append("\nIgredienti: " +x->getIngrediente1());
+    if(x->getIngrediente2()!="")
+        strF.append(" "+x->getIngrediente2());
+        if(x->getIngrediente3()!="")
+            strF.append(" "+x->getIngrediente3());
+            if(x->getIngrediente4()!="")
+                strF.append(" "+x->getIngrediente4());
+    }
+    return strF;
+}
+

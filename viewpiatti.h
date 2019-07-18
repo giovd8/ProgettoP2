@@ -6,20 +6,25 @@
 #include<QHBoxLayout>
 #include<QApplication>
 #include<QListWidget>
+#include"listapcontainer.h"
 
-class viewprodotti: public QWidget {
+class viewpiatti: public QWidget {
     Q_OBJECT
     private:
         QPushButton* tuttiPiatti;
         QPushButton* tuttiPrimi;
         QPushButton* tuttiSecondi;
         QPushButton* tuttiContorni;
-        QListWidget* lista;
-    public slots:
-        //void caricaPiatti();
+        listaPContainer* lista;
+
 
     public:
-        viewprodotti(QWidget* parent);
+        viewpiatti(QWidget* parent);
+        QPushButton* getTuttiPiatti() const;
+        QPushButton* getTuttiPrimi() const;
+        QPushButton* getTuttiSecondi() const;
+        QPushButton* getTuttiContorni() const;
+        listaPContainer* getLista() const;
 };
 
 #endif // VIEWPRODOTTI_H

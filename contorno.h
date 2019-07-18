@@ -24,6 +24,9 @@ class contorno: public piattoBase {
         //calcola prezzo finale virtuale
         double prezzoFinale() const;
 
+        //convertire oggetto in stringa
+        virtual string piattoInString(piattoBase*) const;
+
         //overloading operatori
         bool operator==(const piattoBase&) const;
         bool operator!=(const piattoBase&) const;

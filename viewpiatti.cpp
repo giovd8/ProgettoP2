@@ -1,12 +1,13 @@
-#include "viewpiatti.h"
+#include"viewpiatti.h"
+#include<QDebug>
 
-viewprodotti::viewprodotti(QWidget* p):
+viewpiatti::viewpiatti(QWidget* p):
     QWidget(p),
     tuttiPiatti(new QPushButton("Tutti i piatti",this)),
     tuttiPrimi(new QPushButton("Primi piatti",this)),
     tuttiSecondi(new QPushButton("Secondi piatti",this)),
     tuttiContorni(new QPushButton("Contorni",this)),
-    lista(new QListWidget())
+    lista(new listaPContainer(this))
 {
     QHBoxLayout* y=new QHBoxLayout;
     y->addWidget(tuttiPiatti);
@@ -22,5 +23,24 @@ viewprodotti::viewprodotti(QWidget* p):
     x->addLayout(z);
 
     setLayout(x);
+}
+
+QPushButton* viewpiatti::getTuttiPiatti() const {
+    return tuttiPiatti;
+}
+
+QPushButton* viewpiatti::getTuttiPrimi() const {
+    return tuttiPrimi;
+}
+
+QPushButton* viewpiatti::getTuttiSecondi() const {
+    return tuttiSecondi;
+}
+
+QPushButton* viewpiatti::getTuttiContorni() const {
+    return tuttiContorni;
+}
+listaPContainer* viewpiatti::getLista() const {
+    return lista;
 }
 

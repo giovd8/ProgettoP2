@@ -34,6 +34,9 @@ class piattoBase {
         //calcola prezzo finale
         virtual double prezzoFinale() const=0;
 
+        //convertire oggetto in stringa
+        virtual string piattoInString(piattoBase*) const =0;
+
         //overloading operatori
 //        virtual bool operator==(const piattoBase&) const;
 //        virtual bool operator!=(const piattoBase&) const;

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <primo nome="Carbonara" vegano="glutenFree="false" glutenFree="false" prezzoBase="7" soia="false" tipoPasta="spaghetti" ingrediente1="pancetta" ingrediente2="uova" ingrediente3="panna" ingrediente4="grana">
+    <primo nome="Carbonara" 
+    vegano="false" 
+    glutenFree="false" 
+    prezzoBase="7" 
+    soia="false" 
+    tipoPasta="spaghetti" 
+    ingrediente1="pancetta" 
+    ingrediente2="uova" 
+    ingrediente3="panna" 
+    ingrediente4="grana"/>
+    <primo nome="Carbonara" vegano="false" glutenFree="false" prezzoBase="7" soia="false" tipoPasta="spaghetti" ingrediente1="pancetta" ingrediente2="uova" ingrediente3="panna" ingrediente4="grana"/>
+
 </root>

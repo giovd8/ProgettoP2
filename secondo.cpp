@@ -41,3 +41,16 @@ double secondo::prezzoFinale() const {
 
     return prezzoTemp;
 }
+
+string secondo::piattoInString(piattoBase* pb) const {
+    string strF = piattoBase::piattoInString(pb);
+    secondo* x=dynamic_cast<secondo*>(pb);
+    if(x){
+        if(x->getTipoCarne()!="")
+            strF.append("\nTipo di carne: " + getTipoCarne());
+        else
+            strF.append("\nTipo di pesce: " + getTipoPesce());
+    strF.append("\nTipo di piatto: ") + getTipoPiatto().append("\nTipo cottura: ")+getTipoCottura();
+    }
+    return strF;
+}

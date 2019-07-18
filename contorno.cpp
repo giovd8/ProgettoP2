@@ -26,3 +26,15 @@ double contorno::prezzoFinale() const {
     return prezzoTemp;
 }
 
+string contorno::piattoInString(piattoBase* pb) const {
+    string strF = piattoBase::piattoInString(pb);
+    contorno* x=dynamic_cast<contorno*>(pb);
+        if(x && x->getPatate())
+            strF.append("/nPatate: ");
+        else
+            strF.append("/Verdure: ");
+
+    strF.append(x->getTipoContorno());
+    return strF;
+}
+
