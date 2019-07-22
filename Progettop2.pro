@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     modello.cpp \
     viewpiatti.cpp \
     listapcontainer.cpp \
-    elementilistap.cpp
+    elementilistap.cpp \
+    inserimentopiatto.cpp
 
 HEADERS += \
     piattobase.h \
@@ -36,5 +37,6 @@ HEADERS += \
     modello.h \
     viewpiatti.h \
     listapcontainer.h \
-    elementilistap.h
+    elementilistap.h \
+    inserimentopiatto.h
 

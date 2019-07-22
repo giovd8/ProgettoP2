@@ -8,17 +8,17 @@ using std::string;
 
 class contorno: public piattoBase {
     private:
-        bool patate;
+        string nomeContorno;
         string tipoContorno;
     public:
         //costruttore contorno
-        contorno(string="", bool=true, bool=true, double=3.5, bool=true, string="Inserisci la tipologia di contorno");
+        contorno(string="", bool=true, bool=true, double=3.5, string="Inserisci il contorno", string="Inserisci la tipologia di contorno");
 
         //costruttore di copia
         contorno(const contorno&);
 
         //metodi GET
-        bool getPatate() const;
+        string getNomeContorno() const;
         string getTipoContorno() const;
 
         //calcola prezzo finale virtuale

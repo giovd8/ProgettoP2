@@ -11,6 +11,9 @@ modifichedati::modifichedati(QWidget* p):
     x->addWidget(modifica);
     x->addWidget(elimina);
 
-
     setLayout(x);
-   }
+}
+
+QPushButton* modifichedati::getAggiungiPiatto() const {
+    return aggiungi;
+}

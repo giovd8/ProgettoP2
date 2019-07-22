@@ -5,6 +5,7 @@
 #include"primo.h"
 #include"secondo.h"
 #include"contorno.h"
+//#include"inserimentopiatto.h"
 using std::string;
 
 
@@ -12,12 +13,14 @@ class modello {
     private:
         container<piattoBase*>* piatti;
         string xmlFile;
+        //inserimentoPiatto* insP;
     public:
         modello(string);
         ~modello();
 
         void caricamentoDati() const;
-        void setNuovoPercorso(string);
+        void nuovoPercorso(string);
+        void caricaOggettoXML();
 
         //Funzioni begin e end per modello
         container<piattoBase*>::iteratore mBegin();

@@ -22,8 +22,9 @@ modello::~modello() {
 container<piattoBase*>*modello::getLista() const {
     return piatti;
 }
+//pagins(new paginainserimento(this)),
 
-void modello::setNuovoPercorso(string p)
+void modello::nuovoPercorso(string p)
 {
     xmlFile = p;
     delete piatti;
@@ -82,9 +83,9 @@ void modello::caricamentoDati() const {
                     }
                     //prendo attributi contorno
                     if(xmlReader.name()=="contorno"){
-                        bool patate=attributi.hasAttribute("patate") ? attributi.value("patate").toString()=="true"? true : false : false;
+                        string nomeContorno=attributi.hasAttribute("nomeContorno") ? attributi.value("nomeContorno").toString().toStdString() : "";
                         string tipoContorno=attributi.hasAttribute("tipoContorno") ? attributi.value("tipoContorno").toString().toStdString() : "";
-                        insertElemento=new contorno(nome,vegano,glutenFree,prezzoBase,patate,tipoContorno);
+                        insertElemento=new contorno(nome,vegano,glutenFree,prezzoBase,nomeContorno,tipoContorno);
                     }
                     //inserisco elemento nel mio contenitore
                     if(insertElemento!=nullptr) {
@@ -99,6 +100,70 @@ void modello::caricamentoDati() const {
 
         }
         elementiMenu.close();
+}
+
+//Salvo dati nuovo oggetto su file XML
+void modello::caricaOggettoXML(){
+    QSaveFile elementoMenu(QString::fromStdString(xmlFile));
+
+    if(!elementoMenu.open(QIODevice::WriteOnly))
+        return;
+
+    QXmlStreamWriter xmlWriter(&elementoMenu);
+    //leggibilita XML
+    xmlWriter.setAutoFormatting(true);
+    //scrittura intezstazioni
+    xmlWriter.writeStartDocument();
+
+    xmlWriter.writeStartElement("root");
+
+    container<piattoBase*>::iteratore it = mBegin();
+
+    while(it != mEnd()){
+        const piattoBase* insert = *it;
+        primo* p=dynamic_cast<primo*>(*it);
+        secondo* s=dynamic_cast<secondo*>(*it);
+        contorno* c=dynamic_cast<contorno*>(*it);
+
+        if(p) {
+            xmlWriter.writeEmptyElement("primo");
+            xmlWriter.writeAttribute("nome", QString::fromStdString(insert->getNome()));
+            xmlWriter.writeAttribute("vegano", p->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("glutenFree", p->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(p->getPrezzoBase()));
+            xmlWriter.writeAttribute("soia", p->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("tipoPasta", QString::fromStdString(p->getPasta()));
+            xmlWriter.writeAttribute("ingrediente1", QString::fromStdString(p->getIngrediente1()));
+            xmlWriter.writeAttribute("ingrediente2", QString::fromStdString(p->getIngrediente2()));
+            xmlWriter.writeAttribute("ingrediente3", QString::fromStdString(p->getIngrediente3()));
+            xmlWriter.writeAttribute("ingrediente4", QString::fromStdString(p->getIngrediente4()));
+        }
+        if(s) {
+            xmlWriter.writeEmptyElement("secondo");
+            xmlWriter.writeAttribute("nome", QString::fromStdString(s->getNome()));
+            xmlWriter.writeAttribute("vegano", s->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("glutenFree", s->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(s->getPrezzoBase()));
+            xmlWriter.writeAttribute("tipoCarne", QString::fromStdString(s->getTipoCarne()));
+            xmlWriter.writeAttribute("tipoPesce", QString::fromStdString(s->getTipoPesce()));
+            xmlWriter.writeAttribute("tipoPiatto", QString::fromStdString(s->getTipoPiatto()));
+            xmlWriter.writeAttribute("tipoCattura", QString::fromStdString(s->getTipoCottura()));
+        }
+        if(c) {
+            xmlWriter.writeEmptyElement("contorno");
+            xmlWriter.writeAttribute("nome", QString::fromStdString(c->getNome()));
+            xmlWriter.writeAttribute("vegano", c->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("glutenFree", c->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(c->getPrezzoBase()));
+            xmlWriter.writeAttribute("nomeContorno", QString::fromStdString(c->getNomeContorno()));
+            xmlWriter.writeAttribute("tipoContorno", QString::fromStdString(c->getTipoContorno()));
+        }
+         ++it;
+    }
+    xmlWriter.writeEndElement();
+    xmlWriter.writeEndDocument();
+    //datiSalvati = true;
+    elementoMenu.commit();
 }
 
 

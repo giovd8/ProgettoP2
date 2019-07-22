@@ -7,6 +7,8 @@
 #include<QHBoxLayout>
 #include<QApplication>
 #include<QListWidget>
+#include<QDialog>
+
 
 class modifichedati: public QWidget {
     Q_OBJECT
@@ -14,9 +16,9 @@ class modifichedati: public QWidget {
         QPushButton* aggiungi;
         QPushButton* modifica;
         QPushButton* elimina;
-
     public:
         modifichedati(QWidget* parent);
+        QPushButton *getAggiungiPiatto() const;
 };
 
 #endif // MODIFICHEDATI_H

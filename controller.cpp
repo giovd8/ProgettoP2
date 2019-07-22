@@ -4,6 +4,7 @@
 #include<QVBoxLayout>
 #include<QHBoxLayout>
 #include<QtWidgets>
+#include<QDebug>
 #include"modello.h"
 #include"contorno.h"
 #include"piattobase.h"
@@ -16,9 +17,13 @@ controller::controller(QWidget *parent):
     mp(new menuprincipale(this)),
     md(new modifichedati(this)),
     viewP(new viewpiatti(this))
+//    ip(new inserimentoPiatto(this))
 {
+    //creo modello
     m=(new modello(xmlFile.toStdString()));
-    m->setNuovoPercorso(xmlFile.toStdString());
+    //setto percorso
+    m->nuovoPercorso(xmlFile.toStdString());
+    //carico i dati da file xml e li metto nella mia lista
     m->caricamentoDati();
 
     QVBoxLayout* x=new QVBoxLayout;
@@ -26,21 +31,80 @@ controller::controller(QWidget *parent):
     x->addWidget(md);
     x->addWidget(viewP);
 
+    //connect pulsanti visualizzazione sottolista
     connect(viewP->getTuttiPiatti(), SIGNAL(clicked()), this, SLOT(caricaPiatti()));
-    connect(viewP->getTuttiPrimi(), SIGNAL(clicked()), this, SLOT(caricaPiatti()));
+    connect(viewP->getTuttiPrimi(), SIGNAL(clicked()), this, SLOT(caricaPrimi()));
+    connect(viewP->getTuttiSecondi(), SIGNAL(clicked()), this, SLOT(caricaSecondi()));
+    connect(viewP->getTuttiContorni(), SIGNAL(clicked()), this, SLOT(caricaContorni()));
+
+    //connect pulsanti modifica/aggiungi/elimina piatto
+    connect(md->getAggiungiPiatto(), SIGNAL(clicked()), this, SLOT(aggiungiPiatto()));
+
     setLayout(x);
 }
 
-    void controller::caricaPiatti(){
+    void controller::aggiungiPiatto(){
+        QDialog* d=new inserimentoPiatto(m,this);
+        qWarning()<<"aaaaaaaa";
+        d->show();
+        //this->setDisabled(true);
+    }
+
+    //tutti i piatti
+    void controller::caricaPiatti() const {
         if(xmlFile!="") {
+            viewP->getLista()->clear();
+            container<piattoBase*>::iteratore it = m->mBegin();
+            for(; it!= m->mEnd(); ++it)
+                viewP->getLista()->aggiungiPiatto(*it);
+        }
+    }
+    //tutti i primi
+    void controller::caricaPrimi() const {
+        if(xmlFile!="") {
+            viewP->getLista()->clear();
             container<piattoBase*>::iteratore it = m->mBegin();
             for(; it!= m->mEnd(); ++it){
-//                piattoBase* x=new contorno("aaa",true,true,8,true,"sss");
-                viewP->getLista()->aggiungiPiatto(*it);
+                if(dynamic_cast<primo*>(*it))
+                    viewP->getLista()->aggiungiPiatto(*it);
+            }
+        }
+    }
+    //tutti i secondi
+    void controller::caricaSecondi() const {
+        if(xmlFile!="") {
+            viewP->getLista()->clear();
+            container<piattoBase*>::iteratore it = m->mBegin();
+            for(; it!= m->mEnd(); ++it){
+                if(dynamic_cast<secondo*>(*it))
+                    viewP->getLista()->aggiungiPiatto(*it);
+            }
+        }
+    }
+    //tutti i contorni
+    void controller::caricaContorni() const {
+        if(xmlFile!="") {
+            viewP->getLista()->clear();
+            container<piattoBase*>::iteratore it = m->mBegin();
+            for(; it!= m->mEnd(); ++it){
+                if(dynamic_cast<contorno*>(*it))
+                    viewP->getLista()->aggiungiPiatto(*it);
+            }
+        }
+    }
+
+    void controller::aggiungiPiattoContainer() {
+        if(xmlFile!=""){
+            piattoBase* temp=ip->insertNuovoPiatto();
+            if(temp!=nullptr) {
+                m->getLista()->pushEnd(temp);
+                cout<<temp->getNome();
             }
 
-        }
+               // QMessageBox::warning(this, "Inserisci dati validi");
+         }
 
     }
+
 
 

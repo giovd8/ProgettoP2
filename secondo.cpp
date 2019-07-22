@@ -47,10 +47,10 @@ string secondo::piattoInString(piattoBase* pb) const {
     secondo* x=dynamic_cast<secondo*>(pb);
     if(x){
         if(x->getTipoCarne()!="")
-            strF.append("\nTipo di carne: " + getTipoCarne());
+            strF.append("\nTipo di carne: " + x->getTipoCarne());
         else
-            strF.append("\nTipo di pesce: " + getTipoPesce());
-    strF.append("\nTipo di piatto: ") + getTipoPiatto().append("\nTipo cottura: ")+getTipoCottura();
+            strF.append("\nTipo di pesce: " + x->getTipoPesce());
+    strF.append("\nTipo di piatto: "+x->getTipoPiatto()+"\nTipo cottura: "+x->getTipoCottura()+"\n");
     }
     return strF;
 }

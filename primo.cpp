@@ -1,6 +1,7 @@
 #include "piattobase.h"
 #include "primo.h"
 #include <iostream>
+#include<Qstring>
 using std::string;
 
 //costruttore
@@ -71,13 +72,14 @@ string primo::piattoInString(piattoBase* pb) const {
             strF.append("\nPasta di soia: si");
         else
             strF.append("\nPasta di soia: no");
-    strF.append("\nTipo di Pasta: " + x->getPasta()).append("\nIgredienti: " +x->getIngrediente1());
+    strF.append("\nTipo di Pasta: " + x->getPasta()).append("\nIngredienti: " +x->getIngrediente1());
     if(x->getIngrediente2()!="")
-        strF.append(" "+x->getIngrediente2());
+        strF.append(", "+x->getIngrediente2());
         if(x->getIngrediente3()!="")
-            strF.append(" "+x->getIngrediente3());
+            strF.append(", "+x->getIngrediente3());
             if(x->getIngrediente4()!="")
-                strF.append(" "+x->getIngrediente4());
+                strF.append(", "+x->getIngrediente4());
+    strF.append("\nPrezzo: "+ (QString::number(prezzoFinale()).toUtf8())).append("\n");
     }
     return strF;
 }

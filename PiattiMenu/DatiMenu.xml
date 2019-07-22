@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <primo nome="Carbonara" 
-    vegano="false" 
-    glutenFree="false" 
-    prezzoBase="7" 
-    soia="false" 
-    tipoPasta="spaghetti" 
-    ingrediente1="pancetta" 
-    ingrediente2="uova" 
-    ingrediente3="panna" 
-    ingrediente4="grana"/>
     <primo nome="Carbonara" vegano="false" glutenFree="false" prezzoBase="7" soia="false" tipoPasta="spaghetti" ingrediente1="pancetta" ingrediente2="uova" ingrediente3="panna" ingrediente4="grana"/>
-
+    <secondo nome="Braciola" vegano="false" glutenFree="true" prezzoBase="10" tipoCarne="maiale" tipoPesce="" tipoPiatto="alla griglia" tipoCottura="media"/>
+    <contorno nome="Verdure" vegano="true" glutenFree="true" prezzoBase="5" nomeContorno="verdure" tipoContorno="alla griglia"/>
 </root>

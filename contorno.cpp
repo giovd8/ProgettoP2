@@ -2,14 +2,14 @@
 
 
 //costruttore contorno
-contorno::contorno(string s, bool v, bool gf, double pr, bool p, string tc): piattoBase(s,v,gf,pr), patate(p), tipoContorno(tc) {}
+contorno::contorno(string s, bool v, bool gf, double pr, string nc, string tc): piattoBase(s,v,gf,pr), nomeContorno(nc), tipoContorno(tc) {}
 
 //costruttore di copia
-contorno::contorno(const contorno &c) : piattoBase(c), patate(c.patate), tipoContorno(c.tipoContorno) {}
+contorno::contorno(const contorno &c) : piattoBase(c), nomeContorno(c.nomeContorno), tipoContorno(c.tipoContorno) {}
 
 //metodi GET
-bool contorno::getPatate() const {
-    return patate;
+string contorno::getNomeContorno() const {
+    return nomeContorno;
 }
 string contorno::getTipoContorno() const {
     return tipoContorno;
@@ -18,10 +18,10 @@ string contorno::getTipoContorno() const {
 //calcola prezzo finale virtuale
 double contorno::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();
-    if(patate)
-        prezzoTemp=prezzoTemp+3.5;
-    else
+    if(nomeContorno=="Verdure")
         prezzoTemp=prezzoTemp+5;
+    else
+        prezzoTemp=prezzoTemp+3.5;
 
     return prezzoTemp;
 }
@@ -29,12 +29,8 @@ double contorno::prezzoFinale() const {
 string contorno::piattoInString(piattoBase* pb) const {
     string strF = piattoBase::piattoInString(pb);
     contorno* x=dynamic_cast<contorno*>(pb);
-        if(x && x->getPatate())
-            strF.append("/nPatate: ");
-        else
-            strF.append("/Verdure: ");
-
-    strF.append(x->getTipoContorno());
+    if(x)
+        strF.append("\n"+getNomeContorno()+" "+x->getTipoContorno()+"\n");
     return strF;
 }
 

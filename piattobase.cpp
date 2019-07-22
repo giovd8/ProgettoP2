@@ -52,8 +52,7 @@ bool piattoBase::getPrezzoBase() const {
 //}
 
 
-//Metodo per convertire il mio oggetto in ina string (necessario per passare a Qstring
-//metodo per estrappolare i dati e metterli in stringa
+//Metodo per convertire il mio oggetto in una string
 string piattoBase::piattoInString(piattoBase* pb) const {
     string ptString;
     if(dynamic_cast<primo*>(pb))
@@ -66,12 +65,12 @@ string piattoBase::piattoInString(piattoBase* pb) const {
     strF.append("Tipo di piatto: " + ptString)
             .append("\nNome: " + getNome());
     if(pb->getGlutenFree())
-        strF.append("\nSenza glutine: si");
+        strF.append("\nGluten free: si");
     else
-        strF.append("\nSenza glutine: no");
+        strF.append("\nGluten free: no");
     if(pb->getVegano())
-        strF.append("\nVegano: si");
+        strF.append("     Vegano: si");
     else
-        strF.append("\nVegano: no");
+        strF.append("     Vegano: no");
     return strF;
 }
