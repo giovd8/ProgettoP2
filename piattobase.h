@@ -5,13 +5,13 @@ using std::string;
 
 class piattoBase {
     private:
-        std::string nome;
+        string nome;
         bool vegano;
         bool glutenFree;
         double prezzoBase;
     public:
         //costruttore piattoBase
-        piattoBase(string="",bool=false, bool=false, double=0);
+        piattoBase(string,bool, bool, double);
 
         //costruttore di copia
         piattoBase(const piattoBase &);

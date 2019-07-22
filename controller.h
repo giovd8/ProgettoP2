@@ -27,11 +27,8 @@ public slots:
     void caricaContorni() const;
     void aggiungiPiatto();
 
-
-
 public:
     controller(QWidget * parent= nullptr);
-    void aggiungiPiattoContainer();
 
 };
 

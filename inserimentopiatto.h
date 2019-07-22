@@ -9,13 +9,13 @@
 #include<QCheckBox>
 #include<QWidget>
 #include<iostream>
+#include <QMessageBox>
 using namespace std;
 
 #include"piattobase.h"
 #include"primo.h"
 #include"secondo.h"
 #include"contorno.h"
-
 #include"modello.h"
 
 
@@ -78,6 +78,7 @@ class inserimentoPiatto: public QDialog {
         void buttonAggiungiContorni();
         void buttonAggiungiP();
         void buttonChiusura();
+        //void disablePesce();
     public:
         inserimentoPiatto(modello*m, QWidget* parent);
         piattoBase* insertNuovoPiatto();

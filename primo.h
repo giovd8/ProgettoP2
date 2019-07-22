@@ -15,7 +15,7 @@ class primo: public piattoBase {
         string ingrediente4;
     public:
         //costruttore primi
-        primo(string ="", bool=false, bool=false, double=0, bool=false, string="Inserisci il tipo di pasta", string="Inserisci il primo ingrediente", string="Non hai inserito il secondo ingrediente", string="Non hai inserito il terzo ingrediente", string="Non hai inserito il quarto ingrediente");
+        primo(string="", bool=false, bool=false, double=5, bool=false, string="", string="", string="", string="", string="");
 
         //costruttore di copia
         primo(const primo &);

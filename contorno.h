@@ -1,8 +1,7 @@
 #ifndef CONTORNO_H
 #define CONTORNO_H
 #include "piattobase.h"
-#include <string.h>
-#include <iostream>
+#include<QString>
 using std::string;
 
 
@@ -12,7 +11,7 @@ class contorno: public piattoBase {
         string tipoContorno;
     public:
         //costruttore contorno
-        contorno(string="", bool=true, bool=true, double=3.5, string="Inserisci il contorno", string="Inserisci la tipologia di contorno");
+        contorno(string="", bool=true, bool=true, double=3.5, string="", string="");
 
         //costruttore di copia
         contorno(const contorno&);

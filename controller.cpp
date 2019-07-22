@@ -45,7 +45,6 @@ controller::controller(QWidget *parent):
 
     void controller::aggiungiPiatto(){
         QDialog* d=new inserimentoPiatto(m,this);
-        qWarning()<<"aaaaaaaa";
         d->show();
         //this->setDisabled(true);
     }
@@ -92,19 +91,5 @@ controller::controller(QWidget *parent):
             }
         }
     }
-
-    void controller::aggiungiPiattoContainer() {
-        if(xmlFile!=""){
-            piattoBase* temp=ip->insertNuovoPiatto();
-            if(temp!=nullptr) {
-                m->getLista()->pushEnd(temp);
-                cout<<temp->getNome();
-            }
-
-               // QMessageBox::warning(this, "Inserisci dati validi");
-         }
-
-    }
-
 
 

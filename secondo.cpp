@@ -50,7 +50,8 @@ string secondo::piattoInString(piattoBase* pb) const {
             strF.append("\nTipo di carne: " + x->getTipoCarne());
         else
             strF.append("\nTipo di pesce: " + x->getTipoPesce());
-    strF.append("\nTipo di piatto: "+x->getTipoPiatto()+"\nTipo cottura: "+x->getTipoCottura()+"\n");
+    strF.append("\nTipo di piatto: "+x->getTipoPiatto()).append("\nPrezzo: "+ (QString::number(prezzoFinale()).toUtf8())).append("\n");
+
     }
     return strF;
 }

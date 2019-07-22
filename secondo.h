@@ -1,8 +1,7 @@
 #ifndef SECONDO_H
 #define SECONDO_H
 #include "piattobase.h"
-#include<string.h>
-#include<iostream>
+#include<QString>
 using std::string;
 
 class secondo: public piattoBase {
@@ -13,7 +12,7 @@ class secondo: public piattoBase {
         string tipoCottura;
     public:
         //costruttore secondo
-        secondo(string="", bool=false, bool=true, double=10, string="Inserisci il tipo di carne", string="Inserisci il tipo di pesce", string="Inserisci la tipologia del piatto", string="Inserisci il tipo di cottura");
+        secondo(string="", bool=false, bool=true, double=10, string="", string="", string="", string="");
 
         //costruttore di copia
         secondo(const secondo &);
