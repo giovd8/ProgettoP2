@@ -38,7 +38,7 @@ class piattoBase {
         virtual string piattoInString(piattoBase*) const =0;
 
         //overloading operatori
-//        virtual bool operator==(const piattoBase&) const;
+        virtual bool operator==(const piattoBase&) const;
 //        virtual bool operator!=(const piattoBase&) const;
 };
 //std::ostream& operator<<(std::ostream&, const piattoBase&);

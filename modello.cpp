@@ -19,27 +19,12 @@ modello::~modello() {
     delete piatti;
 }
 
-container<piattoBase*>*modello::getLista() const {
-    return piatti;
-}
-//pagins(new paginainserimento(this)),
-
 void modello::nuovoPercorso(string p)
 {
     xmlFile = p;
     delete piatti;
     //    datiSalvati = false;
     piatti=new container<piattoBase*>();
-}
-
-//Begin e End modello
-container<piattoBase*>::iteratore modello::mBegin()
-{
-    return piatti->begin();
-}
-container<piattoBase *>::iteratore modello::mEnd()
-{
-    return piatti->end();
 }
 
 //Importo dati da file XML
@@ -164,6 +149,28 @@ void modello::caricaOggettoXML(){
     xmlWriter.writeEndDocument();
     //datiSalvati = true;
     elementoMenu.commit();
+}
+
+//Begin e End modello
+container<piattoBase*>::iteratore modello::mBegin()
+{
+    return piatti->begin();
+}
+container<piattoBase *>::iteratore modello::mEnd()
+{
+    return piatti->end();
+}
+//Get lista modello
+container<piattoBase*>*modello::getLista() const {
+    if(piatti)
+        return piatti;
+    else
+        return nullptr;
+}
+//erase modello
+
+void modello::mErase(container<piattoBase*>::iteratore it) {
+    piatti->erase(it);
 }
 
 

@@ -25,8 +25,9 @@ class modello {
         //Funzioni begin e end per modello
         container<piattoBase*>::iteratore mBegin();
         container<piattoBase*>::iteratore mEnd();
-
+        //Funzione prendi lista ed elimina oggetto
         container<piattoBase*>*getLista() const;
+        void mErase(container<piattoBase*>::iteratore it);
         //container<piattoBase*>::Constiterator mcbegin() const;
         //container<piattoBase*>::Constiterator mcend() const;
 };

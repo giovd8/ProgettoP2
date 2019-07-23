@@ -35,7 +35,7 @@ class primo: public piattoBase {
         virtual string piattoInString(piattoBase*) const;
 
         //overloading operatori
-//        bool operator==(const piattoBase&) const;
+        bool operator==(const piattoBase&) const;
 //        bool operator!=(const piattoBase&) const;
 
 };

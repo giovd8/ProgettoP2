@@ -34,3 +34,9 @@ string contorno::piattoInString(piattoBase* pb) const {
     return strF;
 }
 
+//overloading operatore ==
+bool contorno::operator==(const piattoBase& p) const {
+    const contorno* c=dynamic_cast<const contorno*>(&p);
+    return c && piattoBase::operator==(p) && nomeContorno==c->getNomeContorno() && tipoContorno==c->getTipoContorno();
+}
+

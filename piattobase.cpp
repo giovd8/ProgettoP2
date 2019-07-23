@@ -39,6 +39,10 @@ bool piattoBase::getPrezzoBase() const {
 }
 
 //overloading operatori
+bool piattoBase::operator==(const piattoBase& p) const{
+    return (nome==p.getNome() && vegano==p.getVegano() && glutenFree==p.getGlutenFree() && prezzoBase==p.getPrezzoBase());
+}
+
 //virtual std::ostream& operator<< (std::ostream& OS, const piattoBase& pb) {
 //    if(pb.getGlutenFree())
 //        std::cout<<"Senza glutine: si"<<" ";

@@ -28,7 +28,7 @@ class contorno: public piattoBase {
 
         //overloading operatori
         bool operator==(const piattoBase&) const;
-        bool operator!=(const piattoBase&) const;
+        //bool operator!=(const piattoBase&) const;
 };
 
 #endif // CONTORNO_H

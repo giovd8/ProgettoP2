@@ -26,6 +26,7 @@ public slots:
     void caricaSecondi() const;
     void caricaContorni() const;
     void aggiungiPiatto();
+    void eliminaPiatto();
 
 public:
     controller(QWidget * parent= nullptr);

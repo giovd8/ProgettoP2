@@ -55,3 +55,8 @@ string secondo::piattoInString(piattoBase* pb) const {
     }
     return strF;
 }
+
+bool secondo::operator==(const piattoBase& p) const {
+    const secondo* s=dynamic_cast<const secondo*>(&p);
+    return s && piattoBase::operator==(p) && tipoCarne==s->getTipoCarne() && tipoPesce==s->getTipoPesce() && tipoPiatto==s->getTipoPiatto() && tipoCottura==s->getTipoCottura();
+}

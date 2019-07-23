@@ -1,6 +1,5 @@
 #include "piattobase.h"
 #include "primo.h"
-#include <iostream>
 #include<Qstring>
 using std::string;
 
@@ -82,5 +81,11 @@ string primo::piattoInString(piattoBase* pb) const {
     strF.append("\nPrezzo: "+ (QString::number(prezzoFinale()).toUtf8())).append("\n");
     }
     return strF;
+}
+
+//overloading operatori
+bool primo::operator==(const piattoBase& p) const {
+    const primo* x=dynamic_cast<const primo*>(&p);
+    return x && piattoBase::operator==(p) && soia==x->getSoia() && ingrediente1==x->getIngrediente1() && ingrediente2==x->getIngrediente2() && ingrediente3==x->getIngrediente3() && ingrediente4==x->getIngrediente4();
 }
 

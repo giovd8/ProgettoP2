@@ -31,7 +31,7 @@ class secondo: public piattoBase {
 
         //overloading operatori
         bool operator==(const piattoBase&) const;
-        bool operator!=(const piattoBase&) const;
+        //bool operator!=(const piattoBase&) const;
 };
 
 #endif // SECONDO_H

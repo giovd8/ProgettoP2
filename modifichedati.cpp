@@ -17,3 +17,7 @@ modifichedati::modifichedati(QWidget* p):
 QPushButton* modifichedati::getAggiungiPiatto() const {
     return aggiungi;
 }
+
+QPushButton* modifichedati::getEliminaPiatto() const {
+    return elimina;
+}

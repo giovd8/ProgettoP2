@@ -8,11 +8,13 @@ elementiListaP::elementiListaP(QWidget* p, piattoBase* pt):
 }
 
 piattoBase* elementiListaP::prelevaPiatto() const {
-    return piatto;
+    if(piatto)
+        return piatto;
+    else
+        return nullptr;
 }
 
 void elementiListaP::aggiungi() {
-
     setText(QString::fromStdString(piatto->piattoInString(piatto)));
 }
 
