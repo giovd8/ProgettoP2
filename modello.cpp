@@ -63,8 +63,7 @@ void modello::caricamentoDati() const {
                         string tipoCarne=attributi.hasAttribute("tipoCarne") ? attributi.value("tipoCarne").toString().toStdString() : "";
                         string tipoPesce=attributi.hasAttribute("tipoPesce") ? attributi.value("tipoPesce").toString().toStdString() : "";
                         string tipoPiatto=attributi.hasAttribute("tipoPiatto") ? attributi.value("tipoPiatto").toString().toStdString() : "";
-                        string tipoCottura=attributi.hasAttribute("tipoCottura") ? attributi.value("tipoCottura").toString().toStdString() : "";
-                        insertElemento=new secondo(nome,vegano,glutenFree,prezzoBase,tipoCarne,tipoPesce,tipoPiatto,tipoCottura);
+                        insertElemento=new secondo(nome,vegano,glutenFree,prezzoBase,tipoCarne,tipoPesce,tipoPiatto);
                     }
                     //prendo attributi contorno
                     if(xmlReader.name()=="contorno"){
@@ -132,7 +131,6 @@ void modello::caricaOggettoXML(){
             xmlWriter.writeAttribute("tipoCarne", QString::fromStdString(s->getTipoCarne()));
             xmlWriter.writeAttribute("tipoPesce", QString::fromStdString(s->getTipoPesce()));
             xmlWriter.writeAttribute("tipoPiatto", QString::fromStdString(s->getTipoPiatto()));
-            xmlWriter.writeAttribute("tipoCattura", QString::fromStdString(s->getTipoCottura()));
         }
         if(c) {
             xmlWriter.writeEmptyElement("contorno");

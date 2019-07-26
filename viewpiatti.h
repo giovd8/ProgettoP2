@@ -7,6 +7,7 @@
 #include<QApplication>
 #include<QListWidget>
 #include"listapcontainer.h"
+#include"modifichedati.h"
 
 class viewpiatti: public QWidget {
     Q_OBJECT
@@ -16,8 +17,6 @@ class viewpiatti: public QWidget {
         QPushButton* tuttiSecondi;
         QPushButton* tuttiContorni;
         listaPContainer* lista;
-
-
     public:
         viewpiatti(QWidget* parent);
         QPushButton* getTuttiPiatti() const;

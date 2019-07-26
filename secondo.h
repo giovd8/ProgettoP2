@@ -9,10 +9,9 @@ class secondo: public piattoBase {
         string tipoCarne;
         string tipoPesce;
         string tipoPiatto;
-        string tipoCottura;
     public:
         //costruttore secondo
-        secondo(string="", bool=false, bool=true, double=10, string="", string="", string="", string="");
+        secondo(string="", bool=false, bool=true, double=10, string="", string="", string="");
 
         //costruttore di copia
         secondo(const secondo &);
@@ -21,7 +20,11 @@ class secondo: public piattoBase {
         string getTipoCarne() const;
         string getTipoPesce() const;
         string getTipoPiatto() const;
-        string getTipoCottura() const;
+
+        //metodi SET
+        void setTipoCarne(string);
+        void setTipoPesce(string);
+        void setTipoPiatto(string);
 
         //calcola prezzo finale virtuale
         double prezzoFinale() const;

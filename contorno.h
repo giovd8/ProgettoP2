@@ -20,6 +20,10 @@ class contorno: public piattoBase {
         string getNomeContorno() const;
         string getTipoContorno() const;
 
+        //metodi SET
+        void setNomeContorno(string);
+        void setTipoContorno(string);
+
         //calcola prezzo finale virtuale
         double prezzoFinale() const;
 

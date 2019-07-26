@@ -10,10 +10,12 @@ class elementiListaP: public QListWidgetItem {
     private:
         QWidget* parent;
         piattoBase* piatto;
-public:
-    elementiListaP(QWidget*, piattoBase* =nullptr);
-    piattoBase* prelevaPiatto() const;
-    void aggiungi();
+
+    public:
+        elementiListaP(QWidget*, piattoBase* =nullptr);
+        //piattoBase* prelevaPiatto() const;
+        void aggiungi();
+        piattoBase* prelevaPiatto() const;
 };
 
 #endif // ELEMENTILISTAP_H

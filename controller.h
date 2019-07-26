@@ -7,6 +7,9 @@
 #include"viewpiatti.h"
 #include"modello.h"
 #include"inserimentopiatto.h"
+#include"modificapiatto.h"
+//#include"listapcontainer.h"
+
 
 
 class controller: public QWidget {
@@ -26,7 +29,9 @@ public slots:
     void caricaSecondi() const;
     void caricaContorni() const;
     void aggiungiPiatto();
+    void modPiatto();
     void eliminaPiatto();
+    void gestisciPulsantModElim() const;
 
 public:
     controller(QWidget * parent= nullptr);

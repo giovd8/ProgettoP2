@@ -13,7 +13,7 @@ void listaPContainer::aggiungiPiatto(piattoBase* pt){
     addItem(piatto);
 }
 
-//Piuatto corrente della mia lista
+//Piatto corrente della mia lista
 elementiListaP * listaPContainer::piattoCorrente() const{
     return static_cast<elementiListaP*>(QListWidget::currentItem());
 }

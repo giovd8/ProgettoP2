@@ -21,12 +21,8 @@ using namespace std;
 
 
 class modificaPiatto: public QDialog {
-    friend class controller;
     Q_OBJECT
     private:
-        QPushButton* primiB;
-        QPushButton* secondiB;
-        QPushButton* contorniB;
         //piatto base
         QLabel* nomeP;
         QLabel* veganoP;
@@ -72,17 +68,14 @@ class modificaPiatto: public QDialog {
         QPushButton* close;
 
         modello* m;
+        piattoBase* pb;
 
     public slots:
-        void buttonModificaPrimi();
-        void buttonModificaSecondi();
-        void buttonModificaContorni();
         void buttonModificaP();
         void buttonChiusura();
-        //void disablePesce();
     public:
-        modificaPiatto(modello*m, QWidget* parent);
-        piattoBase* modificaNuovoPiatto();
+        modificaPiatto(modello*m, piattoBase* pb,QWidget* parent);
+        bool modificaPiattoCorrente(piattoBase*);
 };
 
 #endif // MODIFICAPIATTO_H

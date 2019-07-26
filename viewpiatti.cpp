@@ -22,6 +22,8 @@ viewpiatti::viewpiatti(QWidget* p):
     x->addLayout(y);
     x->addLayout(z);
 
+
+
     setLayout(x);
 }
 

@@ -29,6 +29,27 @@ string primo::getIngrediente4() const {
     return ingrediente4;
 }
 
+//metodi SET
+void primo::setSoia(bool s) {
+    soia=s;
+}
+void primo::setPasta(string p) {
+    tipoPasta=p;
+}
+void primo::setIngrediente1(string i){
+    ingrediente1=i;
+}
+
+void primo::setIngrediente2(string i){
+    ingrediente2=i;
+}
+void primo::setIngrediente3(string i){
+    ingrediente3=i;
+}
+void primo::setIngrediente4(string i){
+    ingrediente4=i;
+}
+
 //calcola prezzo finale virtuale
 double primo::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();

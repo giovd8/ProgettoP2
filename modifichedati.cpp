@@ -3,7 +3,7 @@
 modifichedati::modifichedati(QWidget* p):
     QWidget(p),
     aggiungi(new QPushButton("Aggiungi", this)),
-    modifica(new QPushButton("modifica", this)),
+    modifica(new QPushButton("Modifica", this)),
     elimina(new QPushButton("Elimina",this))
 {
     QHBoxLayout* x=new QHBoxLayout;
@@ -16,6 +16,10 @@ modifichedati::modifichedati(QWidget* p):
 
 QPushButton* modifichedati::getAggiungiPiatto() const {
     return aggiungi;
+}
+
+QPushButton* modifichedati::getModificaPiatto() const {
+    return modifica;
 }
 
 QPushButton* modifichedati::getEliminaPiatto() const {

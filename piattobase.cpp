@@ -10,6 +10,20 @@ piattoBase::piattoBase(string n,bool v, bool gf, double pr): nome(n), vegano(v),
 //cotruttore di copia
 piattoBase::piattoBase(const piattoBase& p) : nome(p.getNome()), vegano(p.getVegano()), glutenFree(p.getGlutenFree()), prezzoBase(p.getPrezzoBase()) {}
 
+//metodi GET
+string piattoBase::getNome() const {
+    return nome;
+}
+bool piattoBase::getVegano() const {
+    return vegano;
+}
+bool piattoBase::getGlutenFree() const {
+    return glutenFree;
+}
+double piattoBase::getPrezzoBase() const {
+    return prezzoBase;
+}
+
 //metodi SET
 void piattoBase::setNome(string s) {
     nome=s;
@@ -22,20 +36,6 @@ void piattoBase::setGlutenFree(bool b) {
 }
 void piattoBase::setPrezzoBase(double d) {
     prezzoBase=d;
-}
-
-//metodi GET
-string piattoBase::getNome() const {
-    return nome;
-}
-bool piattoBase::getVegano() const {
-    return vegano;
-}
-bool piattoBase::getGlutenFree() const {
-    return glutenFree;
-}
-bool piattoBase::getPrezzoBase() const {
-    return prezzoBase;
 }
 
 //overloading operatori

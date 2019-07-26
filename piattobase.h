@@ -19,17 +19,18 @@ class piattoBase {
         //ditruttore virtuale
         virtual ~piattoBase()=default;
 
+        //metodi GET
+        string getNome() const;
+        bool getVegano() const;
+        bool getGlutenFree() const;
+        double getPrezzoBase() const;
+
         //metodi SET
         void setNome(string);
         void setVegano(bool);
         void setGlutenFree(bool);
         void setPrezzoBase(double);
 
-        //metodi GET
-        string getNome() const;
-        bool getVegano() const;
-        bool getGlutenFree() const;
-        bool getPrezzoBase() const;
 
         //calcola prezzo finale
         virtual double prezzoFinale() const=0;

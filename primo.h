@@ -28,6 +28,14 @@ class primo: public piattoBase {
         string getIngrediente3() const;
         string getIngrediente4() const;
 
+        //metodi SET
+        void setSoia(bool);
+        void setPasta(string);
+        void setIngrediente1(string);
+        void setIngrediente2(string);
+        void setIngrediente3(string);
+        void setIngrediente4(string);
+
         //calcola prezzo finale virtuale
         double prezzoFinale() const;
 

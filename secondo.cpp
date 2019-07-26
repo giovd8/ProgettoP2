@@ -2,10 +2,10 @@
 #include "secondo.h"
 
 //costruttore secondo
-secondo::secondo(string s, bool v, bool gf, double pr, string tc, string tp, string ts, string cot) : piattoBase(s,v,gf,pr), tipoCarne(tc), tipoPesce(tp), tipoPiatto(ts), tipoCottura(cot) {}
+secondo::secondo(string s, bool v, bool gf, double pr, string tc, string tp, string ts) : piattoBase(s,v,gf,pr), tipoCarne(tc), tipoPesce(tp), tipoPiatto(ts) {}
 
 //costruttore di copia
-secondo::secondo(const secondo &s) : piattoBase(s), tipoCarne(s.getTipoCarne()), tipoPesce(s.getTipoPesce()), tipoPiatto(s.getTipoPiatto()), tipoCottura(s.getTipoCottura()) {}
+secondo::secondo(const secondo &s) : piattoBase(s), tipoCarne(s.getTipoCarne()), tipoPesce(s.getTipoPesce()), tipoPiatto(s.getTipoPiatto()) {}
 
 //metodi GET
 string secondo::getTipoCarne() const {
@@ -17,9 +17,18 @@ string secondo::getTipoPesce() const {
 string secondo::getTipoPiatto() const {
     return tipoPiatto;
 }
-string secondo::getTipoCottura() const {
-    return tipoCottura;
+
+//metodi SET
+void secondo::setTipoCarne(string s){
+    tipoCarne=s;
 }
+void secondo::setTipoPesce(string s){
+    tipoPesce=s;
+}
+void secondo::setTipoPiatto(string s){
+    tipoPiatto=s;
+}
+
 
 //calcola prezzo finale virtuale
 double secondo::prezzoFinale() const {
@@ -58,5 +67,5 @@ string secondo::piattoInString(piattoBase* pb) const {
 
 bool secondo::operator==(const piattoBase& p) const {
     const secondo* s=dynamic_cast<const secondo*>(&p);
-    return s && piattoBase::operator==(p) && tipoCarne==s->getTipoCarne() && tipoPesce==s->getTipoPesce() && tipoPiatto==s->getTipoPiatto() && tipoCottura==s->getTipoCottura();
+    return s && piattoBase::operator==(p) && tipoCarne==s->getTipoCarne() && tipoPesce==s->getTipoPesce() && tipoPiatto==s->getTipoPiatto();
 }

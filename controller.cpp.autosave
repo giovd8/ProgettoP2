@@ -101,7 +101,7 @@ void controller::caricaContorni() const {
     }
 }
 //gestisci pulsanti
-void controller::gestisciPulsantiModElim() const {
+void controller::gestisciPulsantiModElim(){
     md->getModificaPiatto()->setEnabled(true);
     md->getEliminaPiatto()->setEnabled(true);
 }

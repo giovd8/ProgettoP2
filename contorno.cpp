@@ -15,6 +15,14 @@ string contorno::getTipoContorno() const {
     return tipoContorno;
 }
 
+//metodi SET
+void contorno::setNomeContorno(string s){
+    nomeContorno=s;
+}
+void contorno::setTipoContorno(string s){
+    tipoContorno=s;
+}
+
 //calcola prezzo finale virtuale
 double contorno::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();

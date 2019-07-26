@@ -185,8 +185,8 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         string tipoPastaNewP=(insertTipoPastaP->text()).toLocal8Bit().constData();
         string ingrediente1NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
         string ingrediente2NewP=(insertIngrediente2P->text()).toLocal8Bit().constData();
-        string ingrediente3NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
-        string ingrediente4NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
+        string ingrediente3NewP=(insertIngrediente3P->text()).toLocal8Bit().constData();
+        string ingrediente4NewP=(insertIngrediente4P->text()).toLocal8Bit().constData();
         if(nomeNewP=="" || prezzoBaseNewP==0 || tipoPastaNewP=="" || ingrediente1NewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di pasta ed almeno il primo ingredinete sono necessari!");
         else
@@ -206,7 +206,7 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if(!CoP && (nomeNewP=="" || prezzoBaseNewP==0 || (tipoCarneNewP=="" && tipoPesceNewP=="") || tipoPiattoNewP==""))
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di carne o pesce e la tipologia del piatto sono necessari!");
         else
-            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarneNewP,tipoPesceNewP,tipoPiattoNewP,tipoCotturaNewP);
+            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarneNewP,tipoPesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
@@ -227,7 +227,6 @@ void inserimentoPiatto::buttonAggiungiP(){
     if(temp!=nullptr) {
         m->getLista()->pushEnd(temp);
         QMessageBox::warning(this, "Inserimento completato", "Il nuovo piatto stato aggiuto correttamente alla lista!");
-//        m->caricamentoDati();
         m->caricaOggettoXML();
     }
     inserimentoPiatto::accept();
