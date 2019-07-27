@@ -14,10 +14,12 @@ using namespace std;
 
 controller::controller(QWidget *parent):
     QWidget(parent),
-    xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli FIle"), "Progettop2/PiattiMenu", "File XML(*.xml)")),
+    xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), "Progetto/PiattiMenu", "File XML(*.xml)")),
     mp(new menuprincipale(this)),
     md(new modifichedati(this)),
     viewP(new viewpiatti(this))
+    //fnd(new QPushButton("Cerca",this))
+
 {
     //creo modello
     m=(new modello(xmlFile.toStdString()));
@@ -27,9 +29,12 @@ controller::controller(QWidget *parent):
     m->caricamentoDati();
 
     QVBoxLayout* x=new QVBoxLayout;
-    x->addWidget(mp);
-    x->addWidget(md);
     x->addWidget(viewP);
+    x->addWidget(md);
+    //x->addWidget(fnd);
+    x->addWidget(mp);
+
+    connect(mp->getSalvaB(),SIGNAL(clicked()), this, SLOT(salvaModello()));
 
     //connect pulsanti visualizzazione sottolista
     connect(viewP->getTuttiPiatti(), SIGNAL(clicked()), this, SLOT(caricaPiatti()));
@@ -37,7 +42,6 @@ controller::controller(QWidget *parent):
     connect(viewP->getTuttiSecondi(), SIGNAL(clicked()), this, SLOT(caricaSecondi()));
     connect(viewP->getTuttiContorni(), SIGNAL(clicked()), this, SLOT(caricaContorni()));
 
-    //connect(viewP->getLista()->elem, SIGNAL(clicked()), this, SLOT(caricaDisable()));
     md->getModificaPiatto()->setEnabled(false);
     md->getEliminaPiatto()->setEnabled(false);
 
@@ -45,10 +49,16 @@ controller::controller(QWidget *parent):
     connect(md->getAggiungiPiatto(), SIGNAL(clicked()), this, SLOT(aggiungiPiatto()));
     connect(md->getModificaPiatto(), SIGNAL(clicked()), this, SLOT(modPiatto()));
     connect(md->getEliminaPiatto(), SIGNAL(clicked()), this, SLOT(eliminaPiatto()));
+    connect(md->getCercaPiatto(), SIGNAL(clicked()), this, SLOT(findPiatto()));
     connect(viewP->getLista(), SIGNAL(itemSelectionChanged()), this, SLOT(gestisciPulsantiModElim()));
 
-    this->resize(500,650);
+    this->resize(400,550);
     setLayout(x);
+}
+//salvo dati menu su XML
+void controller::salvaModello() {
+    m->salvataggioDati();
+    QMessageBox::warning(this,"Salvataggio completata", "Il menu e' stato carrettamente!");
 }
 //visualizza tutti i piatti
 void controller::caricaPiatti() const {
@@ -100,12 +110,6 @@ void controller::caricaContorni() const {
         md->getEliminaPiatto()->setEnabled(false);
     }
 }
-//gestisci pulsanti
-void controller::gestisciPulsantiModElim() const {
-    md->getModificaPiatto()->setEnabled(true);
-    md->getEliminaPiatto()->setEnabled(true);
-}
-
 //aggiungi piatto
 void controller::aggiungiPiatto(){
     QDialog* d=new inserimentoPiatto(m,this);
@@ -113,7 +117,6 @@ void controller::aggiungiPiatto(){
     d->exec();
     caricaPiatti();
 }
-
 //modifica piatto
 void controller::modPiatto(){
     elementiListaP* lc=viewP->getLista()->piattoCorrente();
@@ -132,7 +135,6 @@ void controller::modPiatto(){
     }
     caricaPiatti();
 }
-
 //elimina piatto
 void controller::eliminaPiatto(){
     elementiListaP* lc=viewP->getLista()->piattoCorrente();
@@ -153,7 +155,7 @@ void controller::eliminaPiatto(){
                 m->mErase(it);
                 delete(*it);
                 --it;
-                m->caricaOggettoXML();
+                //m->salvataggioDati();
                 QMessageBox::warning(this,"Eliminazione completata", "Il piatto e stato eliminato carrettamente!");
                 if(p) {
                     caricaPrimi();
@@ -171,6 +173,18 @@ void controller::eliminaPiatto(){
         QMessageBox::warning(this,"Errore", "Devi selezionare quale piatto vuoi eliminare!");
     }
 }
+//cerca piatto
+void controller::findPiatto(){
+    QDialog* d=new cercaPiatto(m,this);
+    d->exec();
+    caricaPiatti();
+}
+//gestisci pulsanti
+void controller::gestisciPulsantiModElim() const {
+    md->getModificaPiatto()->setEnabled(true);
+    md->getEliminaPiatto()->setEnabled(true);
+}
+
 
 
 

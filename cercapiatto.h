@@ -1,16 +1,15 @@
-#ifndef INSERIMENTOPIATTO_H
-#define INSERIMENTOPIATTO_H
+#ifndef CERCAPIATTO_H
+#define CERCAPIATTO_H
 #include<QDialog>
-#include<QHBoxLayout>
-#include<QPushButton>
-#include<QApplication>
 #include<QLabel>
 #include<QLineEdit>
 #include<QCheckBox>
+#include<QPushButton>
+#include<QGridLayout>
+#include<QMessageBox>
+#include<QApplication>
 #include<QWidget>
-#include<iostream>
-#include <QMessageBox>
-using namespace std;
+#include<QHBoxLayout>
 
 #include"piattobase.h"
 #include"primo.h"
@@ -18,8 +17,7 @@ using namespace std;
 #include"contorno.h"
 #include"modello.h"
 
-
-class inserimentoPiatto: public QDialog {
+class cercaPiatto: public QDialog {
     Q_OBJECT
     private:
         QPushButton* primiB;
@@ -51,6 +49,7 @@ class inserimentoPiatto: public QDialog {
         QLabel* tipoCarneP;
         QLabel* tipoPesceP;
         QLabel* tipoPiattoP;
+        QLabel* tipoCotturaP;
         QLineEdit* insertTipoCarneP;
         QLineEdit* insertTipoPesceP;
         QLineEdit* insertTipoPiattoP;
@@ -64,21 +63,20 @@ class inserimentoPiatto: public QDialog {
         QWidget *secondiView;
         QWidget *contorniView;
         //aggiungi/chiudi
-        QPushButton* aggiungiP;
+        QPushButton* cercaP;
         QPushButton* close;
-
+        //modello
         modello* m;
-
     public slots:
-        void buttonAggiungiPrimi();
-        void buttonAggiungiSecondi();
-        void buttonAggiungiContorni();
-        void buttonAggiungiP();
+        void buttonCercaPrimi();
+        void buttonCercaSecondi();
+        void buttonCercaContorni();
+        void buttonCercaP();
         void buttonChiusura();
-        //void disablePesce();
     public:
-        inserimentoPiatto(modello*m, QWidget* parent);
-        piattoBase* insertNuovoPiatto();
-};
+        cercaPiatto(modello*m, QWidget* parent);
+        piattoBase* creaPiattoTemp();
+        void cercaPiattoTemp() const;
+    };
 
-#endif // INSERIMENTOPIATTO_H
+#endif // CERCAPIATTO_H

@@ -38,7 +38,7 @@ string contorno::piattoInString(piattoBase* pb) const {
     string strF = piattoBase::piattoInString(pb);
     contorno* x=dynamic_cast<contorno*>(pb);
     if(x)
-        strF.append("\n"+getNomeContorno()+" "+x->getTipoContorno()+"\n").append("\nPrezzo: "+ (QString::number(prezzoFinale()).toUtf8())).append("\n");
+        strF.append("\n"+getNomeContorno()+" "+x->getTipoContorno()).append("\nPrezzo: "+ (QString::number(prezzoFinale()).toUtf8())).append("\n");
     return strF;
 }
 

@@ -1,6 +1,6 @@
 #include "piattobase.h"
 #include "primo.h"
-#include<Qstring>
+#include<QString>
 using std::string;
 
 //costruttore

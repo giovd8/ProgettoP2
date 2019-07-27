@@ -20,7 +20,7 @@ class modello {
 
         void caricamentoDati() const;
         void nuovoPercorso(string);
-        void caricaOggettoXML();
+        void salvataggioDati();
 
         //Funzioni begin e end per modello
         container<piattoBase*>::iteratore mBegin();

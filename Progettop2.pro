@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     listapcontainer.cpp \
     elementilistap.cpp \
     inserimentopiatto.cpp \
-    modificapiatto.cpp
+    modificapiatto.cpp \
+    cercapiatto.cpp
 
 HEADERS += \
     piattobase.h \
@@ -40,5 +41,6 @@ HEADERS += \
     listapcontainer.h \
     elementilistap.h \
     inserimentopiatto.h \
-    modificapiatto.h
+    modificapiatto.h \
+    cercapiatto.h
 

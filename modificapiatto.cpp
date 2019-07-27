@@ -243,7 +243,7 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
 void modificaPiatto::buttonModificaP(){
     bool modifica=modificaPiatto::modificaPiattoCorrente(pb);
     if(modifica) {
-        m->caricaOggettoXML();
+       // m->caricaOggettoXML();
         QMessageBox::warning(this, "Modifica completata", "Il piatto e stato modificato correttamente!");
     }
     else

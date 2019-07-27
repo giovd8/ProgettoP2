@@ -62,9 +62,6 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     x->addWidget(contorniB);
     mainView->addLayout(x,1,0,1,1);
 
-    //primiB->setFocusPolicy(Qt::NoFocus);
-    //::setFocusPolicy(Qt::NoFocus);
-
     //inserisco i widget piatto base nella sottogriglia
     QGridLayout* listaInserimentoPiattoBase = new QGridLayout;
     listaInserimentoPiattoBase->addWidget(nomeP,0,0,1,1);
@@ -126,7 +123,7 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     contorniView->hide();
 
 //    primiB->setFocusPolicy(Qt::NoFocus);
-    aggiungiP->setFocusPolicy(Qt::StrongFocus);
+    //aggiungiP->setFocusPolicy(Qt::StrongFocus);
 
     //connect pulsanti
     connect(primiB,SIGNAL(clicked()),this,SLOT(buttonAggiungiPrimi()));

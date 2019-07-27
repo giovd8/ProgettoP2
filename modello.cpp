@@ -86,8 +86,8 @@ void modello::caricamentoDati() const {
         elementiMenu.close();
 }
 
-//Salvo dati nuovo oggetto su file XML
-void modello::caricaOggettoXML(){
+//Salvo dati menu su file XML
+void modello::salvataggioDati(){
     QSaveFile elementoMenu(QString::fromStdString(xmlFile));
 
     if(!elementoMenu.open(QIODevice::WriteOnly))

@@ -8,6 +8,7 @@
 #include"modello.h"
 #include"inserimentopiatto.h"
 #include"modificapiatto.h"
+#include"cercapiatto.h"
 //#include"listapcontainer.h"
 
 
@@ -22,8 +23,10 @@ private:
     modifichedati* md;
     viewpiatti* viewP;
     inserimentoPiatto* ip;
+    //QPushButton* fnd;
 
 public slots:
+    void salvaModello();
     void caricaPiatti() const;
     void caricaPrimi() const;
     void caricaSecondi() const;
@@ -31,7 +34,8 @@ public slots:
     void aggiungiPiatto();
     void modPiatto();
     void eliminaPiatto();
-    void gestisciPulsantModElim() const;
+    void findPiatto();
+    void gestisciPulsantiModElim() const;
 
 public:
     controller(QWidget * parent= nullptr);

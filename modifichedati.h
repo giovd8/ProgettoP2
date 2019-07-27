@@ -16,11 +16,13 @@ class modifichedati: public QWidget {
         QPushButton* aggiungi;
         QPushButton* modifica;
         QPushButton* elimina;
+        QPushButton* cerca;
     public:
         modifichedati(QWidget* parent);
         QPushButton *getAggiungiPiatto() const;
         QPushButton *getModificaPiatto() const;
         QPushButton *getEliminaPiatto() const;
+        QPushButton *getCercaPiatto() const;
 };
 
 #endif // MODIFICHEDATI_H
