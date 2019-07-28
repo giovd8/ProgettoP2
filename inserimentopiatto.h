@@ -37,16 +37,16 @@ class inserimentoPiatto: public QDialog {
         //primo piatto
         QLabel* soiaP;
         QLabel* tipoPastaP;
+        QLabel* condimentoP;
         QLabel* ingrediente1P;
         QLabel* ingrediente2P;
         QLabel* ingrediente3P;
-        QLabel* ingrediente4P;
         QCheckBox* insertSoiaP;
         QLineEdit* insertTipoPastaP;
+        QLineEdit* insertCondimentoP;
         QLineEdit* insertIngrediente1P;
         QLineEdit* insertIngrediente2P;
         QLineEdit* insertIngrediente3P;
-        QLineEdit* insertIngrediente4P;
         //secondi piatto
         QLabel* tipoCarneP;
         QLabel* tipoPesceP;

@@ -9,10 +9,10 @@ class primo: public piattoBase {
     private:
         bool soia;
         string tipoPasta;
+        string condimento;
         string ingrediente1;
         string ingrediente2;
         string ingrediente3;
-        string ingrediente4;
     public:
         //costruttore primi
         primo(string="", bool=false, bool=false, double=5, bool=false, string="", string="", string="", string="", string="");
@@ -21,26 +21,26 @@ class primo: public piattoBase {
         primo(const primo &);
 
         //metodi GET
-        bool getSoia() const;
+        bool isSoia() const;
         string getPasta() const;
+        string getCondimento() const;
         string getIngrediente1() const;
         string getIngrediente2() const;
         string getIngrediente3() const;
-        string getIngrediente4() const;
 
         //metodi SET
         void setSoia(bool);
         void setPasta(string);
+        void setCondimento(string);
         void setIngrediente1(string);
         void setIngrediente2(string);
         void setIngrediente3(string);
-        void setIngrediente4(string);
 
         //calcola prezzo finale virtuale
         double prezzoFinale() const;
 
         //convertire oggetto in stringa
-        virtual string piattoInString(piattoBase*) const;
+        string piattoInString(piattoBase*) const;
 
         //overloading operatori
         bool operator==(const piattoBase&) const;

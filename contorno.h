@@ -28,7 +28,7 @@ class contorno: public piattoBase {
         double prezzoFinale() const;
 
         //convertire oggetto in stringa
-        virtual string piattoInString(piattoBase*) const;
+        string piattoInString(piattoBase*) const;
 
         //overloading operatori
         bool operator==(const piattoBase&) const;

@@ -52,11 +52,11 @@ void modello::caricamentoDati() const {
                     if(xmlReader.name()=="primo"){
                         bool soia=attributi.hasAttribute("soia") ? attributi.value("soia").toString()=="true"? true : false : false;
                         string tipoPatsa=attributi.hasAttribute("tipoPasta") ? attributi.value("tipoPasta").toString().toStdString() : "";
+                        string condimento=attributi.hasAttribute("condimento") ? attributi.value("condimento").toString().toStdString() : "";
                         string ingrediente1=attributi.hasAttribute("ingrediente1") ? attributi.value("ingrediente1").toString().toStdString() : "";
                         string ingrediente2=attributi.hasAttribute("ingrediente2") ? attributi.value("ingrediente2").toString().toStdString() : "";
                         string ingrediente3=attributi.hasAttribute("ingrediente3") ? attributi.value("ingrediente3").toString().toStdString() : "";
-                        string ingrediente4=attributi.hasAttribute("ingrediente4") ? attributi.value("ingrediente4").toString().toStdString() : "";
-                        insertElemento=new primo(nome,vegano,glutenFree,prezzoBase,soia,tipoPatsa,ingrediente1,ingrediente2,ingrediente3,ingrediente4);
+                        insertElemento=new primo(nome,vegano,glutenFree,prezzoBase,soia,tipoPatsa,condimento,ingrediente1,ingrediente2,ingrediente3);
                     }
                     //prendo attributi secondo
                     if(xmlReader.name()=="secondo"){
@@ -112,21 +112,21 @@ void modello::salvataggioDati(){
         if(p) {
             xmlWriter.writeEmptyElement("primo");
             xmlWriter.writeAttribute("nome", QString::fromStdString(insert->getNome()));
-            xmlWriter.writeAttribute("vegano", p->getVegano() ? "true" : "false");
-            xmlWriter.writeAttribute("glutenFree", p->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("vegano", p->isVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("glutenFree", p->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(p->getPrezzoBase()));
-            xmlWriter.writeAttribute("soia", p->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("soia", p->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("tipoPasta", QString::fromStdString(p->getPasta()));
+            xmlWriter.writeAttribute("condimento", QString::fromStdString(p->getCondimento()));
             xmlWriter.writeAttribute("ingrediente1", QString::fromStdString(p->getIngrediente1()));
             xmlWriter.writeAttribute("ingrediente2", QString::fromStdString(p->getIngrediente2()));
             xmlWriter.writeAttribute("ingrediente3", QString::fromStdString(p->getIngrediente3()));
-            xmlWriter.writeAttribute("ingrediente4", QString::fromStdString(p->getIngrediente4()));
         }
         if(s) {
             xmlWriter.writeEmptyElement("secondo");
             xmlWriter.writeAttribute("nome", QString::fromStdString(s->getNome()));
-            xmlWriter.writeAttribute("vegano", s->getVegano() ? "true" : "false");
-            xmlWriter.writeAttribute("glutenFree", s->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("vegano", s->isVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("glutenFree", s->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(s->getPrezzoBase()));
             xmlWriter.writeAttribute("tipoCarne", QString::fromStdString(s->getTipoCarne()));
             xmlWriter.writeAttribute("tipoPesce", QString::fromStdString(s->getTipoPesce()));
@@ -135,8 +135,8 @@ void modello::salvataggioDati(){
         if(c) {
             xmlWriter.writeEmptyElement("contorno");
             xmlWriter.writeAttribute("nome", QString::fromStdString(c->getNome()));
-            xmlWriter.writeAttribute("vegano", c->getVegano() ? "true" : "false");
-            xmlWriter.writeAttribute("glutenFree", c->getVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("vegano", c->isVegano() ? "true" : "false");
+            xmlWriter.writeAttribute("glutenFree", c->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(c->getPrezzoBase()));
             xmlWriter.writeAttribute("nomeContorno", QString::fromStdString(c->getNomeContorno()));
             xmlWriter.writeAttribute("tipoContorno", QString::fromStdString(c->getTipoContorno()));

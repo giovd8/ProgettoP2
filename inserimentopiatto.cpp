@@ -19,16 +19,16 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     //primo piatto
     soiaP(new QLabel("Soia",this)),
     tipoPastaP(new QLabel("Tipo di pasta:",this)),
+    condimentoP(new QLabel("Condimento:",this)),
     ingrediente1P(new QLabel("Ingrediente 1:",this)),
     ingrediente2P(new QLabel("Ingrediente 2:",this)),
     ingrediente3P(new QLabel("Ingrediente 3:",this)),
-    ingrediente4P(new QLabel("Ingrediente 4:",this)),
     insertSoiaP(new QCheckBox(this)),
     insertTipoPastaP(new QLineEdit(this)),
+    insertCondimentoP(new QLineEdit(this)),
     insertIngrediente1P(new QLineEdit(this)),
     insertIngrediente2P(new QLineEdit(this)),
     insertIngrediente3P(new QLineEdit(this)),
-    insertIngrediente4P(new QLineEdit(this)),
     //secondo piatto
     tipoCarneP(new QLabel("Tipo di carne:",this)),
     tipoPesceP(new QLabel("Tipo di pesce:",this)),
@@ -47,7 +47,7 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     contorniView(new QWidget(this)),
     //pulsanti aggiungi chiudi
     aggiungiP(new QPushButton("Aggiungi",this)),
-    close(new QPushButton("Esci",this)),
+    close(new QPushButton("Annulla",this)),
     //caricamento modello
     m(mm)
 {
@@ -61,9 +61,6 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     x->addWidget(secondiB);
     x->addWidget(contorniB);
     mainView->addLayout(x,1,0,1,1);
-
-    //primiB->setFocusPolicy(Qt::NoFocus);
-    //::setFocusPolicy(Qt::NoFocus);
 
     //inserisco i widget piatto base nella sottogriglia
     QGridLayout* listaInserimentoPiattoBase = new QGridLayout;
@@ -84,14 +81,14 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     listaInserimentoPrimi->addWidget(insertSoiaP,0,1,1,1);
     listaInserimentoPrimi->addWidget(tipoPastaP,1,0,1,1);
     listaInserimentoPrimi->addWidget(insertTipoPastaP,1,1,1,1);
-    listaInserimentoPrimi->addWidget(ingrediente1P,2,0,1,1);
-    listaInserimentoPrimi->addWidget(insertIngrediente1P,2,1,1,1);
-    listaInserimentoPrimi->addWidget(ingrediente2P,3,0,1,1);
-    listaInserimentoPrimi->addWidget(insertIngrediente2P,3,1,1,1);
-    listaInserimentoPrimi->addWidget(ingrediente3P,4,0,1,1);
-    listaInserimentoPrimi->addWidget(insertIngrediente3P,4,1,1,1);
-    listaInserimentoPrimi->addWidget(ingrediente4P,5,0,1,1);
-    listaInserimentoPrimi->addWidget(insertIngrediente4P,5,1,1,1);
+    listaInserimentoPrimi->addWidget(condimentoP,2,0,1,1);
+    listaInserimentoPrimi->addWidget(insertCondimentoP,2,1,1,1);
+    listaInserimentoPrimi->addWidget(ingrediente1P,3,0,1,1);
+    listaInserimentoPrimi->addWidget(insertIngrediente1P,3,1,1,1);
+    listaInserimentoPrimi->addWidget(ingrediente2P,4,0,1,1);
+    listaInserimentoPrimi->addWidget(insertIngrediente2P,4,1,1,1);
+    listaInserimentoPrimi->addWidget(ingrediente3P,5,0,1,1);
+    listaInserimentoPrimi->addWidget(insertIngrediente3P,5,1,1,1);
     primiView->setLayout(listaInserimentoPrimi);
     mainView->addWidget(primiView,3,0,1,1);
 
@@ -125,8 +122,7 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     secondiView->hide();
     contorniView->hide();
 
-//    primiB->setFocusPolicy(Qt::NoFocus);
-    aggiungiP->setFocusPolicy(Qt::StrongFocus);
+    aggiungiP->setDefault(true);
 
     //connect pulsanti
     connect(primiB,SIGNAL(clicked()),this,SLOT(buttonAggiungiPrimi()));
@@ -180,14 +176,14 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if (insertSoiaP->isChecked())
             soiaNewP=true;
         string tipoPastaNewP=(insertTipoPastaP->text()).toLocal8Bit().constData();
+        string condimentoNewP=(insertCondimentoP->text()).toLocal8Bit().constData();
         string ingrediente1NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
         string ingrediente2NewP=(insertIngrediente2P->text()).toLocal8Bit().constData();
         string ingrediente3NewP=(insertIngrediente3P->text()).toLocal8Bit().constData();
-        string ingrediente4NewP=(insertIngrediente4P->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || prezzoBaseNewP==0 || tipoPastaNewP=="" || ingrediente1NewP=="")
-            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di pasta ed almeno il primo ingredinete sono necessari!");
+        if(nomeNewP=="" || tipoPastaNewP=="" || condimentoNewP=="")
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di pasta ed il condimento sono necessari!");
         else
-            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,soiaNewP,tipoPastaNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP,ingrediente4NewP);
+            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
     }
     //secondo
     if(secondiView->isVisible()) {
@@ -199,8 +195,8 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
             QMessageBox::warning(this,"Errore", "Inserire o tipo di carne o tipo di pesce, non entrambi!");
         }
         string tipoPiattoNewP=(insertTipoPiattoP->text()).toLocal8Bit().constData();
-        if(!CoP && (nomeNewP=="" || prezzoBaseNewP==0 || (tipoCarneNewP=="" && tipoPesceNewP=="") || tipoPiattoNewP==""))
-            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di carne o pesce e la tipologia del piatto sono necessari!");
+        if(!CoP && (nomeNewP=="" || (tipoCarneNewP=="" && tipoPesceNewP=="") || tipoPiattoNewP==""))
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di carne o pesce e la tipologia del piatto sono necessari!");
         else
             return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarneNewP,tipoPesceNewP,tipoPiattoNewP);
     }
@@ -208,8 +204,8 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     if(contorniView->isVisible()) {
         string nomeContornoNewP=(insertTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || prezzoBaseNewP==0 || nomeContornoNewP=="" || tipoContornoNewP=="")
-            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di carne o pesce e la tipologia del piatto sono necessari!");
+        if(nomeNewP=="" || nomeContornoNewP=="" || tipoContornoNewP=="")
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di carne o pesce e la tipologia del piatto sono necessari!");
         else
             return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,nomeContornoNewP,tipoContornoNewP);
     }

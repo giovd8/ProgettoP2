@@ -11,7 +11,7 @@ using std::string;
 
 class modello {
     private:
-        container<piattoBase*>* piatti;
+        container<piattoBase*>*piatti;
         string xmlFile;
         //inserimentoPiatto* insP;
     public:

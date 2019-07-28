@@ -11,7 +11,7 @@ class piattoBase {
         double prezzoBase;
     public:
         //costruttore piattoBase
-        piattoBase(string,bool, bool, double);
+        piattoBase(string="",bool=false, bool=false, double=3);
 
         //costruttore di copia
         piattoBase(const piattoBase &);
@@ -21,8 +21,8 @@ class piattoBase {
 
         //metodi GET
         string getNome() const;
-        bool getVegano() const;
-        bool getGlutenFree() const;
+        bool isVegano() const;
+        bool isGlutenFree() const;
         double getPrezzoBase() const;
 
         //metodi SET

@@ -35,16 +35,16 @@ class modificaPiatto: public QDialog {
         //primo piatto
         QLabel* soiaP;
         QLabel* tipoPastaP;
+        QLabel* condimentoP;
         QLabel* ingrediente1P;
         QLabel* ingrediente2P;
         QLabel* ingrediente3P;
-        QLabel* ingrediente4P;
         QCheckBox* modificaSoiaP;
         QLineEdit* modificaTipoPastaP;
+        QLineEdit* modificaCondimentoP;
         QLineEdit* modificaIngrediente1P;
         QLineEdit* modificaIngrediente2P;
         QLineEdit* modificaIngrediente3P;
-        QLineEdit* modificaIngrediente4P;
         //secondi piatto
         QLabel* tipoCarneP;
         QLabel* tipoPesceP;
@@ -64,7 +64,7 @@ class modificaPiatto: public QDialog {
         QWidget *secondiView;
         QWidget *contorniView;
         //Modifica/chiudi
-        QPushButton* ModificaP;
+        QPushButton* modificaP;
         QPushButton* close;
 
         modello* m;
