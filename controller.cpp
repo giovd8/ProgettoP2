@@ -110,6 +110,21 @@ void controller::caricaContorni() const {
         md->getEliminaPiatto()->setEnabled(false);
     }
 }
+
+//visualizza risultati ricerca
+//void controller::caricaRisultatiRicerca() const {
+//    if(xmlFile!="") {
+//        viewP->getLista()->clear();
+//        container<piattoBase*>::iteratore it = m->mBegin();
+//        piattoBase* findP=
+//        for(; it!= m->mEnd(); ++it){
+
+//            viewP->getLista()->aggiungiPiatto(*it);
+//        }///        md->getModificaPiatto()->setEnabled(false);
+//        md->getEliminaPiatto()->setEnabled(false);
+//    }
+//}
+
 //aggiungi piatto
 void controller::aggiungiPiatto(){
     QDialog* d=new inserimentoPiatto(m,this);
@@ -122,16 +137,9 @@ void controller::modPiatto(){
     elementiListaP* lc=viewP->getLista()->piattoCorrente();
     piattoBase* pb=lc->prelevaPiatto();
     if(pb!=nullptr){
-        container<piattoBase*>::iteratore it=m->mBegin();
-        bool trovato=false;
-        for(;it!=m->mEnd() && !trovato;++it) {
-            if(*it==pb) {
-                trovato=true;
-                QDialog* d=new modificaPiatto(m,*it,this);
-                d->resize(500,300);
-                d->exec();
-            }
-         }
+        QDialog* d=new modificaPiatto(m,pb,this);
+        d->resize(500,300);
+        d->exec();
     }
     caricaPiatti();
 }
@@ -175,9 +183,18 @@ void controller::eliminaPiatto(){
 }
 //cerca piatto
 void controller::findPiatto(){
-    QDialog* d=new cercaPiatto(m,this);
+    QDialog* d=new cercaPiatto(m,viewP,this);
+
+    //connect(d->get)
+//    piattoBase* findP=d->creaPiattoTemp();
     d->exec();
-    caricaPiatti();
+
+//    container<piattoBase*>::iteratore it = m->mBegin();
+//    for(; it!= m->mEnd(); ++it){
+//        if(*(*it)==*findP)
+//        viewP->getLista()->aggiungiPiatto(*it);
+//    }
+
 }
 //gestisci pulsanti
 void controller::gestisciPulsantiModElim() const {

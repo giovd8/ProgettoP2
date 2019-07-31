@@ -1,7 +1,8 @@
 #include "cercapiatto.h"
 
-cercaPiatto::cercaPiatto(modello* mm, QWidget* d):
+cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
     QDialog(d),
+    y(vp),
     //bottoni selezione cerca
     primiB(new QPushButton("Cerca primo",this)),
     secondiB(new QPushButton("Cerca secondo",this)),
@@ -60,9 +61,6 @@ cercaPiatto::cercaPiatto(modello* mm, QWidget* d):
     x->addWidget(secondiB);
     x->addWidget(contorniB);
     mainView->addLayout(x,1,0,1,1);
-
-    //primiB->setFocusPolicy(Qt::NoFocus);
-    //::setFocusPolicy(Qt::NoFocus);
 
     //inserisco i widget piatto base nella sottogriglia
     QGridLayout* listaInserimentoPiattoBase = new QGridLayout;
@@ -154,9 +152,9 @@ void cercaPiatto::buttonCercaContorni(){
     contorniView->show();
 }
 
-//void inserimentoPiatto::disablePesce() {
-//     setDisabled(insertTipoPesceP);
-//}
+QPushButton* cercaPiatto::getCercaP() const{
+    return cercaP;
+}
 
 piattoBase* cercaPiatto::creaPiattoTemp(){
     string nomeNewP=(insertNomeP->text()).toLocal8Bit().constData();
@@ -213,26 +211,43 @@ piattoBase* cercaPiatto::creaPiattoTemp(){
 
 }
 
-bool cercaPiatto::cercaInLista(piattoBase* pb) {
-    container<piattoBase*>::iteratore it=m->mBegin();
-    //primo* p=dynamic_cast<primo*>(*it);
-    //secondo* s=dynamic_cast<secondo*>(*it);
-    //contorno* c=dynamic_cast<contorno*>(*it);
-    for(;it!=m->mEnd();++it) {
-        if(*(*it)==*pb)
-            return true;
-    }
-    return false;
-}
+//int cercaPiatto::cercaInLista(piattoBase* pb) {
+//    container<piattoBase*>::iteratore it=m->mBegin();
+//    //primo* p=dynamic_cast<primo*>(*it);
+//    //secondo* s=dynamic_cast<secondo*>(*it);
+//    //contorno* c=dynamic_cast<contorno*>(*it);
+//    int cont=0;
+//    for(;it!=m->mEnd();++it) {
+//        if(*(*it)==*pb)
+//            cont=cont+1;
+//    }
+//    return cont;
+//}
+
+//piattoBase* cercaPiatto::retPunt(piattoBase* i,piattoBase* pb){
+//    container<piattoBase*>::iteratore it=i;
+//    while(it!=m->mEnd()){
+//        if(*(*it)==*pd) {
+//            return *it;
+//        }
+//    }
+//}
 
 void cercaPiatto::buttonCercaP(){
     piattoBase* temp=creaPiattoTemp();
     if(temp!=nullptr) {
-        std::cout<<temp->getNome();
+        bool trovato=false;
+        container<piattoBase*>::iteratore it=m->mBegin();
+        y->getLista()->clear();
+        for(; it!= m->mEnd(); ++it){
+            if(*(*it)==*temp) {
+                y->getLista()->aggiungiPiatto(*it);
+                trovato=true;
+            }
+        }
+        if(trovato)
+            QMessageBox::warning(this,"Trovato!", "Il piatto e stato trovato, verra visualizzato nella view principale!");
 
-        bool x=cercaInLista(temp);
-        if(x)
-            QMessageBox::warning(this,"Trovato!", "Il piatto e stato trovato");
         else
             QMessageBox::warning(this,"Non trovato!", "Il piatto non e stato trovato");
     }

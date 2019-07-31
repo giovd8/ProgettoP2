@@ -16,6 +16,7 @@
 #include"secondo.h"
 #include"contorno.h"
 #include"modello.h"
+#include"viewpiatti.h"
 
 class cercaPiatto: public QDialog {
     Q_OBJECT
@@ -67,6 +68,7 @@ class cercaPiatto: public QDialog {
         QPushButton* close;
         //modello
         modello* m;
+        viewpiatti* y;
     public slots:
         void buttonCercaPrimi();
         void buttonCercaSecondi();
@@ -74,10 +76,11 @@ class cercaPiatto: public QDialog {
         void buttonCercaP();
         void buttonChiusura();
     public:
-        cercaPiatto(modello*m, QWidget* parent);
+        cercaPiatto(modello*m, viewpiatti* y, QWidget* parent);
         piattoBase* creaPiattoTemp();
-        bool cercaInLista(piattoBase*);
+        //int cercaInLista(piattoBase*);
         void cercaPiattoTemp() const;
+        QPushButton* getCercaP() const;
     };
 
 #endif // CERCAPIATTO_H
