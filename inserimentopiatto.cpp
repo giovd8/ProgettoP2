@@ -30,11 +30,9 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     insertIngrediente2P(new QLineEdit(this)),
     insertIngrediente3P(new QLineEdit(this)),
     //secondo piatto
-    tipoCarneP(new QLabel("Tipo di carne:",this)),
-    tipoPesceP(new QLabel("Tipo di pesce:",this)),
-    tipoPiattoP(new QLabel("Tipo piatto:",this)),
-    insertTipoCarneP(new QLineEdit(this)),
-    insertTipoPesceP(new QLineEdit(this)),
+    tipoCarnePesceP(new QLabel("Tipo di carne o pesce:",this)),
+    tipoPiattoP(new QLabel("Tipo cottura:",this)),
+    insertTipoCarnePesceP(new QLineEdit(this)),
     insertTipoPiattoP(new QLineEdit(this)),
     //contorni
     tipoNomeContornoP(new QLabel("Contorno:",this)),
@@ -94,12 +92,10 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
 
     //inserisco i widget secondo piatto nella sottogriglia
     QGridLayout* listaInserimentoSecondi = new QGridLayout;
-    listaInserimentoSecondi->addWidget(tipoCarneP,0,0,1,1);
-    listaInserimentoSecondi->addWidget(insertTipoCarneP,0,1,1,1);
-    listaInserimentoSecondi->addWidget(tipoPesceP,1,0,1,1);
-    listaInserimentoSecondi->addWidget(insertTipoPesceP,1,1,1,1);
-    listaInserimentoSecondi->addWidget(tipoPiattoP,2,0,1,1);
-    listaInserimentoSecondi->addWidget(insertTipoPiattoP,2,1,1,1);
+    listaInserimentoSecondi->addWidget(tipoCarnePesceP,0,0,1,1);
+    listaInserimentoSecondi->addWidget(insertTipoCarnePesceP,0,1,1,1);
+    listaInserimentoSecondi->addWidget(tipoPiattoP,1,0,1,1);
+    listaInserimentoSecondi->addWidget(insertTipoPiattoP,1,1,1,1);
     secondiView->setLayout(listaInserimentoSecondi);
     mainView->addWidget(secondiView,3,0,1,1);
 
@@ -131,9 +127,6 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     connect(aggiungiP,SIGNAL(clicked()),this,SLOT(buttonAggiungiP()));
     connect(close,SIGNAL(clicked()),this,SLOT(buttonChiusura()));
 
-    //connect(insertTipoCarneP,SIGNAL(textChanged(QString)),this,SLOT(disablePesce()));
-
-
     setLayout(mainView);
 }
 
@@ -154,10 +147,6 @@ void inserimentoPiatto::buttonAggiungiContorni(){
     secondiView->hide();
     contorniView->show();
 }
-
-//void inserimentoPiatto::disablePesce() {
-//     setDisabled(insertTipoPesceP);
-//}
 
 piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     string nomeNewP=(insertNomeP->text()).toLocal8Bit().constData();
@@ -187,25 +176,19 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     }
     //secondo
     if(secondiView->isVisible()) {
-        string tipoCarneNewP=(insertTipoCarneP->text()).toLocal8Bit().constData();
-        string tipoPesceNewP=(insertTipoPesceP->text()).toLocal8Bit().constData();
-        bool CoP=true;
-        if((tipoCarneNewP!="" && tipoPesceNewP!="")||(tipoCarneNewP=="" && tipoPesceNewP=="")) {
-            CoP=false;
-            QMessageBox::warning(this,"Errore", "Inserire o tipo di carne o tipo di pesce, non entrambi!");
-        }
+        string tipoCarnePesceNewP=(insertTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(insertTipoPiattoP->text()).toLocal8Bit().constData();
-        if(!CoP && (nomeNewP=="" || (tipoCarneNewP=="" && tipoPesceNewP=="") || tipoPiattoNewP==""))
-            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di carne o pesce e la tipologia del piatto sono necessari!");
+        if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo carne/pesce e tipo di cottura sono necessari!");
         else
-            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarneNewP,tipoPesceNewP,tipoPiattoNewP);
+            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarnePesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
         string nomeContornoNewP=(insertTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
         if(nomeNewP=="" || nomeContornoNewP=="" || tipoContornoNewP=="")
-            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di carne o pesce e la tipologia del piatto sono necessari!");
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, !");
         else
             return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,nomeContornoNewP,tipoContornoNewP);
     }
@@ -218,7 +201,7 @@ void inserimentoPiatto::buttonAggiungiP(){
     piattoBase* temp=insertNuovoPiatto();
     if(temp!=nullptr) {
         m->getLista()->pushEnd(temp);
-        QMessageBox::warning(this, "Inserimento completato", "Il nuovo piatto stato aggiuto correttamente alla lista!");
+        QMessageBox::warning(this, "Inserimento completato", "Il nuovo piatto è stato aggiuto correttamente alla lista!");
         //m->salvataggioDati();
 
     }

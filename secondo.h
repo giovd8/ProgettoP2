@@ -6,24 +6,21 @@ using std::string;
 
 class secondo: public piattoBase {
     private:
-        string tipoCarne;
-        string tipoPesce;
+        string tipoCarnePesce;
         string tipoPiatto;
     public:
         //costruttore secondo
-        secondo(string="", bool=false, bool=true, double=10, string="", string="", string="");
+        secondo(string="", bool=false, bool=true, double=10, string="", string="");
 
         //costruttore di copia
         secondo(const secondo &);
 
         //metodi GET
-        string getTipoCarne() const;
-        string getTipoPesce() const;
+        string getTipoCarnePesce() const;
         string getTipoPiatto() const;
 
         //metodi SET
-        void setTipoCarne(string);
-        void setTipoPesce(string);
+        void setTipoCarnePesce(string);
         void setTipoPiatto(string);
 
         //calcola prezzo finale virtuale

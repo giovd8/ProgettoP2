@@ -48,11 +48,9 @@ class inserimentoPiatto: public QDialog {
         QLineEdit* insertIngrediente2P;
         QLineEdit* insertIngrediente3P;
         //secondi piatto
-        QLabel* tipoCarneP;
-        QLabel* tipoPesceP;
+        QLabel* tipoCarnePesceP;
         QLabel* tipoPiattoP;
-        QLineEdit* insertTipoCarneP;
-        QLineEdit* insertTipoPesceP;
+        QLineEdit* insertTipoCarnePesceP;
         QLineEdit* insertTipoPiattoP;
         //contorno
         QLabel* tipoNomeContornoP;
@@ -75,7 +73,6 @@ class inserimentoPiatto: public QDialog {
         void buttonAggiungiContorni();
         void buttonAggiungiP();
         void buttonChiusura();
-        //void disablePesce();
     public:
         inserimentoPiatto(modello*m, QWidget* parent);
         piattoBase* insertNuovoPiatto();

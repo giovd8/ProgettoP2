@@ -47,12 +47,9 @@ class cercaPiatto: public QDialog {
         QLineEdit* insertIngrediente2P;
         QLineEdit* insertIngrediente3P;
         //secondi piatto
-        QLabel* tipoCarneP;
-        QLabel* tipoPesceP;
+        QLabel* tipoCarnePesceP;
         QLabel* tipoPiattoP;
-        QLabel* tipoCotturaP;
-        QLineEdit* insertTipoCarneP;
-        QLineEdit* insertTipoPesceP;
+        QLineEdit* insertTipoCarnePesceP;
         QLineEdit* insertTipoPiattoP;
         //contorno
         QLabel* tipoNomeContornoP;

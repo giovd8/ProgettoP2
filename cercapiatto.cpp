@@ -30,11 +30,9 @@ cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
     insertIngrediente2P(new QLineEdit(this)),
     insertIngrediente3P(new QLineEdit(this)),
     //secondo piatto
-    tipoCarneP(new QLabel("Tipo di carne:",this)),
-    tipoPesceP(new QLabel("Tipo di pesce:",this)),
-    tipoPiattoP(new QLabel("Tipo piatto:",this)),
-    insertTipoCarneP(new QLineEdit(this)),
-    insertTipoPesceP(new QLineEdit(this)),
+    tipoCarnePesceP(new QLabel("Tipo di carne o pesce:",this)),
+    tipoPiattoP(new QLabel("Tipo cottura:",this)),
+    insertTipoCarnePesceP(new QLineEdit(this)),
     insertTipoPiattoP(new QLineEdit(this)),
     //contorni
     tipoNomeContornoP(new QLabel("Contorno:",this)),
@@ -94,12 +92,10 @@ cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
 
     //inserisco i widget secondo piatto nella sottogriglia
     QGridLayout* listaInserimentoSecondi = new QGridLayout;
-    listaInserimentoSecondi->addWidget(tipoCarneP,0,0,1,1);
-    listaInserimentoSecondi->addWidget(insertTipoCarneP,0,1,1,1);
-    listaInserimentoSecondi->addWidget(tipoPesceP,1,0,1,1);
-    listaInserimentoSecondi->addWidget(insertTipoPesceP,1,1,1,1);
-    listaInserimentoSecondi->addWidget(tipoPiattoP,2,0,1,1);
-    listaInserimentoSecondi->addWidget(insertTipoPiattoP,2,1,1,1);
+    listaInserimentoSecondi->addWidget(tipoCarnePesceP,0,0,1,1);
+    listaInserimentoSecondi->addWidget(insertTipoCarnePesceP,0,1,1,1);
+    listaInserimentoSecondi->addWidget(tipoPiattoP,1,0,1,1);
+    listaInserimentoSecondi->addWidget(insertTipoPiattoP,1,1,1,1);
     secondiView->setLayout(listaInserimentoSecondi);
     mainView->addWidget(secondiView,3,0,1,1);
 
@@ -177,61 +173,24 @@ piattoBase* cercaPiatto::creaPiattoTemp(){
         string ingrediente1NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
         string ingrediente2NewP=(insertIngrediente2P->text()).toLocal8Bit().constData();
         string ingrediente3NewP=(insertIngrediente3P->text()).toLocal8Bit().constData();
-//        if(nomeNewP=="" || prezzoBaseNewP==0 || tipoPastaNewP=="" || condimentoNewP=="")
-//            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di pasta ed il condimento sono necessari!");
-//        else
-            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
+        return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
     }
     //secondo
     if(secondiView->isVisible()) {
-        string tipoCarneNewP=(insertTipoCarneP->text()).toLocal8Bit().constData();
-        string tipoPesceNewP=(insertTipoPesceP->text()).toLocal8Bit().constData();
-        bool CoP=true;
-        if((tipoCarneNewP!="" && tipoPesceNewP!="")||(tipoCarneNewP=="" && tipoPesceNewP=="")) {
-            CoP=false;
-            QMessageBox::warning(this,"Errore", "Inserire o tipo di carne o tipo di pesce, non entrambi!");
-        }
+        string tipoCarnePesceNewP=(insertTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(insertTipoPiattoP->text()).toLocal8Bit().constData();
-//        if(!CoP && (nomeNewP=="" || prezzoBaseNewP==0 || (tipoCarneNewP=="" && tipoPesceNewP=="") || tipoPiattoNewP==""))
-//            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di carne o pesce e la tipologia del piatto sono necessari!");
-//        else
-            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarneNewP,tipoPesceNewP,tipoPiattoNewP);
+        return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarnePesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
         string nomeContornoNewP=(insertTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
-//        if(nomeNewP=="" || prezzoBaseNewP==0 || nomeContornoNewP=="" || tipoContornoNewP=="")
-//            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, prezzo base, tipo di carne o pesce e la tipologia del piatto sono necessari!");
-//        else
-            return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,nomeContornoNewP,tipoContornoNewP);
+        return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,nomeContornoNewP,tipoContornoNewP);
     }
 
     return nullptr;
 
 }
-
-//int cercaPiatto::cercaInLista(piattoBase* pb) {
-//    container<piattoBase*>::iteratore it=m->mBegin();
-//    //primo* p=dynamic_cast<primo*>(*it);
-//    //secondo* s=dynamic_cast<secondo*>(*it);
-//    //contorno* c=dynamic_cast<contorno*>(*it);
-//    int cont=0;
-//    for(;it!=m->mEnd();++it) {
-//        if(*(*it)==*pb)
-//            cont=cont+1;
-//    }
-//    return cont;
-//}
-
-//piattoBase* cercaPiatto::retPunt(piattoBase* i,piattoBase* pb){
-//    container<piattoBase*>::iteratore it=i;
-//    while(it!=m->mEnd()){
-//        if(*(*it)==*pd) {
-//            return *it;
-//        }
-//    }
-//}
 
 void cercaPiatto::buttonCercaP(){
     piattoBase* temp=creaPiattoTemp();
@@ -246,10 +205,10 @@ void cercaPiatto::buttonCercaP(){
             }
         }
         if(trovato)
-            QMessageBox::warning(this,"Trovato!", "Il piatto e stato trovato, verra visualizzato nella view principale!");
+            QMessageBox::warning(this,"Trovato!", "Il piatto è stato trovato, verra visualizzato nella view principale!");
 
         else
-            QMessageBox::warning(this,"Non trovato!", "Il piatto non e stato trovato");
+            QMessageBox::warning(this,"Non trovato!", "Il piatto non è stato trovato");
     }
     cercaPiatto::accept();
 }

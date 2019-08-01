@@ -27,14 +27,10 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     modificaIngrediente2P(new QLineEdit(this)),
     modificaIngrediente3P(new QLineEdit(this)),
     //secondo piatto
-    tipoCarneP(new QLabel("Tipo di carne:",this)),
-    tipoPesceP(new QLabel("Tipo di pesce:",this)),
-    tipoPiattoP(new QLabel("Tipo piatto:",this)),
-    tipoCotturaP(new QLabel("Tipo cottura:",this)),
-    modificaTipoCarneP(new QLineEdit(this)),
-    modificaTipoPesceP(new QLineEdit(this)),
+    tipoCarnePesceP(new QLabel("Tipo di carne o pesce:",this)),
+    tipoPiattoP(new QLabel("Tipo cottura:",this)),
+    modificaTipoCarnePesceP(new QLineEdit(this)),
     modificaTipoPiattoP(new QLineEdit(this)),
-    modificaTipoCotturaP(new QLineEdit(this)),
     //contorni
     tipoNomeContornoP(new QLabel("Contorno:",this)),
     tipoContornoP(new QLabel("Tipologia contorno:",this)),
@@ -110,14 +106,11 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     if(y){
         //inserisco i widget secondo piatto nella sottogriglia
         QGridLayout* listaModificaSecondi = new QGridLayout;
-        listaModificaSecondi->addWidget(tipoCarneP,0,0,1,1);
-        listaModificaSecondi->addWidget(modificaTipoCarneP,0,1,1,1);
-        modificaTipoCarneP->setText(QString::fromStdString(y->getTipoCarne()));
-        listaModificaSecondi->addWidget(tipoPesceP,1,0,1,1);
-        listaModificaSecondi->addWidget(modificaTipoPesceP,1,1,1,1);
-        modificaTipoPesceP->setText(QString::fromStdString(y->getTipoPesce()));
-        listaModificaSecondi->addWidget(tipoPiattoP,2,0,1,1);
-        listaModificaSecondi->addWidget(modificaTipoPiattoP,2,1,1,1);
+        listaModificaSecondi->addWidget(tipoCarnePesceP,0,0,1,1);
+        listaModificaSecondi->addWidget(modificaTipoCarnePesceP,0,1,1,1);
+        modificaTipoCarnePesceP->setText(QString::fromStdString(y->getTipoCarnePesce()));
+        listaModificaSecondi->addWidget(tipoPiattoP,1,0,1,1);
+        listaModificaSecondi->addWidget(modificaTipoPiattoP,1,1,1,1);
         modificaTipoPiattoP->setText(QString::fromStdString(y->getTipoPiatto()));
         secondiView->setLayout(listaModificaSecondi);
         mainView->addWidget(secondiView,2,0,1,1);
@@ -207,21 +200,12 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
     //secondo
     secondo* s=dynamic_cast<secondo*>(mod);
     if(s) {
-        string tipoCarneNewP=(modificaTipoCarneP->text()).toLocal8Bit().constData();
-        string tipoPesceNewP=(modificaTipoPesceP->text()).toLocal8Bit().constData();
-        bool CoP=true;
-        if((tipoCarneNewP!="" && tipoPesceNewP!="")||(tipoCarneNewP=="" && tipoPesceNewP=="")) {
-            CoP=false;
-            QMessageBox::warning(this,"Errore", "Inserire o tipo di carne o tipo di pesce, non entrambi!");
-        }
-        else {
-            s->setTipoCarne(tipoCarneNewP);
-            s->setTipoPesce(tipoPesceNewP);
-        }
+        string tipoCarnePesceNewP=(modificaTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(modificaTipoPiattoP->text()).toLocal8Bit().constData();
-        if(!CoP && (nomeNewP=="" || prezzoBaseNewP==0 || (tipoCarneNewP=="" && tipoPesceNewP=="") || tipoPiattoNewP==""))
-            QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Nome, prezzo base, tipo di carne o pesce e la tipologia del piatto sono necessari!");
+        if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
+            QMessageBox::warning(this,"Modifica non riuscita", "RRORE: Nome, tipo del secondo, tipo carne\pesce e di cottura sono necessari!");
         else {
+            s->setTipoCarnePesce(tipoCarnePesceNewP);
             s->setTipoPiatto(tipoPiattoNewP);
             modifica=true;
         }
@@ -232,7 +216,7 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
         string nomeContornoNewP=(modificaTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(modificaTipoContornoP->text()).toLocal8Bit().constData();
         if(nomeNewP=="" || nomeContornoNewP=="" || tipoContornoNewP=="")
-            QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Nome, tipo di carne o pesce e la tipologia del piatto sono necessari!");
+            QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: ERRORE: Tutti i campi, ad eccezione del prezzo base, sono necessari!");
         else {
             c->setNomeContorno(nomeContornoNewP);
             c->setTipoContorno(tipoContornoNewP);
@@ -246,10 +230,10 @@ void modificaPiatto::buttonModificaP(){
     bool modifica=modificaPiatto::modificaPiattoCorrente(pb);
     if(modifica) {
        // m->caricaOggettoXML();
-        QMessageBox::warning(this, "Modifica completata", "Il piatto e stato modificato correttamente!");
+        QMessageBox::warning(this, "Modifica completata", "Il piatto è stato modificato correttamente!");
     }
     else
-        QMessageBox::warning(this, "Errore", "Il piatto non e stato modificato vista la presenza di errori!");
+        QMessageBox::warning(this, "Errore", "Il piatto non è stato modificato vista la presenza di errori!");
     modificaPiatto::accept();
 }
 void modificaPiatto::buttonChiusura(){

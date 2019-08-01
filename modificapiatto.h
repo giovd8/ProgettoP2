@@ -46,14 +46,10 @@ class modificaPiatto: public QDialog {
         QLineEdit* modificaIngrediente2P;
         QLineEdit* modificaIngrediente3P;
         //secondi piatto
-        QLabel* tipoCarneP;
-        QLabel* tipoPesceP;
+        QLabel* tipoCarnePesceP;
         QLabel* tipoPiattoP;
-        QLabel* tipoCotturaP;
-        QLineEdit* modificaTipoCarneP;
-        QLineEdit* modificaTipoPesceP;
+        QLineEdit* modificaTipoCarnePesceP;
         QLineEdit* modificaTipoPiattoP;
-        QLineEdit* modificaTipoCotturaP;
         //contorno
         QLabel* tipoNomeContornoP;
         QLabel* tipoContornoP;

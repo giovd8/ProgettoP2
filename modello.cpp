@@ -59,11 +59,10 @@ void modello::caricamentoDati() const {
                         insertElemento=new primo(nome,vegano,glutenFree,prezzoBase,soia,tipoPatsa,condimento,ingrediente1,ingrediente2,ingrediente3);
                     }
                     //prendo attributi secondo
-                    if(xmlReader.name()=="secondo"){
-                        string tipoCarne=attributi.hasAttribute("tipoCarne") ? attributi.value("tipoCarne").toString().toStdString() : "";
-                        string tipoPesce=attributi.hasAttribute("tipoPesce") ? attributi.value("tipoPesce").toString().toStdString() : "";
+                    if(xmlReader.name()=="secondo"){\
+                        string tipoCarnePesce=attributi.hasAttribute("tipoCarnePesce") ? attributi.value("tipoCarnePesce").toString().toStdString() : "";
                         string tipoPiatto=attributi.hasAttribute("tipoPiatto") ? attributi.value("tipoPiatto").toString().toStdString() : "";
-                        insertElemento=new secondo(nome,vegano,glutenFree,prezzoBase,tipoCarne,tipoPesce,tipoPiatto);
+                        insertElemento=new secondo(nome,vegano,glutenFree,prezzoBase,tipoCarnePesce,tipoPiatto);
                     }
                     //prendo attributi contorno
                     if(xmlReader.name()=="contorno"){
@@ -128,8 +127,7 @@ void modello::salvataggioDati(){
             xmlWriter.writeAttribute("vegano", s->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("glutenFree", s->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(s->getPrezzoBase()));
-            xmlWriter.writeAttribute("tipoCarne", QString::fromStdString(s->getTipoCarne()));
-            xmlWriter.writeAttribute("tipoPesce", QString::fromStdString(s->getTipoPesce()));
+            xmlWriter.writeAttribute("tipoCarnePesce", QString::fromStdString(s->getTipoCarnePesce()));
             xmlWriter.writeAttribute("tipoPiatto", QString::fromStdString(s->getTipoPiatto()));
         }
         if(c) {
