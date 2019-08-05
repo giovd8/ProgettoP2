@@ -47,6 +47,7 @@ void modello::caricamentoDati() const {
                     bool vegano=attributi.hasAttribute("vegano") ? attributi.value("vegano").toString()=="true"? true : false : false;
                     bool glutenFree=attributi.hasAttribute("glutenFree") ? attributi.value("glutenFree").toString()=="true"? true : false : false;
                     double prezzoBase=attributi.hasAttribute("prezzoBase") ? attributi.value("prezzoBase").toDouble() : 0;
+                    string urlImmagine=attributi.hasAttribute("urlImmagine") ? attributi.value("urlImmagine").toString().toStdString() : "";
                     piattoBase* insertElemento=nullptr;
                     //prendo attributi primo
                     if(xmlReader.name()=="primo"){
@@ -56,19 +57,18 @@ void modello::caricamentoDati() const {
                         string ingrediente1=attributi.hasAttribute("ingrediente1") ? attributi.value("ingrediente1").toString().toStdString() : "";
                         string ingrediente2=attributi.hasAttribute("ingrediente2") ? attributi.value("ingrediente2").toString().toStdString() : "";
                         string ingrediente3=attributi.hasAttribute("ingrediente3") ? attributi.value("ingrediente3").toString().toStdString() : "";
-                        insertElemento=new primo(nome,vegano,glutenFree,prezzoBase,soia,tipoPatsa,condimento,ingrediente1,ingrediente2,ingrediente3);
+                        insertElemento=new primo(nome,vegano,glutenFree,prezzoBase,urlImmagine,soia,tipoPatsa,condimento,ingrediente1,ingrediente2,ingrediente3);
                     }
                     //prendo attributi secondo
                     if(xmlReader.name()=="secondo"){\
                         string tipoCarnePesce=attributi.hasAttribute("tipoCarnePesce") ? attributi.value("tipoCarnePesce").toString().toStdString() : "";
                         string tipoPiatto=attributi.hasAttribute("tipoPiatto") ? attributi.value("tipoPiatto").toString().toStdString() : "";
-                        insertElemento=new secondo(nome,vegano,glutenFree,prezzoBase,tipoCarnePesce,tipoPiatto);
+                        insertElemento=new secondo(nome,vegano,glutenFree,prezzoBase,urlImmagine,tipoCarnePesce,tipoPiatto);
                     }
                     //prendo attributi contorno
                     if(xmlReader.name()=="contorno"){
-                        string nomeContorno=attributi.hasAttribute("nomeContorno") ? attributi.value("nomeContorno").toString().toStdString() : "";
                         string tipoContorno=attributi.hasAttribute("tipoContorno") ? attributi.value("tipoContorno").toString().toStdString() : "";
-                        insertElemento=new contorno(nome,vegano,glutenFree,prezzoBase,nomeContorno,tipoContorno);
+                        insertElemento=new contorno(nome,vegano,glutenFree,prezzoBase,urlImmagine,tipoContorno);
                     }
                     //inserisco elemento nel mio contenitore
                     if(insertElemento!=nullptr) {
@@ -114,6 +114,7 @@ void modello::salvataggioDati(){
             xmlWriter.writeAttribute("vegano", p->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("glutenFree", p->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(p->getPrezzoBase()));
+            xmlWriter.writeAttribute("urlImmagine", QString::fromStdString(insert->getUrlImmagine()));
             xmlWriter.writeAttribute("soia", p->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("tipoPasta", QString::fromStdString(p->getPasta()));
             xmlWriter.writeAttribute("condimento", QString::fromStdString(p->getCondimento()));
@@ -127,6 +128,7 @@ void modello::salvataggioDati(){
             xmlWriter.writeAttribute("vegano", s->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("glutenFree", s->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(s->getPrezzoBase()));
+            xmlWriter.writeAttribute("urlImmagine", QString::fromStdString(insert->getUrlImmagine()));
             xmlWriter.writeAttribute("tipoCarnePesce", QString::fromStdString(s->getTipoCarnePesce()));
             xmlWriter.writeAttribute("tipoPiatto", QString::fromStdString(s->getTipoPiatto()));
         }
@@ -136,7 +138,7 @@ void modello::salvataggioDati(){
             xmlWriter.writeAttribute("vegano", c->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("glutenFree", c->isVegano() ? "true" : "false");
             xmlWriter.writeAttribute("prezzoBase", QString("%1").arg(c->getPrezzoBase()));
-            xmlWriter.writeAttribute("nomeContorno", QString::fromStdString(c->getNomeContorno()));
+            xmlWriter.writeAttribute("urlImmagine", QString::fromStdString(insert->getUrlImmagine()));
             xmlWriter.writeAttribute("tipoContorno", QString::fromStdString(c->getTipoContorno()));
         }
          ++it;

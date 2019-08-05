@@ -53,9 +53,7 @@ class inserimentoPiatto: public QDialog {
         QLineEdit* insertTipoCarnePesceP;
         QLineEdit* insertTipoPiattoP;
         //contorno
-        QLabel* tipoNomeContornoP;
         QLabel* tipoContornoP;
-        QLineEdit* insertTipoNomeContornoP;
         QLineEdit* insertTipoContornoP;
         //contenitori view
         QWidget *primiView;

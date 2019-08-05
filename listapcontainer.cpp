@@ -1,10 +1,10 @@
 #include "listapcontainer.h"
 
 //Costruttore
-listaPContainer::listaPContainer(QWidget* p) :
-    parent(p)
-{
-    addScrollBarWidget(new QScrollBar(parent),Qt::AlignRight);
+listaPContainer::listaPContainer(QWidget* p) : parent(p) {
+    setIconSize(QSize(150,150));
+    addScrollBarWidget(new QScrollBar(Qt::Orientation::Vertical,parent), Qt::AlignRight);
+    //addScrollBarWidget(new QScrollBar(parent),Qt::AlignRight);
 }
 
 //"Trasforma" il piatto in un elemento della mia lista

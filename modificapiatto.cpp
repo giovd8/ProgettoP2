@@ -8,7 +8,7 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     nomeP(new QLabel("Nome:",this)),
     veganoP(new QLabel("Vegano:",this)),
     glutenFreeP(new QLabel("GlutenFree:",this)),
-    prezzoBaseP(new QLabel("Prezzo:",this)),
+    prezzoBaseP(new QLabel("Modifica prezzo base:",this)),
     modificaNomeP(new QLineEdit(this)),
     modificaVeganoP(new QCheckBox(this)),
     modificaGlutenFreeP(new QCheckBox(this)),
@@ -32,9 +32,7 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     modificaTipoCarnePesceP(new QLineEdit(this)),
     modificaTipoPiattoP(new QLineEdit(this)),
     //contorni
-    tipoNomeContornoP(new QLabel("Contorno:",this)),
     tipoContornoP(new QLabel("Tipologia contorno:",this)),
-    modificaTipoNomeContornoP(new QLineEdit(this)),
     modificaTipoContornoP(new QLineEdit(this)),
     //view dinamiche
     primiView(new QWidget(this)),
@@ -119,11 +117,8 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     if(z){
         //inserisco i widget contorno nella sottogriglia
         QGridLayout* listaModificaContorni = new QGridLayout;
-        listaModificaContorni->addWidget(tipoNomeContornoP,0,0,1,1);
-        listaModificaContorni->addWidget(modificaTipoNomeContornoP,0,1,1,1);
-        modificaTipoNomeContornoP->setText(QString::fromStdString(z->getNomeContorno()));
-        listaModificaContorni->addWidget(tipoContornoP,1,0,1,1);
-        listaModificaContorni->addWidget(modificaTipoContornoP,1,1,1,1);
+        listaModificaContorni->addWidget(tipoContornoP,0,0,1,1);
+        listaModificaContorni->addWidget(modificaTipoContornoP,0,1,1,1);
         modificaTipoContornoP->setText(QString::fromStdString(z->getTipoContorno()));
         contorniView->setLayout(listaModificaContorni);
         mainView->addWidget(contorniView,2,0,1,1);
@@ -203,7 +198,7 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
         string tipoCarnePesceNewP=(modificaTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(modificaTipoPiattoP->text()).toLocal8Bit().constData();
         if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
-            QMessageBox::warning(this,"Modifica non riuscita", "RRORE: Nome, tipo del secondo, tipo carne\pesce e di cottura sono necessari!");
+            QMessageBox::warning(this,"Modifica non riuscita", "RRORE: Nome, tipo del secondo, tipo carne o pesce e di cottura sono necessari!");
         else {
             s->setTipoCarnePesce(tipoCarnePesceNewP);
             s->setTipoPiatto(tipoPiattoNewP);
@@ -213,12 +208,10 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
     //contorno
     contorno* c=dynamic_cast<contorno*>(mod);
     if(contorniView->isVisible()) {
-        string nomeContornoNewP=(modificaTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(modificaTipoContornoP->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || nomeContornoNewP=="" || tipoContornoNewP=="")
+        if(nomeNewP=="" || tipoContornoNewP=="")
             QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: ERRORE: Tutti i campi, ad eccezione del prezzo base, sono necessari!");
         else {
-            c->setNomeContorno(nomeContornoNewP);
             c->setTipoContorno(tipoContornoNewP);
             modifica=true;
         }

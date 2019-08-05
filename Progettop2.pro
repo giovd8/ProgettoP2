@@ -1,5 +1,4 @@
 QT       += core gui
-CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,6 +9,7 @@ TEMPLATE = app
 #CONFIG += console c++11
 #CONFIG -= app_bundle
 #CONFIG -= qt
+CONFIG += c++11
 
 SOURCES += main.cpp \
     piattobase.cpp \

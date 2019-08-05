@@ -4,7 +4,7 @@
 using std::string;
 
 //costruttore
-primo::primo(string n, bool v, bool gf, double pr, bool so, string tp, string c, string i1, string i2, string i3): piattoBase(n,v,gf,pr), soia(so), tipoPasta(tp), condimento(c), ingrediente1(i1), ingrediente2(i2), ingrediente3(i3) {}
+primo::primo(string n, bool v, bool gf, double pr, string ui, bool so, string tp, string c, string i1, string i2, string i3): piattoBase(n,v,gf,pr,ui), soia(so), tipoPasta(tp), condimento(c), ingrediente1(i1), ingrediente2(i2), ingrediente3(i3) {}
 
 //costruttore di copia
 primo::primo(const primo& p) : piattoBase(p), soia(p.isSoia()), tipoPasta(p.getPasta()), condimento(p.getCondimento()), ingrediente1(p.getIngrediente1()), ingrediente2(p.getIngrediente2()), ingrediente3(p.getIngrediente3()) {}

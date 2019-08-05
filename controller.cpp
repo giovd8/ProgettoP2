@@ -14,12 +14,10 @@ using namespace std;
 
 controller::controller(QWidget *parent):
     QWidget(parent),
-    xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), "Progetto/PiattiMenu", "File XML(*.xml)")),
+    xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File XML(*.xml)")),
     mp(new menuprincipale(this)),
     md(new modifichedati(this)),
     viewP(new viewpiatti(this))
-    //fnd(new QPushButton("Cerca",this))
-
 {
     //creo modello
     m=(new modello(xmlFile.toStdString()));

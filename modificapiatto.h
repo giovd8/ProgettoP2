@@ -51,9 +51,7 @@ class modificaPiatto: public QDialog {
         QLineEdit* modificaTipoCarnePesceP;
         QLineEdit* modificaTipoPiattoP;
         //contorno
-        QLabel* tipoNomeContornoP;
         QLabel* tipoContornoP;
-        QLineEdit* modificaTipoNomeContornoP;
         QLineEdit* modificaTipoContornoP;
         //contenitori view
         QWidget *primiView;

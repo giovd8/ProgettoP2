@@ -4,6 +4,7 @@
 #include<QListWidget>
 #include<QScrollBar>
 #include<QWidget>
+#include<QLabel>
 #include"piattobase.h"
 #include"elementilistap.h"
 #include"modifichedati.h"
@@ -16,6 +17,7 @@ class listaPContainer: public QListWidget {
     private:
         QWidget* parent;
         modifichedati *md;
+        QLabel ql;
     public:
         listaPContainer(QWidget* =nullptr);
         void aggiungiPiatto(piattoBase*);

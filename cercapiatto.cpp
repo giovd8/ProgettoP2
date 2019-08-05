@@ -2,7 +2,6 @@
 
 cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
     QDialog(d),
-    y(vp),
     //bottoni selezione cerca
     primiB(new QPushButton("Cerca primo",this)),
     secondiB(new QPushButton("Cerca secondo",this)),
@@ -35,9 +34,7 @@ cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
     insertTipoCarnePesceP(new QLineEdit(this)),
     insertTipoPiattoP(new QLineEdit(this)),
     //contorni
-    tipoNomeContornoP(new QLabel("Contorno:",this)),
     tipoContornoP(new QLabel("Tipologia contorno:",this)),
-    insertTipoNomeContornoP(new QLineEdit(this)),
     insertTipoContornoP(new QLineEdit(this)),
     //view dinamiche
     primiView(new QWidget(this)),
@@ -47,7 +44,8 @@ cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
     cercaP(new QPushButton("Cerca",this)),
     close(new QPushButton("Annulla",this)),
     //caricamento modello
-    m(mm)
+    m(mm),
+    y(vp)
 {
     //griglia principale
     QGridLayout* mainView = new QGridLayout;
@@ -101,10 +99,8 @@ cercaPiatto::cercaPiatto(modello* mm, viewpiatti* vp, QWidget* d):
 
     //inserisco i widget contorno nella sottogriglia
     QGridLayout* listaInserimentoContorni = new QGridLayout;
-    listaInserimentoContorni->addWidget(tipoNomeContornoP,0,0,1,1);
-    listaInserimentoContorni->addWidget(insertTipoNomeContornoP,0,1,1,1);
-    listaInserimentoContorni->addWidget(tipoContornoP,1,0,1,1);
-    listaInserimentoContorni->addWidget(insertTipoContornoP,1,1,1,1);
+    listaInserimentoContorni->addWidget(tipoContornoP,0,0,1,1);
+    listaInserimentoContorni->addWidget(insertTipoContornoP,0,1,1,1);
     contorniView->setLayout(listaInserimentoContorni);
     mainView->addWidget(contorniView,3,0,1,1);
 
@@ -173,19 +169,18 @@ piattoBase* cercaPiatto::creaPiattoTemp(){
         string ingrediente1NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
         string ingrediente2NewP=(insertIngrediente2P->text()).toLocal8Bit().constData();
         string ingrediente3NewP=(insertIngrediente3P->text()).toLocal8Bit().constData();
-        return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
+        return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
     }
     //secondo
     if(secondiView->isVisible()) {
         string tipoCarnePesceNewP=(insertTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(insertTipoPiattoP->text()).toLocal8Bit().constData();
-        return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarnePesceNewP,tipoPiattoNewP);
+        return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoCarnePesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
-        string nomeContornoNewP=(insertTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
-        return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,nomeContornoNewP,tipoContornoNewP);
+        return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoContornoNewP);
     }
 
     return nullptr;

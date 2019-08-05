@@ -5,10 +5,10 @@
 using std::string;
 
 //costruttore piattoBase
-piattoBase::piattoBase(string n,bool v, bool gf, double pr): nome(n), vegano(v), glutenFree(gf), prezzoBase(pr){}
+piattoBase::piattoBase(string n,bool v, bool gf, double pr, string ui): nome(n), vegano(v), glutenFree(gf), prezzoBase(pr), urlImmagine(ui){}
 
 //cotruttore di copia
-piattoBase::piattoBase(const piattoBase& p) : nome(p.getNome()), vegano(p.isVegano()), glutenFree(p.isGlutenFree()), prezzoBase(p.getPrezzoBase()) {}
+piattoBase::piattoBase(const piattoBase& p) : nome(p.getNome()), vegano(p.isVegano()), glutenFree(p.isGlutenFree()), prezzoBase(p.getPrezzoBase()), urlImmagine(p.getUrlImmagine()) {}
 
 //metodi GET
 string piattoBase::getNome() const {
@@ -22,6 +22,9 @@ bool piattoBase::isGlutenFree() const {
 }
 double piattoBase::getPrezzoBase() const {
     return prezzoBase;
+}
+string piattoBase::getUrlImmagine() const {
+    return urlImmagine;
 }
 
 //metodi SET
@@ -37,6 +40,9 @@ void piattoBase::setGlutenFree(bool b) {
 void piattoBase::setPrezzoBase(double d) {
     prezzoBase=d;
 }
+void piattoBase::setUrlImmagine(string s) {
+    urlImmagine=s;
+}
 
 //Metodo per convertire il mio oggetto in una string
 string piattoBase::piattoInString(piattoBase* pb) const {
@@ -48,8 +54,8 @@ string piattoBase::piattoInString(piattoBase* pb) const {
     if(dynamic_cast<contorno*>(pb))
         ptString="Contorno";
     string strF = "";
-    strF.append("Tipo di piatto: " + ptString)
-            .append("\nNome: " + getNome());
+    //strF.append("Tipo di piatto: " + ptString)
+    strF.append("Nome: " + getNome());
     if(pb->isGlutenFree())
         strF.append("\nGluten free: si");
     else

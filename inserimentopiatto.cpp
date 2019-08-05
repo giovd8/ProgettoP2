@@ -11,7 +11,7 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     nomeP(new QLabel("Nome:",this)),
     veganoP(new QLabel("Vegano:",this)),
     glutenFreeP(new QLabel("GlutenFree:",this)),
-    prezzoBaseP(new QLabel("Prezzo:",this)),
+    prezzoBaseP(new QLabel("Modifica prezzo base:",this)),
     insertNomeP(new QLineEdit(this)),
     insertVeganoP(new QCheckBox(this)),
     insertGlutenFreeP(new QCheckBox(this)),
@@ -35,9 +35,7 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     insertTipoCarnePesceP(new QLineEdit(this)),
     insertTipoPiattoP(new QLineEdit(this)),
     //contorni
-    tipoNomeContornoP(new QLabel("Contorno:",this)),
     tipoContornoP(new QLabel("Tipologia contorno:",this)),
-    insertTipoNomeContornoP(new QLineEdit(this)),
     insertTipoContornoP(new QLineEdit(this)),
     //view dinamiche
     primiView(new QWidget(this)),
@@ -101,10 +99,8 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
 
     //inserisco i widget contorno nella sottogriglia
     QGridLayout* listaInserimentoContorni = new QGridLayout;
-    listaInserimentoContorni->addWidget(tipoNomeContornoP,0,0,1,1);
-    listaInserimentoContorni->addWidget(insertTipoNomeContornoP,0,1,1,1);
-    listaInserimentoContorni->addWidget(tipoContornoP,1,0,1,1);
-    listaInserimentoContorni->addWidget(insertTipoContornoP,1,1,1,1);
+    listaInserimentoContorni->addWidget(tipoContornoP,0,0,1,1);
+    listaInserimentoContorni->addWidget(insertTipoContornoP,0,1,1,1);
     contorniView->setLayout(listaInserimentoContorni);
     mainView->addWidget(contorniView,3,0,1,1);
 
@@ -172,7 +168,7 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if(nomeNewP=="" || tipoPastaNewP=="" || condimentoNewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di pasta ed il condimento sono necessari!");
         else
-            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
+            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
     }
     //secondo
     if(secondiView->isVisible()) {
@@ -181,16 +177,15 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo carne/pesce e tipo di cottura sono necessari!");
         else
-            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,tipoCarnePesceNewP,tipoPiattoNewP);
+            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoCarnePesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
-        string nomeContornoNewP=(insertTipoNomeContornoP->text()).toLocal8Bit().constData();
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || nomeContornoNewP=="" || tipoContornoNewP=="")
-            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, !");
+        if(nomeNewP=="" || tipoContornoNewP=="")
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome e tipo di contorno sono necessari!");
         else
-            return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,nomeContornoNewP,tipoContornoNewP);
+            return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoContornoNewP);
     }
 
     return nullptr;

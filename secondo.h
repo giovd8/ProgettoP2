@@ -10,7 +10,7 @@ class secondo: public piattoBase {
         string tipoPiatto;
     public:
         //costruttore secondo
-        secondo(string="", bool=false, bool=true, double=10, string="", string="");
+        secondo(string="", bool=false, bool=true, double=10, string="", string="", string="");
 
         //costruttore di copia
         secondo(const secondo &);

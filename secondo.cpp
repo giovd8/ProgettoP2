@@ -2,7 +2,7 @@
 #include "secondo.h"
 
 //costruttore secondo
-secondo::secondo(string s, bool v, bool gf, double pr, string tcp, string tp) : piattoBase(s,v,gf,pr), tipoCarnePesce(tcp), tipoPiatto(tp) {}
+secondo::secondo(string s, bool v, bool gf, double pr, string ui, string tcp, string tp) : piattoBase(s,v,gf,pr,ui), tipoCarnePesce(tcp), tipoPiatto(tp) {}
 
 //costruttore di copia
 secondo::secondo(const secondo &s) : piattoBase(s), tipoCarnePesce(s.getTipoCarnePesce()), tipoPiatto(s.getTipoPiatto()) {}
@@ -28,20 +28,15 @@ void secondo::setTipoPiatto(string s){
 double secondo::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();
     if(tipoCarnePesce=="maiale")
+        prezzoTemp=prezzoTemp+3;
+    if(tipoCarnePesce=="manzo" || tipoCarnePesce=="agnello")
         prezzoTemp=prezzoTemp+5;
-    else
-        prezzoTemp=prezzoTemp+10;
     if(tipoCarnePesce=="salmone" || tipoCarnePesce=="seppie")
-        prezzoTemp=prezzoTemp+15;
-    else
-        prezzoTemp=prezzoTemp+10;
-    if(piattoBase::getNome()=="costata" || tipoPiatto=="alla griglia")
-        prezzoTemp=prezzoTemp+8.5;
+        prezzoTemp=prezzoTemp+8;
+    if(piattoBase::getNome()=="costata")
+        prezzoTemp=prezzoTemp+5;
     if(piattoBase::getNome()=="filetto")
         prezzoTemp=prezzoTemp+10;
-    else
-        prezzoTemp=prezzoTemp+5;
-
     return prezzoTemp;
 }
 

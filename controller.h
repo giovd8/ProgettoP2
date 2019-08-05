@@ -23,7 +23,6 @@ private:
     modifichedati* md;
     viewpiatti* viewP;
     inserimentoPiatto* ip;
-    //QPushButton* fnd;
 
 public slots:
     void salvaModello();

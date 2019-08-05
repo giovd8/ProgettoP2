@@ -9,9 +9,10 @@ class piattoBase {
         bool vegano;
         bool glutenFree;
         double prezzoBase;
+        string urlImmagine;
     public:
         //costruttore piattoBase
-        piattoBase(string="",bool=false, bool=false, double=3);
+        piattoBase(string="",bool=false, bool=false, double=3, string="");
 
         //costruttore di copia
         piattoBase(const piattoBase &);
@@ -24,12 +25,14 @@ class piattoBase {
         bool isVegano() const;
         bool isGlutenFree() const;
         double getPrezzoBase() const;
+        string getUrlImmagine() const;
 
         //metodi SET
         void setNome(string);
         void setVegano(bool);
         void setGlutenFree(bool);
         void setPrezzoBase(double);
+        void setUrlImmagine(string);
 
 
         //calcola prezzo finale
