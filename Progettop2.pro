@@ -44,3 +44,6 @@ HEADERS += \
     modificapiatto.h \
     cercapiatto.h
 
+RESOURCES += \
+    imgresource.qrc
+

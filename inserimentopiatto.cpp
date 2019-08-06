@@ -41,6 +41,8 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     primiView(new QWidget(this)),
     secondiView(new QWidget(this)),
     contorniView(new QWidget(this)),
+    //pulsante carica immagine
+    caricaImmagine(new QPushButton("Carica immagine",this)),
     //pulsanti aggiungi chiudi
     aggiungiP(new QPushButton("Aggiungi",this)),
     close(new QPushButton("Annulla",this)),
@@ -104,11 +106,16 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     contorniView->setLayout(listaInserimentoContorni);
     mainView->addWidget(contorniView,3,0,1,1);
 
+    //inserisco pulsante carica immagine
+    QHBoxLayout* w=new QHBoxLayout;
+    w->addWidget(caricaImmagine);
+    mainView->addLayout(w,4,0,1,1);
+
     //inserisco pulsanti aggiungi/chiudi
     QHBoxLayout* q=new QHBoxLayout;
     q->addWidget(aggiungiP);
     q->addWidget(close);
-    mainView->addLayout(q,4,0,1,1);
+    mainView->addLayout(q,5,0,1,1);
 
     primiView->show();
     secondiView->hide();
@@ -120,6 +127,7 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     connect(primiB,SIGNAL(clicked()),this,SLOT(buttonAggiungiPrimi()));
     connect(secondiB,SIGNAL(clicked()),this,SLOT(buttonAggiungiSecondi()));
     connect(contorniB,SIGNAL(clicked()),this,SLOT(buttonAggiungiContorni()));
+    connect(caricaImmagine,SIGNAL(clicked()),this,SLOT(buttonCaricaImmagine()));
     connect(aggiungiP,SIGNAL(clicked()),this,SLOT(buttonAggiungiP()));
     connect(close,SIGNAL(clicked()),this,SLOT(buttonChiusura()));
 
@@ -154,6 +162,9 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     if (insertGlutenFreeP->isChecked())
         glutenFreeNewP=true;
     double prezzoBaseNewP = atof(prezzoTemp.c_str());
+    string urlImmNewP=urlImmagine.toStdString();
+    if(urlImmNewP=="")
+        urlImmNewP=":/piattiMenu/immagini/vuota.png";
 
     //primo
     if(primiView->isVisible()){
@@ -168,7 +179,7 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if(nomeNewP=="" || tipoPastaNewP=="" || condimentoNewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo di pasta ed il condimento sono necessari!");
         else
-            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
+            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,urlImmNewP,soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
     }
     //secondo
     if(secondiView->isVisible()) {
@@ -177,7 +188,7 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome, tipo carne/pesce e tipo di cottura sono necessari!");
         else
-            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoCarnePesceNewP,tipoPiattoNewP);
+            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,urlImmNewP,tipoCarnePesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
@@ -185,12 +196,18 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
         if(nomeNewP=="" || tipoContornoNewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome e tipo di contorno sono necessari!");
         else
-            return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoContornoNewP);
+            return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,urlImmNewP,tipoContornoNewP);
     }
 
     return nullptr;
 
 }
+
+void inserimentoPiatto::buttonCaricaImmagine(){
+    urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
+    caricaImmagine->setIcon(QIcon(urlImmagine));
+}
+
 
 void inserimentoPiatto::buttonAggiungiP(){
     piattoBase* temp=insertNuovoPiatto();

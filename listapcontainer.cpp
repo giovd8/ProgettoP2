@@ -2,7 +2,7 @@
 
 //Costruttore
 listaPContainer::listaPContainer(QWidget* p) : parent(p) {
-    setIconSize(QSize(150,150));
+    setIconSize(QSize(200,200));
     addScrollBarWidget(new QScrollBar(Qt::Orientation::Vertical,parent), Qt::AlignRight);
     //addScrollBarWidget(new QScrollBar(parent),Qt::AlignRight);
 }

@@ -11,8 +11,6 @@ class elementiListaP: public QListWidgetItem {
     private:
         QWidget* parent;
         piattoBase* piatto;
-        QLabel ql;
-
     public:
         elementiListaP(QWidget*, piattoBase* =nullptr);
         piattoBase* prelevaPiatto() const;

@@ -17,7 +17,7 @@ class listaPContainer: public QListWidget {
     private:
         QWidget* parent;
         modifichedati *md;
-        QLabel ql;
+
     public:
         listaPContainer(QWidget* =nullptr);
         void aggiungiPiatto(piattoBase*);

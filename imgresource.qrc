@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>piattiMenu/immagini/amatriciana.jpg</file>
+        <file>piattiMenu/immagini/carbonara.jpg</file>
+        <file>piattiMenu/immagini/costata.jpg</file>
+        <file>piattiMenu/immagini/braciola.jpg</file>
+        <file>piattiMenu/immagini/filetto.jpg</file>
+        <file>piattiMenu/immagini/filettobranzino.jpg</file>
+        <file>piattiMenu/immagini/carciofimarinati.jpg</file>
+        <file>piattiMenu/immagini/patatechips.jpeg</file>
+        <file>piattiMenu/immagini/verdureallagriglia.jpg</file>
+        <file>piattiMenu/immagini/patatespeziate.jpg</file>
+        <file>piattiMenu/immagini/vuota.png</file>
+    </qresource>
+</RCC>

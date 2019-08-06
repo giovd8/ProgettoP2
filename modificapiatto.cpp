@@ -38,6 +38,8 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     primiView(new QWidget(this)),
     secondiView(new QWidget(this)),
     contorniView(new QWidget(this)),
+    //pulsante carica immagine
+    caricaImmagine(new QPushButton("Carica immagine",this)),
     //pulsanti Modifica chiudi
     modificaP(new QPushButton("Modifica",this)),
     close(new QPushButton("Annulla",this)),
@@ -170,6 +172,9 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
     string prezzoTemp=(modificaPrezzoBaseP->text()).toLocal8Bit().constData();
     double prezzoBaseNewP = atof(prezzoTemp.c_str());
     mod->setPrezzoBase(prezzoBaseNewP);
+    string urlImmNewP=urlImmagine.toStdString();
+    if(urlImmNewP!="")
+        mod->setUrlImmagine(urlImmNewP);
     //primo
     primo* p=dynamic_cast<primo*>(mod);
     if(p){
@@ -217,6 +222,11 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
         }
     }
     return modifica;
+}
+
+void modificaPiatto::buttonCaricaImmagine(){
+    urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
+    caricaImmagine->setIcon(QIcon(urlImmagine));
 }
 
 void modificaPiatto::buttonModificaP(){

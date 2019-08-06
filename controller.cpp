@@ -50,7 +50,7 @@ controller::controller(QWidget *parent):
     connect(md->getCercaPiatto(), SIGNAL(clicked()), this, SLOT(findPiatto()));
     connect(viewP->getLista(), SIGNAL(itemSelectionChanged()), this, SLOT(gestisciPulsantiModElim()));
 
-    this->resize(400,550);
+    this->resize(600,500);
     setLayout(x);
 }
 //salvo dati menu su XML

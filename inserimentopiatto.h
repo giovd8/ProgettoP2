@@ -8,6 +8,7 @@
 #include<QLineEdit>
 #include<QCheckBox>
 #include<QWidget>
+#include<QFileDialog>
 #include<iostream>
 #include <QMessageBox>
 using namespace std;
@@ -59,16 +60,21 @@ class inserimentoPiatto: public QDialog {
         QWidget *primiView;
         QWidget *secondiView;
         QWidget *contorniView;
+        //carica immagine
+        QPushButton* caricaImmagine;
         //aggiungi/chiudi
         QPushButton* aggiungiP;
         QPushButton* close;
-
+        //url immagine
+        QString urlImmagine;
+        //modello
         modello* m;
 
     public slots:
         void buttonAggiungiPrimi();
         void buttonAggiungiSecondi();
         void buttonAggiungiContorni();
+        void buttonCaricaImmagine();
         void buttonAggiungiP();
         void buttonChiusura();
     public:
