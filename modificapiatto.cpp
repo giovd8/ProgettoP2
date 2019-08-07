@@ -126,11 +126,16 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
         mainView->addWidget(contorniView,2,0,1,1);
     }
 
+    //inserisco pulsante carica immagine
+    QHBoxLayout* w=new QHBoxLayout;
+    w->addWidget(caricaImmagine);
+    mainView->addLayout(w,3,0,1,1);
+
     //inserisco pulsanti Modifica/chiudi
     QHBoxLayout* q=new QHBoxLayout;
     q->addWidget(modificaP);
     q->addWidget(close);
-    mainView->addLayout(q,3,0,1,1);
+    mainView->addLayout(q,4,0,1,1);
 
     if(x){
         primiView->show();
@@ -153,6 +158,7 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     modificaP->setDefault(true);
 
     //connect pulsanti
+    connect(caricaImmagine,SIGNAL(clicked()),this,SLOT(buttonCaricaImmagine()));
     connect(modificaP,SIGNAL(clicked()),this,SLOT(buttonModificaP()));
     connect(close,SIGNAL(clicked()),this,SLOT(buttonChiusura()));
     setLayout(mainView);

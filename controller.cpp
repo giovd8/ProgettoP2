@@ -108,21 +108,6 @@ void controller::caricaContorni() const {
         md->getEliminaPiatto()->setEnabled(false);
     }
 }
-
-//visualizza risultati ricerca
-//void controller::caricaRisultatiRicerca() const {
-//    if(xmlFile!="") {
-//        viewP->getLista()->clear();
-//        container<piattoBase*>::iteratore it = m->mBegin();
-//        piattoBase* findP=
-//        for(; it!= m->mEnd(); ++it){
-
-//            viewP->getLista()->aggiungiPiatto(*it);
-//        }///        md->getModificaPiatto()->setEnabled(false);
-//        md->getEliminaPiatto()->setEnabled(false);
-//    }
-//}
-
 //aggiungi piatto
 void controller::aggiungiPiatto(){
     QDialog* d=new inserimentoPiatto(m,this);
@@ -182,17 +167,7 @@ void controller::eliminaPiatto(){
 //cerca piatto
 void controller::findPiatto(){
     QDialog* d=new cercaPiatto(m,viewP,this);
-
-    //connect(d->get)
-//    piattoBase* findP=d->creaPiattoTemp();
     d->exec();
-
-//    container<piattoBase*>::iteratore it = m->mBegin();
-//    for(; it!= m->mEnd(); ++it){
-//        if(*(*it)==*findP)
-//        viewP->getLista()->aggiungiPiatto(*it);
-//    }
-
 }
 //gestisci pulsanti
 void controller::gestisciPulsantiModElim() const {
