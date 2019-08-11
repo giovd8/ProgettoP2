@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <primo nome="Carbonara" vegano="false" glutenFree="false" prezzoBase="7" soia="false" tipoPasta="spaghetti" ingrediente1="pancetta" ingrediente2="uova" ingrediente3="panna" ingrediente4="grana"/>
-    <secondo nome="Braciola" vegano="false" glutenFree="true" prezzoBase="10" tipoCarne="maiale" tipoPesce="" tipoPiatto="alla griglia" tipoCottura="media"/>
-    <contorno nome="Verdure" vegano="true" glutenFree="true" prezzoBase="5" nomeContorno="verdure" tipoContorno="alla griglia"/>
+    <primo nome="carbonara" vegano="false" glutenFree="false" prezzoBase="5" urlImmagine=":/piattiMenu/immagini/carbonara.jpg" soia="false" tipoPasta="spaghetti" condimento="pomodoro" ingrediente1="pancetta" ingrediente2="grana" ingrediente3="uova"/>
+    <secondo nome="braciola" vegano="false" glutenFree="false" prezzoBase="1" urlImmagine="/Users/giovannividotto/Desktop/P2 Jolly/Progetto/Progetto/piattiMenu/immagini/braciola.jpg" tipoCarnePesce="maiale" tipoPiatto="alla griglia"/>
+    <contorno nome="verdure" vegano="true" glutenFree="true" prezzoBase="1" urlImmagine=":/piattiMenu/immagini/verdureallagriglia.jpg" tipoContorno="alla griglia"/>
+    <primo nome="amatriciana" vegano="false" glutenFree="false" prezzoBase="0" urlImmagine=":/piattiMenu/immagini/amatriciana.jpg" soia="false" tipoPasta="spaghetti" condimento="pomodoro" ingrediente1="pancetta" ingrediente2="cipolla" ingrediente3=""/>
+    <contorno nome="patate" vegano="true" glutenFree="true" prezzoBase="0" urlImmagine=":/piattiMenu/immagini/patatechips.jpeg" tipoContorno="chips"/>
+    <secondo nome="costata" vegano="false" glutenFree="false" prezzoBase="2" urlImmagine=":/piattiMenu/immagini/costata.jpg" tipoCarnePesce="manzo" tipoPiatto="alla griglia"/>
+    <secondo nome="filetto" vegano="false" glutenFree="false" prezzoBase="0" urlImmagine=":/piattiMenu/immagini/filettobranzino.jpg" tipoCarnePesce="branzino" tipoPiatto="alla piastra"/>
+    <contorno nome="carciofi" vegano="true" glutenFree="true" prezzoBase="0" urlImmagine=":/piattiMenu/immagini/carciofimarinati.jpg" tipoContorno="marinati"/>
+    <contorno nome="patate" vegano="false" glutenFree="false" prezzoBase="0" urlImmagine=":/piattiMenu/immagini/patatespeziate.jpg" tipoContorno="speziate alle erbe"/>
+    <secondo nome="aaa" vegano="false" glutenFree="false" prezzoBase="0" urlImmagine="/Users/giovannividotto/Desktop/P2 Jolly/Progetto/Progetto/piattiMenu/immagini/filetto.jpg" tipoCarnePesce="saas" tipoPiatto="aa"/>
 </root>
