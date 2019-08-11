@@ -9,21 +9,30 @@ using namespace std;
 using std::string;
 
 //costruttore e distruttore modello
-modello::modello(string s):
+modello::modello(string s, bool b):
     piatti(new container<piattoBase*>),
-    xmlFile(s)
-//    datiSalvati(true)
+    xmlFile(s),
+    salvataggioEffetuato(b)
 {}
 
 modello::~modello() {
     delete piatti;
 }
 
+bool modello::getSalvataggioEffetuato() const{
+    return salvataggioEffetuato;
+}
+
+void modello::setSalvataggioEffetuato(bool b) {
+    salvataggioEffetuato=b;
+}
+
+
 void modello::nuovoPercorso(string p)
 {
     xmlFile = p;
     delete piatti;
-    //    datiSalvati = false;
+    //salvataggioEffetuato=false;
     piatti=new container<piattoBase*>();
 }
 
@@ -82,6 +91,7 @@ void modello::caricamentoDati() const {
             }
 
         }
+
         elementiMenu.close();
 }
 
@@ -150,12 +160,10 @@ void modello::salvataggioDati(){
 }
 
 //Begin e End modello
-container<piattoBase*>::iteratore modello::mBegin()
-{
+container<piattoBase*>::iteratore modello::mBegin() {
     return piatti->begin();
 }
-container<piattoBase *>::iteratore modello::mEnd()
-{
+container<piattoBase *>::iteratore modello::mEnd() {
     return piatti->end();
 }
 //Get lista modello

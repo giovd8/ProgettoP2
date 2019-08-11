@@ -205,6 +205,8 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
 
 void inserimentoPiatto::buttonCaricaImmagine(){
     urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
+//    m->nuovoPercorso(urlImmagine.toStdString());
+//    m->caricamentoDati();
     caricaImmagine->setIcon(QIcon(urlImmagine));
 }
 
@@ -214,6 +216,7 @@ void inserimentoPiatto::buttonAggiungiP(){
     if(temp!=nullptr) {
         m->getLista()->pushEnd(temp);
         QMessageBox::warning(this, "Inserimento completato", "Il nuovo piatto è stato aggiuto correttamente alla lista!");
+        m->setSalvataggioEffetuato(false);
         //m->salvataggioDati();
 
     }

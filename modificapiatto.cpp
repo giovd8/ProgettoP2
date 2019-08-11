@@ -238,7 +238,7 @@ void modificaPiatto::buttonCaricaImmagine(){
 void modificaPiatto::buttonModificaP(){
     bool modifica=modificaPiatto::modificaPiattoCorrente(pb);
     if(modifica) {
-       // m->caricaOggettoXML();
+        m->setSalvataggioEffetuato(false);
         QMessageBox::warning(this, "Modifica completata", "Il piatto è stato modificato correttamente!");
     }
     else

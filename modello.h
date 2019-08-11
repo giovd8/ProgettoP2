@@ -13,13 +13,16 @@ class modello {
     private:
         container<piattoBase*>*piatti;
         string xmlFile;
-        //inserimentoPiatto* insP;
+        bool salvataggioEffetuato;
     public:
-        modello(string);
+        modello(string, bool=true);
         ~modello();
 
-        void caricamentoDati() const;
+        bool getSalvataggioEffetuato() const;
+        void setSalvataggioEffetuato(bool);
+
         void nuovoPercorso(string);
+        void caricamentoDati() const;
         void salvataggioDati();
 
         //Funzioni begin e end per modello

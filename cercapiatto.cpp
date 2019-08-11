@@ -149,6 +149,7 @@ QPushButton* cercaPiatto::getCercaP() const{
 }
 
 piattoBase* cercaPiatto::creaPiattoTemp(){
+    bool piattoBaseVuoto=false;
     string nomeNewP=(insertNomeP->text()).toLocal8Bit().constData();
     bool veganoNewP=false;
     bool glutenFreeNewP=false;
@@ -158,6 +159,8 @@ piattoBase* cercaPiatto::creaPiattoTemp(){
     if (insertGlutenFreeP->isChecked())
         glutenFreeNewP=true;
     double prezzoBaseNewP = atof(prezzoTemp.c_str());
+    if(nomeNewP=="" && veganoNewP==false && glutenFreeNewP==false && prezzoBaseNewP==0)
+        piattoBaseVuoto=true;
 
     //primo
     if(primiView->isVisible()){
@@ -169,30 +172,37 @@ piattoBase* cercaPiatto::creaPiattoTemp(){
         string ingrediente1NewP=(insertIngrediente1P->text()).toLocal8Bit().constData();
         string ingrediente2NewP=(insertIngrediente2P->text()).toLocal8Bit().constData();
         string ingrediente3NewP=(insertIngrediente3P->text()).toLocal8Bit().constData();
-        return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
+        if(piattoBaseVuoto && tipoPastaNewP=="" && condimentoNewP=="" &&ingrediente1NewP=="" && ingrediente2NewP=="" && ingrediente3NewP=="")
+            return nullptr;
+        else
+            return new primo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",soiaNewP,tipoPastaNewP,condimentoNewP,ingrediente1NewP,ingrediente2NewP,ingrediente3NewP);
     }
     //secondo
     if(secondiView->isVisible()) {
         string tipoCarnePesceNewP=(insertTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(insertTipoPiattoP->text()).toLocal8Bit().constData();
-        return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoCarnePesceNewP,tipoPiattoNewP);
+        if(piattoBaseVuoto && tipoCarnePesceNewP=="" && tipoPiattoNewP=="")
+            return nullptr;
+        else
+            return new secondo(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoCarnePesceNewP,tipoPiattoNewP);
     }
     //contorno
     if(contorniView->isVisible()) {
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
-        return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoContornoNewP);
+        if(piattoBaseVuoto && tipoContornoNewP=="")
+            return nullptr;
+        else
+            return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,"",tipoContornoNewP);
     }
-
-    return nullptr;
-
+   return nullptr;
 }
 
 void cercaPiatto::buttonCercaP(){
     piattoBase* temp=creaPiattoTemp();
+    y->getLista()->clear();
     if(temp!=nullptr) {
         bool trovato=false;
         container<piattoBase*>::iteratore it=m->mBegin();
-        y->getLista()->clear();
         for(; it!= m->mEnd(); ++it){
             if(*(*it)==*temp) {
                 y->getLista()->aggiungiPiatto(*it);
@@ -204,7 +214,10 @@ void cercaPiatto::buttonCercaP(){
 
         else
             QMessageBox::warning(this,"Non trovato!", "Il piatto non è stato trovato");
+        delete temp;
     }
+    else
+        QMessageBox::warning(this,"Errore!", "Inserisci almeno un dato per iniziare la ricerca!");
     cercaPiatto::accept();
 }
 void cercaPiatto::buttonChiusura(){

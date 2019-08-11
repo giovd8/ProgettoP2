@@ -29,10 +29,11 @@ controller::controller(QWidget *parent):
     QVBoxLayout* x=new QVBoxLayout;
     x->addWidget(viewP);
     x->addWidget(md);
-    //x->addWidget(fnd);
     x->addWidget(mp);
 
-    connect(mp->getSalvaB(),SIGNAL(clicked()), this, SLOT(salvaModello()));
+    connect(mp->getSalva(),SIGNAL(clicked()), this, SLOT(salvaModello()));
+    connect(mp->getClose(),SIGNAL(clicked()), this, SLOT(closeApp()));
+
 
     //connect pulsanti visualizzazione sottolista
     connect(viewP->getTuttiPiatti(), SIGNAL(clicked()), this, SLOT(caricaPiatti()));
@@ -56,7 +57,34 @@ controller::controller(QWidget *parent):
 //salvo dati menu su XML
 void controller::salvaModello() {
     m->salvataggioDati();
+    m->setSalvataggioEffetuato(true);
     QMessageBox::warning(this,"Salvataggio completata", "Il menu e' stato carrettamente!");
+}
+//chiudo app
+void controller::closeApp() {
+    if(!m->getSalvataggioEffetuato()) {
+        QMessageBox uss;
+        uss.setText("Il menu è stato modificato!");
+        uss.setInformativeText("\nVuoi salvare le modifiche prima di uscire?\n\n");
+        uss.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        uss.setDefaultButton(QMessageBox::Save);
+        uss.setEscapeButton(QMessageBox::Cancel);
+        int choice=uss.exec();
+        switch (choice) {
+          case QMessageBox::Save:
+                m->salvataggioDati();
+                //m->setSalvataggioEffetuato(true);
+                QApplication::quit();
+          break;
+          case QMessageBox::Discard:
+               QApplication::quit();
+          break;
+//          case QMessageBox::Cancel:
+//          break;
+        }
+     }
+    else
+        QApplication::quit();
 }
 //visualizza tutti i piatti
 void controller::caricaPiatti() const {
@@ -146,7 +174,7 @@ void controller::eliminaPiatto(){
                 m->mErase(it);
                 delete(*it);
                 --it;
-                //m->salvataggioDati();
+                m->setSalvataggioEffetuato(false);
                 QMessageBox::warning(this,"Eliminazione completata", "Il piatto e stato eliminato carrettamente!");
                 if(p) {
                     caricaPrimi();

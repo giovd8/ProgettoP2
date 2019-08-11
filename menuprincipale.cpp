@@ -1,41 +1,48 @@
 #include"menuprincipale.h"
 
 
-menuprincipale::menuprincipale(QWidget* p, bool s):
+menuprincipale::menuprincipale(QWidget* p):
     QWidget(p),
     salva(new QPushButton("Salva", this)),
-    close(new QPushButton("Chiudi", this)),
-    salvataggioEffetuato(s)
+    close(new QPushButton("Chiudi", this))
+    //salvataggioEffetuato(s)
 {
     QHBoxLayout* x=new QHBoxLayout;
+//    const QSize btnSize = QSize(100, 40);
+//    salva->setFixedSize(btnSize);
+//    close->setFixedSize(btnSize);
     x->addWidget(salva);
     x->addWidget(close);
 
+
+
+
     //Connect pulsanti: il bottone salva lo gestisco sul modello
     //connect(salva,SIGNAL(clicked()),this,SLOT(buttonSalvataggio()));
-    connect(close,SIGNAL(clicked()),this,SLOT(buttonChiusura()));
+    //connect(close,SIGNAL(clicked()),this,SLOT(buttonChiusura()));
 
     setLayout(x);
 }
 
-void menuprincipale::buttonSalvataggio(){
-    QApplication::quit();
-}
+//void menuprincipale::buttonSalvataggio(){
+//    QApplication::quit();
+//}
 
-void menuprincipale::buttonChiusura() {
-    if(salvataggioEffetuato==false)
-        QMessageBox::warning(this,"Attenzione", "modifiche menu non salvate");
-    QApplication::quit();
-}
+//void menuprincipale::buttonChiusura() {
+//    if(salvataggioEffetuato==false)
+//        QMessageBox::warning(this,"Attenzione", "modifiche menu non salvate");
+//    QApplication::quit();
+//}
 
-QPushButton* menuprincipale::getSalvaB() const {
+QPushButton* menuprincipale::getSalva() const {
     return salva;
 }
 
-void menuprincipale::setSalvataggio(bool s) {
-    salvataggioEffetuato=s;
+QPushButton* menuprincipale::getClose() const {
+    return close;
 }
 
-//QPushButton* menuprincipale::getClose(){
-//    return close;
+//void menuprincipale::setSalvataggio(bool s) {
+//    salvataggioEffetuato=s;
 //}
+

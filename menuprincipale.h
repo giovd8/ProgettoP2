@@ -8,22 +8,20 @@
 #include<QApplication>
 #include<QListWidget>
 #include <QMessageBox>
-#include"modello.h"
 
 class menuprincipale: public QWidget {
     Q_OBJECT
     private:
         QPushButton* salva;
         QPushButton* close;
-        bool salvataggioEffetuato;
-    public slots:
-        void buttonSalvataggio();
-        void buttonChiusura();
+        //bool salvataggioEffetuato;
+    //public slots:
+        //void buttonSalvataggio();
+        //void buttonChiusura();
     public:
-        menuprincipale(QWidget* =nullptr, bool=true);
-        QPushButton* getSalvaB() const;
-        void setSalvataggio(bool b);
-
-//        QPushButton* getClose();
+        menuprincipale(QWidget* =nullptr);
+        QPushButton* getSalva() const;
+        QPushButton* getClose() const;
+        //void setSalvataggio(bool b);
 };
 #endif // MENUPRINCIPALE_H

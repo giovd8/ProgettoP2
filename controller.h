@@ -26,6 +26,7 @@ private:
 
 public slots:
     void salvaModello();
+    void closeApp() ;
     void caricaPiatti() const;
     void caricaPrimi() const;
     void caricaSecondi() const;
