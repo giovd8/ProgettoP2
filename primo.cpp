@@ -53,32 +53,32 @@ void primo::setIngrediente3(string i){
 //calcola prezzo finale virtuale
 double primo::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();
-    if(condimento == "gamberi")
-        prezzoTemp=prezzoTemp+2;
-    if(condimento == "pancetta")
-        prezzoTemp=prezzoTemp+1.5;
-    if(condimento =="")
+    if(condimento == "pesto")
         prezzoTemp=prezzoTemp+1;
+    if(condimento == "pomodoro")
+        prezzoTemp=prezzoTemp+0.5;
+    if(condimento != "")
+        prezzoTemp=prezzoTemp+0.5;
 
     if(ingrediente1 == "gamberi")
         prezzoTemp=prezzoTemp+2;
     if(ingrediente1 == "pancetta")
         prezzoTemp=prezzoTemp+1.5;
-    if(ingrediente1 == "")
-
+    if(ingrediente1 != "")
         prezzoTemp=prezzoTemp+1;
+
     if(ingrediente2 == "gamberi")
         prezzoTemp=prezzoTemp+2;
     if(ingrediente2 == "pancetta")
         prezzoTemp=prezzoTemp+1.5;
-    if(ingrediente2 == "")
+    if(ingrediente2 != "")
         prezzoTemp=prezzoTemp+1;
 
     if(ingrediente3 == "gamberi")
         prezzoTemp=prezzoTemp+2;
     if(ingrediente3 == "pancetta")
         prezzoTemp=prezzoTemp+1.5;
-    if(ingrediente3 == "")
+    if(ingrediente3 != "")
         prezzoTemp=prezzoTemp+1;
 
     return prezzoTemp;
@@ -93,12 +93,14 @@ string primo::piattoInString(piattoBase* pb) const {
         else
             strF.append("\nPasta di soia: no");
     strF.append("\nTipo di Pasta: " + x->getPasta()).append("\nIngredienti: " +x->getCondimento());
-    if(x->getIngrediente1()!="")
+    if(x->getIngrediente1()!="") {
         strF.append(", "+x->getIngrediente1());
-        if(x->getIngrediente2()!="")
+        if(x->getIngrediente2()!="") {
             strF.append(", "+x->getIngrediente2());
             if(x->getIngrediente3()!="")
                 strF.append(", "+x->getIngrediente3());
+        }
+    }
     strF.append("\nPrezzo: "+ (QString::number(prezzoFinale()).toUtf8())).append("\n");
     }
     return strF;

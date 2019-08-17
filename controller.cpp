@@ -27,19 +27,26 @@ controller::controller(QWidget *parent):
     //carico i dati da file xml e li metto nella mia lista
     m->caricamentoDati();
 
+    //imposto logo ristorante
+    QHBoxLayout* logoContainer=new QHBoxLayout;
+    QPixmap logo(":/piattiMenu/immagini/logo.png");
+    QLabel* logoCucu = new QLabel(this);
+    logoCucu->setPixmap(logo.scaled(120, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    logoCucu->setStyleSheet("QLabel { margin: 0 auto; }");
+    QLabel* presentazione = new QLabel("Modifica piatti principali del menu");
+    presentazione->setStyleSheet("QLabel { font: 20px; }");
+    logoContainer->addWidget(logoCucu);
+    logoContainer->addWidget(presentazione,Qt::AlignCenter);
 
-    QPixmap logo(":/piattiMenu/logo.png");
-    QLabel* logoCucu = new QLabel();
-    logoCucu->setPixmap(logo.scaled(200, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    //logoCucu->setMaximumWidth(220);
-    logoCucu->setProperty("logo", true);
-
+    //imnposto view principale
     QVBoxLayout* x=new QVBoxLayout;
-    //QPixmap p(":/piattiMenu/logo.png");
-    //setIconSize(QSize(200,200));
+    x->addLayout(logoContainer);
     x->addWidget(viewP);
     x->addWidget(md);
     x->addWidget(mp);
+
+    //viewController->addWidget(x);
+    //parent->setStyleSheet("QVBoxLayout { Background-color: 5d5d5f; }");
 
     connect(mp->getSalva(),SIGNAL(clicked()), this, SLOT(salvaModello()));
     connect(mp->getClose(),SIGNAL(clicked()), this, SLOT(closeApp()));
@@ -61,7 +68,7 @@ controller::controller(QWidget *parent):
     connect(md->getCercaPiatto(), SIGNAL(clicked()), this, SLOT(findPiatto()));
     connect(viewP->getLista(), SIGNAL(itemSelectionChanged()), this, SLOT(gestisciPulsantiModElim()));
 
-    this->resize(600,500);
+    this->resize(600,600);
     setLayout(x);
 }
 //salvo dati menu su XML

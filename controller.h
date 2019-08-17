@@ -31,7 +31,6 @@ public slots:
     void caricaPrimi() const;
     void caricaSecondi() const;
     void caricaContorni() const;
-    //void caricaRisultatiRicerca() const;
     void aggiungiPiatto();
     void modPiatto();
     void eliminaPiatto();
