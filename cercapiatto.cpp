@@ -161,7 +161,6 @@ piattoBase* cercaPiatto::creaPiattoTemp(){
     double prezzoBaseNewP = atof(prezzoTemp.c_str());
     if(nomeNewP=="" && veganoNewP==false && glutenFreeNewP==false && prezzoBaseNewP==0)
         piattoBaseVuoto=true;
-
     //primo
     if(primiView->isVisible()){
         bool soiaNewP=false;
@@ -210,10 +209,10 @@ void cercaPiatto::buttonCercaP(){
             }
         }
         if(trovato)
-            QMessageBox::warning(this,"Trovato!", "Il piatto è stato trovato, verra visualizzato nella view principale!");
+            QMessageBox::information(this,"Trovato!", "Il piatto è stato trovato, verra visualizzato nella view principale!");
 
         else
-            QMessageBox::warning(this,"Non trovato!", "Il piatto non è stato trovato");
+            QMessageBox::information(this,"Non trovato!", "Il piatto non è stato trovato");
         delete temp;
     }
     else

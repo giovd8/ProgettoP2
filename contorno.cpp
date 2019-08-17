@@ -20,10 +20,10 @@ void contorno::setTipoContorno(string s){
 //calcola prezzo finale virtuale
 double contorno::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();
-    if(getNome()=="Verdure")
-        prezzoTemp=prezzoTemp+5;
+    if(getNome()=="verdure" || getNome()=="carciofi")
+        prezzoTemp=prezzoTemp+2;
     else
-        prezzoTemp=prezzoTemp+3.5;
+        prezzoTemp=prezzoTemp+1;
 
     return prezzoTemp;
 }

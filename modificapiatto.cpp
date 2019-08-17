@@ -74,56 +74,70 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     modificaPrezzoBaseP->setText(QString::number(pMod->getPrezzoBase()));
     piattoBaseView->setLayout(listaModificaPiattoBase);
     mainView->addWidget(piattoBaseView,1,0,1,1);
+
+    //inserisco i widget primo piatto nella sottogriglia
+    QGridLayout* listaModificaPrimi = new QGridLayout;
+    listaModificaPrimi->addWidget(soiaP,0,0,1,1);
+    listaModificaPrimi->addWidget(modificaSoiaP,0,1,1,1);
+    listaModificaPrimi->addWidget(tipoPastaP,1,0,1,1);
+    listaModificaPrimi->addWidget(modificaTipoPastaP,1,1,1,1);
+    listaModificaPrimi->addWidget(condimentoP,2,0,1,1);
+    listaModificaPrimi->addWidget(modificaCondimentoP,2,1,1,1);
+    listaModificaPrimi->addWidget(ingrediente1P,3,0,1,1);
+    listaModificaPrimi->addWidget(modificaIngrediente1P,3,1,1,1);
+    listaModificaPrimi->addWidget(ingrediente2P,4,0,1,1);
+    listaModificaPrimi->addWidget(modificaIngrediente2P,4,1,1,1);
+    listaModificaPrimi->addWidget(ingrediente3P,5,0,1,1);
+    listaModificaPrimi->addWidget(modificaIngrediente3P,5,1,1,1);
+    primiView->setLayout(listaModificaPrimi);
+    mainView->addWidget(primiView,2,0,1,1);
+
+    //inserisco i widget secondo piatto nella sottogriglia
+    QGridLayout* listaModificaSecondi = new QGridLayout;
+    listaModificaSecondi->addWidget(tipoCarnePesceP,0,0,1,1);
+    listaModificaSecondi->addWidget(modificaTipoCarnePesceP,0,1,1,1);
+    listaModificaSecondi->addWidget(tipoPiattoP,1,0,1,1);
+    listaModificaSecondi->addWidget(modificaTipoPiattoP,1,1,1,1);
+    secondiView->setLayout(listaModificaSecondi);
+    mainView->addWidget(secondiView,2,0,1,1);
+
+    //inserisco i widget contorno nella sottogriglia
+    QGridLayout* listaModificaContorni = new QGridLayout;
+    listaModificaContorni->addWidget(tipoContornoP,0,0,1,1);
+    listaModificaContorni->addWidget(modificaTipoContornoP,0,1,1,1);
+    contorniView->setLayout(listaModificaContorni);
+    mainView->addWidget(contorniView,2,0,1,1);
+
+    //setto i qlineedit in base al tipo di piatto che sto modificando
     primo* x=dynamic_cast<primo*>(pMod);
     if(x) {
-        //inserisco i widget primo piatto nella sottogriglia
-        QGridLayout* listaModificaPrimi = new QGridLayout;
-        listaModificaPrimi->addWidget(soiaP,0,0,1,1);
-        listaModificaPrimi->addWidget(modificaSoiaP,0,1,1,1);
         if(x->isSoia())
             modificaSoiaP->setCheckState(Qt::CheckState(true));
         else
             modificaSoiaP->setCheckState(Qt::CheckState(false));
-        listaModificaPrimi->addWidget(tipoPastaP,1,0,1,1);
-        listaModificaPrimi->addWidget(modificaTipoPastaP,1,1,1,1);
         modificaTipoPastaP->setText(QString::fromStdString(x->getPasta()));
-        listaModificaPrimi->addWidget(condimentoP,2,0,1,1);
-        listaModificaPrimi->addWidget(modificaCondimentoP,2,1,1,1);
         modificaCondimentoP->setText(QString::fromStdString(x->getCondimento()));
-        listaModificaPrimi->addWidget(ingrediente1P,3,0,1,1);
-        listaModificaPrimi->addWidget(modificaIngrediente1P,3,1,1,1);
         modificaIngrediente1P->setText(QString::fromStdString(x->getIngrediente1()));
-        listaModificaPrimi->addWidget(ingrediente2P,4,0,1,1);
-        listaModificaPrimi->addWidget(modificaIngrediente2P,4,1,1,1);
         modificaIngrediente2P->setText(QString::fromStdString(x->getIngrediente2()));
-        listaModificaPrimi->addWidget(ingrediente3P,5,0,1,1);
-        listaModificaPrimi->addWidget(modificaIngrediente3P,5,1,1,1);
         modificaIngrediente3P->setText(QString::fromStdString(x->getIngrediente3()));
-        primiView->setLayout(listaModificaPrimi);
-        mainView->addWidget(primiView,2,0,1,1);
+        primiView->show();
+        secondiView->hide();
+        contorniView->hide();
     }
     secondo* y=dynamic_cast<secondo*>(pMod);
     if(y){
-        //inserisco i widget secondo piatto nella sottogriglia
-        QGridLayout* listaModificaSecondi = new QGridLayout;
-        listaModificaSecondi->addWidget(tipoCarnePesceP,0,0,1,1);
-        listaModificaSecondi->addWidget(modificaTipoCarnePesceP,0,1,1,1);
         modificaTipoCarnePesceP->setText(QString::fromStdString(y->getTipoCarnePesce()));
-        listaModificaSecondi->addWidget(tipoPiattoP,1,0,1,1);
-        listaModificaSecondi->addWidget(modificaTipoPiattoP,1,1,1,1);
         modificaTipoPiattoP->setText(QString::fromStdString(y->getTipoPiatto()));
-        secondiView->setLayout(listaModificaSecondi);
-        mainView->addWidget(secondiView,2,0,1,1);
+        primiView->hide();
+        secondiView->show();
+        contorniView->hide();
     }
     contorno* z=dynamic_cast<contorno*>(pMod);
     if(z){
-        //inserisco i widget contorno nella sottogriglia
-        QGridLayout* listaModificaContorni = new QGridLayout;
-        listaModificaContorni->addWidget(tipoContornoP,0,0,1,1);
-        listaModificaContorni->addWidget(modificaTipoContornoP,0,1,1,1);
         modificaTipoContornoP->setText(QString::fromStdString(z->getTipoContorno()));
-        contorniView->setLayout(listaModificaContorni);
-        mainView->addWidget(contorniView,2,0,1,1);
+        primiView->hide();
+        secondiView->hide();
+        contorniView->show();
     }
 
     //inserisco pulsante carica immagine
@@ -136,24 +150,6 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     q->addWidget(modificaP);
     q->addWidget(close);
     mainView->addLayout(q,4,0,1,1);
-
-    if(x){
-        primiView->show();
-        secondiView->hide();
-        contorniView->hide();
-    }
-    else {
-        if(y){
-            primiView->hide();
-            secondiView->show();
-            contorniView->hide();
-        }
-        else {
-            primiView->hide();
-            secondiView->hide();
-            contorniView->show();
-        }
-    }
 
     modificaP->setDefault(true);
 
@@ -239,7 +235,7 @@ void modificaPiatto::buttonModificaP(){
     bool modifica=modificaPiatto::modificaPiattoCorrente(pb);
     if(modifica) {
         m->setSalvataggioEffetuato(false);
-        QMessageBox::warning(this, "Modifica completata", "Il piatto è stato modificato correttamente!");
+        QMessageBox::information(this, "Modifica completata", "Il piatto è stato modificato correttamente!");
     }
     else
         QMessageBox::warning(this, "Errore", "Il piatto non è stato modificato vista la presenza di errori!");

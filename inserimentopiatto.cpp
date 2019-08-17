@@ -168,6 +168,8 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
 
     //primo
     if(primiView->isVisible()){
+        if(prezzoBaseNewP==0)
+            prezzoBaseNewP=5;
         bool soiaNewP=false;
         if (insertSoiaP->isChecked())
             soiaNewP=true;
@@ -183,6 +185,8 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     }
     //secondo
     if(secondiView->isVisible()) {
+        if(prezzoBaseNewP==0)
+            prezzoBaseNewP=7;
         string tipoCarnePesceNewP=(insertTipoCarnePesceP->text()).toLocal8Bit().constData();
         string tipoPiattoNewP=(insertTipoPiattoP->text()).toLocal8Bit().constData();
         if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
@@ -192,22 +196,23 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     }
     //contorno
     if(contorniView->isVisible()) {
+        if(prezzoBaseNewP==0)
+            prezzoBaseNewP=3;
         string tipoContornoNewP=(insertTipoContornoP->text()).toLocal8Bit().constData();
         if(nomeNewP=="" || tipoContornoNewP=="")
             QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Nome e tipo di contorno sono necessari!");
         else
             return new contorno(nomeNewP,veganoNewP,glutenFreeNewP,prezzoBaseNewP,urlImmNewP,tipoContornoNewP);
     }
-
     return nullptr;
-
 }
 
 void inserimentoPiatto::buttonCaricaImmagine(){
-    urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
+    urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG;*.JPEG)");
 //    m->nuovoPercorso(urlImmagine.toStdString());
 //    m->caricamentoDati();
     caricaImmagine->setIcon(QIcon(urlImmagine));
+    caricaImmagine->setIconSize(QSize(200,200));
 }
 
 
@@ -215,7 +220,7 @@ void inserimentoPiatto::buttonAggiungiP(){
     piattoBase* temp=insertNuovoPiatto();
     if(temp!=nullptr) {
         m->getLista()->pushEnd(temp);
-        QMessageBox::warning(this, "Inserimento completato", "Il nuovo piatto è stato aggiuto correttamente alla lista!");
+        QMessageBox::information(this, "Inserimento completato", "Il nuovo piatto è stato aggiuto correttamente alla lista!");
         m->setSalvataggioEffetuato(false);
         //m->salvataggioDati();
 

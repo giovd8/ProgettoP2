@@ -5,6 +5,7 @@
 #include<QHBoxLayout>
 #include<QtWidgets>
 #include<QDebug>
+#include<QLabel>
 #include"modello.h"
 #include"contorno.h"
 #include"piattobase.h"
@@ -26,7 +27,16 @@ controller::controller(QWidget *parent):
     //carico i dati da file xml e li metto nella mia lista
     m->caricamentoDati();
 
+
+    QPixmap logo(":/piattiMenu/logo.png");
+    QLabel* logoCucu = new QLabel();
+    logoCucu->setPixmap(logo.scaled(200, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    //logoCucu->setMaximumWidth(220);
+    logoCucu->setProperty("logo", true);
+
     QVBoxLayout* x=new QVBoxLayout;
+    //QPixmap p(":/piattiMenu/logo.png");
+    //setIconSize(QSize(200,200));
     x->addWidget(viewP);
     x->addWidget(md);
     x->addWidget(mp);
@@ -58,7 +68,7 @@ controller::controller(QWidget *parent):
 void controller::salvaModello() {
     m->salvataggioDati();
     m->setSalvataggioEffetuato(true);
-    QMessageBox::warning(this,"Salvataggio completata", "Il menu e' stato carrettamente!");
+    QMessageBox::information(this,"Salvataggio completata", "Il menu e' stato carrettamente!");
 }
 //chiudo app
 void controller::closeApp() {
@@ -96,6 +106,7 @@ void controller::caricaPiatti() const {
         md->getModificaPiatto()->setEnabled(false);
         md->getEliminaPiatto()->setEnabled(false);
     }
+    viewP->getLista()->scrollToTop();
 }
 //visualizza tutti i primi
 void controller::caricaPrimi() const {
@@ -109,6 +120,7 @@ void controller::caricaPrimi() const {
         md->getModificaPiatto()->setEnabled(false);
         md->getEliminaPiatto()->setEnabled(false);
     }
+    viewP->getLista()->scrollToTop();
 }
 //visualizza tutti i secondi
 void controller::caricaSecondi() const {
@@ -122,6 +134,7 @@ void controller::caricaSecondi() const {
         md->getModificaPiatto()->setEnabled(false);
         md->getEliminaPiatto()->setEnabled(false);
     }
+    viewP->getLista()->scrollToTop();
 }
 //visualizza tutti i contorni
 void controller::caricaContorni() const {
@@ -135,6 +148,7 @@ void controller::caricaContorni() const {
         md->getModificaPiatto()->setEnabled(false);
         md->getEliminaPiatto()->setEnabled(false);
     }
+    viewP->getLista()->scrollToTop();
 }
 //aggiungi piatto
 void controller::aggiungiPiatto(){
