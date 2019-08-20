@@ -33,7 +33,7 @@ controller::controller(QWidget *parent):
     QLabel* logoCucu = new QLabel(this);
     logoCucu->setPixmap(logo.scaled(120, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     logoCucu->setStyleSheet("QLabel { margin: 0 auto; }");
-    QLabel* presentazione = new QLabel("Modifica piatti principali del menu");
+    QLabel* presentazione = new QLabel("Modifica piatti principali menu ristorante");
     presentazione->setStyleSheet("QLabel { font: 20px; }");
     logoContainer->addWidget(logoCucu);
     logoContainer->addWidget(presentazione,Qt::AlignCenter);
@@ -96,8 +96,8 @@ void controller::closeApp() {
           case QMessageBox::Discard:
                QApplication::quit();
           break;
-//          case QMessageBox::Cancel:
-//          break;
+          case QMessageBox::Cancel:
+          break;
         }
      }
     else
@@ -173,7 +173,14 @@ void controller::modPiatto(){
         d->resize(500,300);
         d->exec();
     }
-    caricaPiatti();
+    if(dynamic_cast<primo*>(pb))
+        caricaPrimi();
+    else {
+        if(dynamic_cast<secondo*>(pb))
+            caricaSecondi();
+        else
+            caricaContorni();
+    }
 }
 //elimina piatto
 void controller::eliminaPiatto(){
@@ -224,6 +231,30 @@ void controller::gestisciPulsantiModElim() const {
     md->getEliminaPiatto()->setEnabled(true);
 }
 
+void controller::closeEvent(QCloseEvent *event) {
+    if (event->spontaneous()) {
+        if(!m->getSalvataggioEffetuato()) {
+            QMessageBox uss;
+            uss.setText("Il menu è stato modificato!");
+            uss.setInformativeText("\nVuoi salvare le modifiche prima di uscire?\n\n");
+            uss.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
+            uss.setDefaultButton(QMessageBox::Save);
+            int choice=uss.exec();
+            switch (choice) {
+              case QMessageBox::Save:
+                    m->salvataggioDati();
+                    //m->setSalvataggioEffetuato(true);
+                    QApplication::quit();
+              break;
+              case QMessageBox::Discard:
+                   QApplication::quit();
+              break;
+            }
+        }
+        else
+            QApplication::quit();
+    }
+    else {
 
-
-
+    }
+}

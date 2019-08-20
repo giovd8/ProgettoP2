@@ -24,6 +24,7 @@ class viewpiatti: public QWidget {
         QPushButton* getTuttiSecondi() const;
         QPushButton* getTuttiContorni() const;
         listaPContainer* getLista() const;
+
 };
 
 #endif // VIEWPRODOTTI_H

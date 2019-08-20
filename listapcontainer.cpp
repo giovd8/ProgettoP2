@@ -17,3 +17,5 @@ void listaPContainer::aggiungiPiatto(piattoBase* pt){
 elementiListaP * listaPContainer::piattoCorrente() const{
     return static_cast<elementiListaP*>(QListWidget::currentItem());
 }
+
+

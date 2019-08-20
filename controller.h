@@ -14,7 +14,6 @@
 
 
 class controller: public QWidget {
-    friend class inserimentoPiatto;
      Q_OBJECT
 private:
     QString xmlFile;
@@ -39,6 +38,7 @@ public slots:
 
 public:
     controller(QWidget * parent= nullptr);
+    void closeEvent(QCloseEvent *event) override;
 
 };
 

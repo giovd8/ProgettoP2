@@ -152,6 +152,21 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     mainView->addLayout(q,4,0,1,1);
 
     modificaP->setDefault(true);
+    modificaP->setEnabled(false);
+
+    //connect che abilita il tasto modifica in caso venga camabiato almeno un dato
+    connect(modificaNomeP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaVeganoP,SIGNAL(stateChanged(int)),this,SLOT(showButtonModificaP()));
+    connect(modificaGlutenFreeP,SIGNAL(stateChanged(int)),this,SLOT(showButtonModificaP()));
+    connect(modificaPrezzoBaseP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaSoiaP,SIGNAL(stateChanged(int)),this,SLOT(showButtonModificaP()));
+    connect(modificaCondimentoP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaIngrediente1P,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaIngrediente2P,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaIngrediente3P,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaTipoCarnePesceP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaTipoPiattoP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaTipoContornoP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
 
     //connect pulsanti
     connect(caricaImmagine,SIGNAL(clicked()),this,SLOT(buttonCaricaImmagine()));
@@ -161,73 +176,130 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
 }
 
 bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
+    bool esistente=false;
     bool modifica=false;
-    //piatto base
     string nomeNewP=(modificaNomeP->text()).toLocal8Bit().constData();
-    mod->setNome(nomeNewP);
-    mod->setVegano(false);
-    mod->setGlutenFree(false);
-    if (modificaVeganoP->isChecked())
-        mod->setVegano(true);
-    if (modificaGlutenFreeP->isChecked())
-        mod->setGlutenFree(true);
-    string prezzoTemp=(modificaPrezzoBaseP->text()).toLocal8Bit().constData();
-    double prezzoBaseNewP = atof(prezzoTemp.c_str());
-    mod->setPrezzoBase(prezzoBaseNewP);
-    string urlImmNewP=urlImmagine.toStdString();
-    if(urlImmNewP!="")
-        mod->setUrlImmagine(urlImmNewP);
-    //primo
-    primo* p=dynamic_cast<primo*>(mod);
-    if(p){
-        p->setSoia(false);
-        if (modificaSoiaP->isChecked())
-            p->setSoia(true);
-        string tipoPastaNewP=(modificaTipoPastaP->text()).toLocal8Bit().constData();
-        string condimentoNewP=(modificaCondimentoP->text()).toLocal8Bit().constData();
-        string ingrediente1NewP=(modificaIngrediente1P->text()).toLocal8Bit().constData();
-        string ingrediente2NewP=(modificaIngrediente2P->text()).toLocal8Bit().constData();
-        string ingrediente3NewP=(modificaIngrediente3P->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || tipoPastaNewP=="" || condimentoNewP=="")
-            QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Nome, tipo di pasta ed il condimento sono necessari!");
-        else {
-            p->setPasta(tipoPastaNewP);
-            p->setCondimento(condimentoNewP);
-            p->setIngrediente1(ingrediente1NewP);
-            p->setIngrediente2(ingrediente2NewP);
-            p->setIngrediente3(ingrediente3NewP);
-            modifica=true;
+    //verifico se il nome e stato modificato oppure no
+    if(nomeNewP!=mod->getNome()) {
+        container<piattoBase*>::iteratore it=m->mBegin();
+        for(; it!=m->mEnd() && !esistente; ++it) {
+            if(nomeNewP==(*it)->getNome()) {
+                esistente=true;
+                QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Nome, tipo di pasta ed il condimento sono necessari!");
+            }
         }
     }
-    //secondo
-    secondo* s=dynamic_cast<secondo*>(mod);
-    if(s) {
-        string tipoCarnePesceNewP=(modificaTipoCarnePesceP->text()).toLocal8Bit().constData();
-        string tipoPiattoNewP=(modificaTipoPiattoP->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || tipoCarnePesceNewP=="" || tipoPiattoNewP=="")
-            QMessageBox::warning(this,"Modifica non riuscita", "RRORE: Nome, tipo del secondo, tipo carne o pesce e di cottura sono necessari!");
-        else {
-            s->setTipoCarnePesce(tipoCarnePesceNewP);
-            s->setTipoPiatto(tipoPiattoNewP);
-            modifica=true;
+    //se il piatto non esiste gia imposto i nuovi valori
+    if(!esistente) {
+        //piatto base
+        if(nomeNewP!="")
+            mod->setNome(nomeNewP);
+        mod->setVegano(false);
+        mod->setGlutenFree(false);
+        if (modificaVeganoP->isChecked())
+            mod->setVegano(true);
+        if (modificaGlutenFreeP->isChecked())
+            mod->setGlutenFree(true);
+        string prezzoTemp=(modificaPrezzoBaseP->text()).toLocal8Bit().constData();
+        double prezzoBaseNewP = atof(prezzoTemp.c_str());
+        mod->setPrezzoBase(prezzoBaseNewP);
+        string urlImmNewP=urlImmagine.toStdString();
+        if(urlImmNewP!="")
+            mod->setUrlImmagine(urlImmNewP);
+        //primo
+        primo* p=dynamic_cast<primo*>(mod);
+        if(p){
+            p->setSoia(false);
+            if (modificaSoiaP->isChecked())
+                p->setSoia(true);
+            string tipoPastaNewP=(modificaTipoPastaP->text()).toLocal8Bit().constData();
+            string condimentoNewP=(modificaCondimentoP->text()).toLocal8Bit().constData();
+            string ingrediente1NewP=(modificaIngrediente1P->text()).toLocal8Bit().constData();
+            string ingrediente2NewP=(modificaIngrediente2P->text()).toLocal8Bit().constData();
+            string ingrediente3NewP=(modificaIngrediente3P->text()).toLocal8Bit().constData();
+            if(nomeNewP=="" || tipoPastaNewP=="" || condimentoNewP=="")
+                QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Nome, tipo di pasta ed il condimento sono necessari!");
+            else {
+                p->setPasta(tipoPastaNewP);
+                p->setCondimento(condimentoNewP);
+                p->setIngrediente1(ingrediente1NewP);
+                p->setIngrediente2(ingrediente2NewP);
+                p->setIngrediente3(ingrediente3NewP);
+                modifica=true;
+            }
         }
+        else{
+            //secondo
+            secondo* s=dynamic_cast<secondo*>(mod);
+            if(s) {
+                string tipoCarnePesceNewP=(modificaTipoCarnePesceP->text()).toLocal8Bit().constData();
+                string tipoPiattoNewP=(modificaTipoPiattoP->text()).toLocal8Bit().constData();
+                if(tipoCarnePesceNewP=="" || tipoPiattoNewP=="") {
+                    QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Nome, tipo carne/pesce e tipo di cottura sono necessari!");
+                }
+                else {
+                    s->setTipoCarnePesce(tipoCarnePesceNewP);
+                    s->setTipoPiatto(tipoPiattoNewP);
+                    modifica=true;
+                }
+            }
+            else {
+                //contorno
+                contorno* c=dynamic_cast<contorno*>(mod);
+                if(c) {
+                    string tipoContornoNewP=(modificaTipoContornoP->text()).toLocal8Bit().constData();
+                    if(nomeNewP=="" || tipoContornoNewP=="")
+                        QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: Tutti i campi, ad eccezione del prezzo base, sono necessari!");
+                    else {
+                        c->setTipoContorno(tipoContornoNewP);
+                        modifica=true;
+                    }
+                }
+           }
+       }
     }
-    //contorno
-    contorno* c=dynamic_cast<contorno*>(mod);
-    if(contorniView->isVisible()) {
-        string tipoContornoNewP=(modificaTipoContornoP->text()).toLocal8Bit().constData();
-        if(nomeNewP=="" || tipoContornoNewP=="")
-            QMessageBox::warning(this,"Modifica non riuscita", "ERRORE: ERRORE: Tutti i campi, ad eccezione del prezzo base, sono necessari!");
-        else {
-            c->setTipoContorno(tipoContornoNewP);
-            modifica=true;
+    //se il piatto esisteva gia rimposto i valori iniziali
+    else {
+        modificaNomeP->setText(QString::fromStdString(mod->getNome()));
+        if(mod->isVegano())
+            modificaVeganoP->setCheckState(Qt::CheckState(true));
+        else
+            modificaVeganoP->setCheckState(Qt::CheckState(false));
+        if(mod->isGlutenFree())
+            modificaGlutenFreeP->setCheckState(Qt::CheckState(true));
+        else
+            modificaGlutenFreeP->setCheckState(Qt::CheckState(false));
+        modificaPrezzoBaseP->setText(QString::number(mod->getPrezzoBase()));
+        primo* x=dynamic_cast<primo*>(mod);
+        if(x) {
+            if(x->isSoia())
+                modificaSoiaP->setCheckState(Qt::CheckState(true));
+            else
+                modificaSoiaP->setCheckState(Qt::CheckState(false));
+            modificaTipoPastaP->setText(QString::fromStdString(x->getPasta()));
+            modificaCondimentoP->setText(QString::fromStdString(x->getCondimento()));
+            modificaIngrediente1P->setText(QString::fromStdString(x->getIngrediente1()));
+            modificaIngrediente2P->setText(QString::fromStdString(x->getIngrediente2()));
+            modificaIngrediente3P->setText(QString::fromStdString(x->getIngrediente3()));
         }
-    }
-    return modifica;
+        else {
+            secondo* y=dynamic_cast<secondo*>(mod);
+            if(y){
+                modificaTipoCarnePesceP->setText(QString::fromStdString(y->getTipoCarnePesce()));
+                modificaTipoPiattoP->setText(QString::fromStdString(y->getTipoPiatto()));
+            }
+            else {
+                contorno* z=dynamic_cast<contorno*>(mod);
+                if(z)
+                    modificaTipoContornoP->setText(QString::fromStdString(z->getTipoContorno()));
+            }
+        }
+   }
+   return modifica;
 }
 
 void modificaPiatto::buttonCaricaImmagine(){
-    urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
+    urlImmagine=QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
     caricaImmagine->setIcon(QIcon(urlImmagine));
 }
 
@@ -236,11 +308,17 @@ void modificaPiatto::buttonModificaP(){
     if(modifica) {
         m->setSalvataggioEffetuato(false);
         QMessageBox::information(this, "Modifica completata", "Il piatto è stato modificato correttamente!");
+        modificaPiatto::accept();
     }
     else
-        QMessageBox::warning(this, "Errore", "Il piatto non è stato modificato vista la presenza di errori!");
-    modificaPiatto::accept();
+        QMessageBox::warning(this, "Errore", "Nessuna modifica è stata apportata al piatto iniziale!");
+
 }
+
+void modificaPiatto::showButtonModificaP(){
+    modificaP->setEnabled(true);
+}
+
 void modificaPiatto::buttonChiusura(){
    modificaPiatto::reject();
 }

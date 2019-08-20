@@ -67,14 +67,15 @@ class modificaPiatto: public QDialog {
         QString urlImmagine;
         //modello
         modello* m;
+        //piatto da modificare
         piattoBase* pb;
-
     public slots:
         void buttonCaricaImmagine();
         void buttonModificaP();
+        void showButtonModificaP();
         void buttonChiusura();
     public:
-        modificaPiatto(modello*m, piattoBase* pb,QWidget* parent);
+        modificaPiatto(modello*m, piattoBase* pb, QWidget* parent);
         bool modificaPiattoCorrente(piattoBase*);
 };
 

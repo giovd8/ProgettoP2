@@ -154,6 +154,15 @@ void inserimentoPiatto::buttonAggiungiContorni(){
 
 piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     string nomeNewP=(insertNomeP->text()).toLocal8Bit().constData();
+    container<piattoBase*>::iteratore it=m->mBegin();
+    bool esistente=false;
+    for(; it!=m->mEnd() && !esistente; ++it) {
+        if(nomeNewP==(*it)->getNome()) {
+            esistente=true;
+            QMessageBox::warning(this,"Inserimento non riuscito", "ERRORE: Esiste gia un piatto con questo nome!");
+            return nullptr;
+        }
+    }
     bool veganoNewP=false;
     bool glutenFreeNewP=false;
     string prezzoTemp=(insertPrezzoBaseP->text()).toLocal8Bit().constData();
@@ -223,9 +232,10 @@ void inserimentoPiatto::buttonAggiungiP(){
         QMessageBox::information(this, "Inserimento completato", "Il nuovo piatto è stato aggiuto correttamente alla lista!");
         m->setSalvataggioEffetuato(false);
         //m->salvataggioDati();
-
+        inserimentoPiatto::accept();
     }
-    inserimentoPiatto::accept();
+    else
+        QMessageBox::warning(this, "Errore", "Inserimento non riuscito vista la presenza di errori!");
 }
 void inserimentoPiatto::buttonChiusura(){
    inserimentoPiatto::reject();

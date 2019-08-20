@@ -111,4 +111,3 @@ bool primo::operator==(const piattoBase& p) const {
     const primo* x=dynamic_cast<const primo*>(&p);
     return x && piattoBase::operator==(p) && (soia==x->isSoia() || x->isSoia()==false) && (condimento==x->getCondimento() || x->getCondimento()=="") && (ingrediente1==x->getIngrediente1() || x->getIngrediente1()=="") && (ingrediente2==x->getIngrediente2() || x->getIngrediente2()=="") && (ingrediente3==x->getIngrediente3() || x->getIngrediente3()=="");
 }
-

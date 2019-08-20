@@ -208,16 +208,14 @@ void cercaPiatto::buttonCercaP(){
                 trovato=true;
             }
         }
-        if(trovato)
-            QMessageBox::information(this,"Trovato!", "Il piatto è stato trovato, verra visualizzato nella view principale!");
-
-        else
+        if(!trovato)
             QMessageBox::information(this,"Non trovato!", "Il piatto non è stato trovato");
         delete temp;
+        cercaPiatto::accept();
     }
     else
         QMessageBox::warning(this,"Errore!", "Inserisci almeno un dato per iniziare la ricerca!");
-    cercaPiatto::accept();
+
 }
 void cercaPiatto::buttonChiusura(){
     cercaPiatto::reject();
