@@ -5,12 +5,9 @@
 #include<QScrollBar>
 #include<QWidget>
 #include<QLabel>
-#include"piattobase.h"
-#include"elementilistap.h"
-#include"modifichedati.h"
-#include<iostream>
-using namespace std;
-
+#include"gerarchia/piattobase.h"
+#include"gui/elementilistap.h"
+#include"gui/modifichedati.h"
 
 class listaPContainer: public QListWidget {
     Q_OBJECT

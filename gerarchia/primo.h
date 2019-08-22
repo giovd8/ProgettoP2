@@ -1,9 +1,6 @@
 #ifndef PRIMO_H
 #define PRIMO_H
-#include "piattobase.h"
-#include <string.h>
-#include <iostream>
-using std::string;
+#include "gerarchia/piattobase.h"
 
 class primo: public piattoBase {
     private:

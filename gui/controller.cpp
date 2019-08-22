@@ -7,15 +7,13 @@
 #include<QDebug>
 #include<QLabel>
 #include"modello.h"
-#include"contorno.h"
-#include"piattobase.h"
-#include<iostream>
-
-using namespace std;
+#include"gerarchia/contorno.h"
+#include"gerarchia/piattobase.h"
 
 controller::controller(QWidget *parent):
     QWidget(parent),
-    xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File XML(*.xml)")),
+    //xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File XML(*.xml)")),
+    xmlFile(":/piattiMenu/DatiMenu.xml"),
     mp(new menuprincipale(this)),
     md(new modifichedati(this)),
     viewP(new viewpiatti(this))
@@ -107,8 +105,8 @@ void controller::closeApp() {
 void controller::caricaPiatti() const {
     if(xmlFile!="") {
         viewP->getLista()->clear();
-        container<piattoBase*>::iteratore it = m->mBegin();
-        for(; it!= m->mEnd(); ++it)
+        container<piattoBase*>::constIteratore it=m->mConstBegin();
+        for(; it!= m->mConstEnd(); ++it)
             viewP->getLista()->aggiungiPiatto(*it);
         md->getModificaPiatto()->setEnabled(false);
         md->getEliminaPiatto()->setEnabled(false);
@@ -119,8 +117,8 @@ void controller::caricaPiatti() const {
 void controller::caricaPrimi() const {
     if(xmlFile!="") {
         viewP->getLista()->clear();
-        container<piattoBase*>::iteratore it = m->mBegin();
-        for(; it!= m->mEnd(); ++it){
+        container<piattoBase*>::constIteratore it=m->mConstBegin();
+        for(; it!= m->mConstEnd(); ++it){
             if(dynamic_cast<primo*>(*it))
                 viewP->getLista()->aggiungiPiatto(*it);
         }
@@ -133,8 +131,8 @@ void controller::caricaPrimi() const {
 void controller::caricaSecondi() const {
     if(xmlFile!="") {
         viewP->getLista()->clear();
-        container<piattoBase*>::iteratore it = m->mBegin();
-        for(; it!= m->mEnd(); ++it){
+        container<piattoBase*>::constIteratore it=m->mConstBegin();
+        for(; it!= m->mConstEnd(); ++it){
             if(dynamic_cast<secondo*>(*it))
                 viewP->getLista()->aggiungiPiatto(*it);
         }
@@ -147,8 +145,8 @@ void controller::caricaSecondi() const {
 void controller::caricaContorni() const {
     if(xmlFile!="") {
         viewP->getLista()->clear();
-        container<piattoBase*>::iteratore it = m->mBegin();
-        for(; it!= m->mEnd(); ++it){
+        container<piattoBase*>::constIteratore it=m->mConstBegin();
+        for(; it!= m->mConstEnd(); ++it){
             if(dynamic_cast<contorno*>(*it))
                 viewP->getLista()->aggiungiPiatto(*it);
         }
@@ -243,7 +241,6 @@ void controller::closeEvent(QCloseEvent *event) {
             switch (choice) {
               case QMessageBox::Save:
                     m->salvataggioDati();
-                    //m->setSalvataggioEffetuato(true);
                     QApplication::quit();
               break;
               case QMessageBox::Discard:

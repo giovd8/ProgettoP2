@@ -1,8 +1,6 @@
 #ifndef SECONDO_H
 #define SECONDO_H
-#include "piattobase.h"
-#include<QString>
-using std::string;
+#include "gerarchia/piattobase.h"
 
 class secondo: public piattoBase {
     private:

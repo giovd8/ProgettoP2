@@ -10,14 +10,12 @@
 #include<QCheckBox>
 #include<QWidget>
 #include<QFileDialog>
-#include<iostream>
-#include <QMessageBox>
-using namespace std;
+#include<QMessageBox>
 
-#include"piattobase.h"
-#include"primo.h"
-#include"secondo.h"
-#include"contorno.h"
+#include"gerarchia/piattobase.h"
+#include"gerarchia/primo.h"
+#include"gerarchia/secondo.h"
+#include"gerarchia/contorno.h"
 #include"modello.h"
 
 

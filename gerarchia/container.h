@@ -36,8 +36,28 @@ class container {
                 bool operator==(const iteratore&) const;
                 bool operator!=(const iteratore&) const;
         };
+        //DEFINIZIONE CONSTITERATORE
+        class constIteratore {
+            friend class container<T>;
+
+        private:
+            nodo *pt;
+
+        public:
+            constIteratore();
+            constIteratore(nodo *);
+            const T &operator*() const;
+            const T *operator->() const;
+            constIteratore &operator++();
+            constIteratore &operator--();
+            bool operator==(const constIteratore &) const;
+            bool operator!=(const constIteratore &) const;
+        };
+
         iteratore begin() const;
         iteratore end() const;
+        constIteratore constBegin() const;
+        constIteratore constEnd() const;
         void erase(iteratore);
 };
 
@@ -73,7 +93,7 @@ void container<T>::pushEnd(const T &t) {
         (ultimo->prev)->next=ultimo;
 }
 
-//ITERATORE: definizione costruttori, overloading operatori, begin/end/erase
+//ITERATORE: definizione costruttori ed overloading operatori
 template<typename T>
 container<T>::iteratore::iteratore():pt(nullptr){}
 
@@ -114,38 +134,97 @@ bool container<T>::iteratore::operator !=(const iteratore& i) const {
     return pt!=i.pt;
 }
 
-template<typename T>
-typename container<T>::iteratore container<T>::begin() const {
+// CONSTITERATORE : definizione costruttori e overloading operatori
+template <typename T>
+container<T>::constIteratore::constIteratore() : pt(nullptr) {}
+
+template <typename T>
+container<T>::constIteratore::constIteratore(nodo *p) : pt(p) {}
+
+template <typename T>
+const T &container<T>::constIteratore::operator*() const {
+    return pt->info;
+}
+
+template <typename T>
+const T *container<T>::constIteratore::operator->() const {
+    return &(pt->info);
+}
+
+template <typename T>
+typename container<T>::constIteratore &container<T>::constIteratore::operator++() {
+    if (pt)
+        pt = pt->next;
+    return *this;
+}
+
+template <typename T>
+typename container<T>::constIteratore &container<T>::constIteratore::operator--() {
+    if (pt)
+        pt = pt->prev;
+    return *this;
+}
+
+template <typename T>
+bool container<T>::constIteratore::operator==(const constIteratore &i) const {
+    return pt == i.pt;
+}
+
+template <typename T>
+bool container<T>::constIteratore::operator!=(const constIteratore &i) const {
+    return pt != i.pt;
+}
+
+// BEGIN/END ITERATORI
+template <typename T>
+typename container<T>::iteratore container<T>::begin() const
+{
     return iteratore(primo);
 }
 
-template<typename T>
-typename container<T>::iteratore container<T>::end() const {
+template <typename T>
+typename container<T>::iteratore container<T>::end() const
+{
     return iteratore(ultimo->next);
 }
 
-template<typename T>
-void container<T>::erase(iteratore it) {
-    if(!it.pt->next && !it.pt->prev) {
-        primo=nullptr;
-        ultimo=nullptr;
-//        delete(it.pt);
+template <typename T>
+typename container<T>::constIteratore container<T>::constBegin() const
+{
+    return constIteratore(primo);
+}
+
+template <typename T>
+typename container<T>::constIteratore container<T>::constEnd() const
+{
+    return constIteratore(ultimo->next);
+}
+
+// ERASE ITERATORE
+template <typename T>
+void container<T>::erase(iteratore it)
+{
+    if (!it.pt->next && !it.pt->prev)
+    {
+        primo = nullptr;
+        ultimo = nullptr;
     }
-    else {
-        if(!it.pt->next) {
-            ultimo=it.pt->prev;
-//            delete(it.pt);
+    else
+    {
+        if (!it.pt->next)
+        {
+            ultimo = it.pt->prev;
         }
 
-        if(!it.pt->prev) {
-            primo=it.pt->next;
-//            delete(it.pt);
+        if (!it.pt->prev)
+        {
+            primo = it.pt->next;
         }
 
-        if(it.pt->next && it.pt->prev) {
-            (it.pt->prev)->next=it.pt->next;
-            (it.pt->next)->prev=it.pt->prev;
-//            delete(it.pt);
+        if (it.pt->next && it.pt->prev)
+        {
+            (it.pt->prev)->next = it.pt->next;
+            (it.pt->next)->prev = it.pt->prev;
         }
     }
 }

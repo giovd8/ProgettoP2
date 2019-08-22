@@ -2,13 +2,13 @@
 #define CONTROLLER_H
 #include <QApplication>
 #include <QWidget>
-#include"menuprincipale.h"
-#include"modifichedati.h"
-#include"viewpiatti.h"
+#include"gui/menuprincipale.h"
+#include"gui/modifichedati.h"
+#include"gui/viewpiatti.h"
 #include"modello.h"
-#include"inserimentopiatto.h"
-#include"modificapiatto.h"
-#include"cercapiatto.h"
+#include"gui/inserimentopiatto.h"
+#include"gui/modificapiatto.h"
+#include"gui/cercapiatto.h"
 //#include"listapcontainer.h"
 
 
@@ -21,7 +21,6 @@ private:
     menuprincipale* mp;
     modifichedati* md;
     viewpiatti* viewP;
-    inserimentoPiatto* ip;
 
 public slots:
     void salvaModello();

@@ -1,13 +1,11 @@
 #include <iostream>
-#include "container.h"
-#include "piattobase.h"
-#include "primo.h"
-#include "secondo.h"
-#include "contorno.h"
-#include <string.h>
+#include "gerarchia/container.h"
+#include "gerarchia/piattobase.h"
+#include "gerarchia/primo.h"
+#include "gerarchia/secondo.h"
+#include "gerarchia/contorno.h"
 #include <QApplication>
-#include<controller.h>
-//#include <qtGui/QApplication>
+#include <gui/controller.h>
 
 using namespace std;
 
@@ -75,8 +73,9 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     controller w(nullptr);
+    w.setWindowIcon(QIcon(":/cucu.ico"));
+    //w.setWindowIcon(QIcon(":/cucu.icns"));
     w.show();
-
     return app.exec();
 }
 

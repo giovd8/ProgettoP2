@@ -3,46 +3,45 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Progettop2
+
 TEMPLATE = app
 
-#TEMPLATE = app
-#CONFIG += console c++11
-#CONFIG -= app_bundle
-#CONFIG -= qt
 CONFIG += c++11
 
+ICON = cucu.icns
+
 SOURCES += main.cpp \
-    piattobase.cpp \
-    primo.cpp \
-    secondo.cpp \
-    contorno.cpp \
-    controller.cpp \
-    menuprincipale.cpp \
-    modifichedati.cpp \
+    gerarchia/piattobase.cpp \
+    gerarchia/primo.cpp \
+    gerarchia/secondo.cpp \
+    gerarchia/contorno.cpp \
+    gui/controller.cpp \
+    gui/menuprincipale.cpp \
+    gui/modifichedati.cpp \
     modello.cpp \
-    viewpiatti.cpp \
-    listapcontainer.cpp \
-    elementilistap.cpp \
-    inserimentopiatto.cpp \
-    modificapiatto.cpp \
-    cercapiatto.cpp
+    gui/viewpiatti.cpp \
+    gui/listapcontainer.cpp \
+    gui/elementilistap.cpp \
+    gui/inserimentopiatto.cpp \
+    gui/modificapiatto.cpp \
+    gui/cercapiatto.cpp
 
 HEADERS += \
-    piattobase.h \
-    primo.h \
-    secondo.h \
-    contorno.h \
-    container.h \
-    controller.h \
-    menuprincipale.h \
-    modifichedati.h \
+    gerarchia/piattobase.h \
+    gerarchia/primo.h \
+    gerarchia/secondo.h \
+    gerarchia/contorno.h \
+    gerarchia/container.h \
+    gui/controller.h \
+    gui/menuprincipale.h \
+    gui/modifichedati.h \
     modello.h \
-    viewpiatti.h \
-    listapcontainer.h \
-    elementilistap.h \
-    inserimentopiatto.h \
-    modificapiatto.h \
-    cercapiatto.h
+    gui/viewpiatti.h \
+    gui/listapcontainer.h \
+    gui/elementilistap.h \
+    gui/inserimentopiatto.h \
+    gui/modificapiatto.h \
+    gui/cercapiatto.h
 
 RESOURCES += \
     imgresource.qrc

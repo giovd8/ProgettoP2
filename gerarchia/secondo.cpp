@@ -1,4 +1,3 @@
-#include "piattobase.h"
 #include "secondo.h"
 
 //costruttore secondo

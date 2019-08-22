@@ -6,8 +6,8 @@
 #include<QHBoxLayout>
 #include<QApplication>
 #include<QListWidget>
-#include"listapcontainer.h"
-#include"modifichedati.h"
+#include"gui/listapcontainer.h"
+#include"gui/modifichedati.h"
 
 class viewpiatti: public QWidget {
     Q_OBJECT

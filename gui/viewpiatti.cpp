@@ -1,5 +1,4 @@
 #include"viewpiatti.h"
-#include<QDebug>
 
 viewpiatti::viewpiatti(QWidget* p):
     QWidget(p),

@@ -12,5 +12,8 @@
         <file>piattiMenu/immagini/patatespeziate.jpg</file>
         <file>piattiMenu/immagini/vuota.png</file>
         <file>piattiMenu/immagini/logo.png</file>
+        <file>cucu.ico</file>
+        <file>cucu.icns</file>
+        <file>piattiMenu/DatiMenu.xml</file>
     </qresource>
 </RCC>

@@ -1,6 +1,6 @@
 #ifndef CERCAPIATTO_H
 #define CERCAPIATTO_H
-#include<QDialog>
+//#include<QDialog>
 #include<QLabel>
 #include<QLineEdit>
 #include<QCheckBox>
@@ -11,12 +11,12 @@
 #include<QWidget>
 #include<QHBoxLayout>
 
-#include"piattobase.h"
-#include"primo.h"
-#include"secondo.h"
-#include"contorno.h"
+#include"gerarchia/piattobase.h"
+#include"gerarchia/primo.h"
+#include"gerarchia/secondo.h"
+#include"gerarchia/contorno.h"
 #include"modello.h"
-#include"viewpiatti.h"
+#include"gui/viewpiatti.h"
 
 class cercaPiatto: public QDialog {
     Q_OBJECT
@@ -63,7 +63,7 @@ class cercaPiatto: public QDialog {
         QPushButton* close;
         //modello
         modello* m;
-        viewpiatti* y;
+        viewpiatti* vp;
     public slots:
         void buttonCercaPrimi();
         void buttonCercaSecondi();

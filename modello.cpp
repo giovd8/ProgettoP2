@@ -1,11 +1,9 @@
 #include "modello.h"
-#include "primo.h"
 #include <QSaveFile>
 #include <QXmlStreamReader>
 #include <QFile>
 #include <QDebug>
 #include <iostream>
-using namespace std;
 using std::string;
 
 //costruttore e distruttore modello
@@ -159,12 +157,18 @@ void modello::salvataggioDati(){
     elementoMenu.commit();
 }
 
-//Begin e End modello
+//Begin e End modello  iteratori
 container<piattoBase*>::iteratore modello::mBegin() {
     return piatti->begin();
 }
 container<piattoBase *>::iteratore modello::mEnd() {
     return piatti->end();
+}
+container<piattoBase *>::constIteratore modello::mConstBegin() const {
+    return piatti->constBegin();
+}
+container<piattoBase *>::constIteratore modello::mConstEnd() const {
+    return piatti->constEnd();
 }
 //Get lista modello
 container<piattoBase*>*modello::getLista() const {

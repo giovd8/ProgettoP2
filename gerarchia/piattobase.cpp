@@ -2,7 +2,6 @@
 #include"primo.h"
 #include"secondo.h"
 #include"contorno.h"
-using std::string;
 
 //costruttore piattoBase
 piattoBase::piattoBase(string n,bool v, bool gf, double pr, string ui): nome(n), vegano(v), glutenFree(gf), prezzoBase(pr), urlImmagine(ui){}

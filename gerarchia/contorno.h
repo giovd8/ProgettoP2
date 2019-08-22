@@ -1,8 +1,6 @@
 #ifndef CONTORNO_H
 #define CONTORNO_H
-#include "piattobase.h"
-#include<QString>
-using std::string;
+#include "gerarchia/piattobase.h"
 
 
 class contorno: public piattoBase {

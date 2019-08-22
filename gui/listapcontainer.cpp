@@ -4,7 +4,6 @@
 listaPContainer::listaPContainer(QWidget* p) : parent(p) {
     setIconSize(QSize(200,200));
     addScrollBarWidget(new QScrollBar(Qt::Orientation::Vertical,parent), Qt::AlignRight);
-    //addScrollBarWidget(new QScrollBar(parent),Qt::AlignRight);
 }
 
 //"Trasforma" il piatto in un elemento della mia lista

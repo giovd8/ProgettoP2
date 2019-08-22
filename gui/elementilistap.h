@@ -3,9 +3,8 @@
 #include<QListWidgetItem>
 #include<QWidget>
 #include<QPushButton>
-#include"piattobase.h"
 #include<QLabel>
-
+#include"gerarchia/piattobase.h"
 
 class elementiListaP: public QListWidgetItem {
     private:
