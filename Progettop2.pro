@@ -44,5 +44,5 @@ HEADERS += \
     gui/cercapiatto.h
 
 RESOURCES += \
-    imgresource.qrc
+    dataresource.qrc
 

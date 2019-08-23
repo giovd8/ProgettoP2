@@ -1,7 +1,5 @@
 #include "piattobase.h"
 #include "primo.h"
-#include<QString>
-using std::string;
 
 //costruttore
 primo::primo(string n, bool v, bool gf, double pr, string ui, bool so, string tp, string c, string i1, string i2, string i3): piattoBase(n,v,gf,pr,ui), soia(so), tipoPasta(tp), condimento(c), ingrediente1(i1), ingrediente2(i2), ingrediente3(i3) {}

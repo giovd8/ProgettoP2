@@ -1,7 +1,6 @@
 #ifndef MENUITEM_H
 #define MENUITEM_H
 #include<QString>
-#include<iostream>
 using std::string;
 
 class piattoBase {

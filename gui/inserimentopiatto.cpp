@@ -2,6 +2,7 @@
 
 inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     QDialog(d),
+    selectB(new QLabel("Seleziona il tipo di piatto che vuoi aggiungere:",this)),
     //bottoni selezione inserimento
     primiB(new QPushButton("Inserisci primo",this)),
     secondiB(new QPushButton("Inserisci secondo",this)),
@@ -52,6 +53,10 @@ inserimentoPiatto::inserimentoPiatto(modello* mm, QWidget* d):
     QGridLayout* mainView = new QGridLayout;
     //widget inserimento
     QWidget* piattoBaseView = new QWidget(this);
+    selectB->setAlignment(Qt::AlignCenter);
+    selectB->setStyleSheet("QLabel { font: 15px; }");
+    mainView->addWidget(selectB,0,0,1,1);
+
     //tasti selezione tipo prodotto da aggiungere
     QHBoxLayout* x=new QHBoxLayout;
     x->addWidget(primiB);
@@ -137,18 +142,21 @@ void inserimentoPiatto::buttonAggiungiPrimi(){
     primiView->show();
     secondiView->hide();
     contorniView->hide();
+    this->adjustSize();
 }
 
 void inserimentoPiatto::buttonAggiungiSecondi(){
     primiView->hide();
     secondiView->show();
     contorniView->hide();
+    this->adjustSize();
 }
 
 void inserimentoPiatto::buttonAggiungiContorni(){
     primiView->hide();
     secondiView->hide();
     contorniView->show();
+    this->adjustSize();
 }
 
 piattoBase* inserimentoPiatto::insertNuovoPiatto(){

@@ -1,19 +1,9 @@
 #include "controller.h"
 
-#include<QLayout>
-#include<QVBoxLayout>
-#include<QHBoxLayout>
-#include<QtWidgets>
-#include<QDebug>
-#include<QLabel>
-#include"modello.h"
-#include"gerarchia/contorno.h"
-#include"gerarchia/piattobase.h"
-
 controller::controller(QWidget *parent):
     QWidget(parent),
-    //xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File XML(*.xml)")),
-    xmlFile(":/piattiMenu/DatiMenu.xml"),
+    xmlFile(QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File XML(*.xml)")),
+    //xmlFile(":/piattiMenu/DatiMenu.xml"),
     mp(new menuprincipale(this)),
     md(new modifichedati(this)),
     viewP(new viewpiatti(this))
@@ -201,7 +191,7 @@ void controller::eliminaPiatto(){
                 delete(*it);
                 --it;
                 m->setSalvataggioEffetuato(false);
-                QMessageBox::warning(this,"Eliminazione completata", "Il piatto e stato eliminato carrettamente!");
+                QMessageBox::information(this,"Eliminazione completata", "Il piatto e stato eliminato carrettamente!");
                 if(p) {
                     caricaPrimi();
                 }

@@ -21,6 +21,7 @@
 class inserimentoPiatto: public QDialog {
     Q_OBJECT
     private:
+        QLabel* selectB;
         QPushButton* primiB;
         QPushButton* secondiB;
         QPushButton* contorniB;

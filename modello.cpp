@@ -1,10 +1,4 @@
 #include "modello.h"
-#include <QSaveFile>
-#include <QXmlStreamReader>
-#include <QFile>
-#include <QDebug>
-#include <iostream>
-using std::string;
 
 //costruttore e distruttore modello
 modello::modello(string s, bool b):
@@ -26,8 +20,7 @@ void modello::setSalvataggioEffetuato(bool b) {
 }
 
 
-void modello::nuovoPercorso(string p)
-{
+void modello::nuovoPercorso(string p) {
     xmlFile = p;
     delete piatti;
     //salvataggioEffetuato=false;
@@ -40,7 +33,7 @@ void modello::caricamentoDati() const {
     QFile elementiMenu(QString::fromStdString(xmlFile));
     //warning se non carico nessun file xml
     if(!elementiMenu.open(QIODevice::ReadOnly)) {
-        qWarning() << "Impossibile caricare i piatti del menu!" << elementiMenu.errorString();
+        qWarning() << "Impossibile caricare i piatti del menu!\n" << elementiMenu.errorString();
         return ;
     }
     //inizio lettura file
@@ -89,16 +82,19 @@ void modello::caricamentoDati() const {
             }
 
         }
-
         elementiMenu.close();
 }
 
 //Salvo dati menu su file XML
 void modello::salvataggioDati(){
-    QSaveFile elementoMenu(QString::fromStdString(xmlFile));
 
-    if(!elementoMenu.open(QIODevice::WriteOnly))
+    //QSaveFile elementoMenu(":/piattiMenu/DatiMenu.xml");
+
+    QSaveFile elementoMenu(QString::fromStdString(xmlFile));
+    if(!elementoMenu.open(QIODevice::WriteOnly)) {
+        qWarning() << "Impossibile caricare i piatti del menu!\n" << elementoMenu.errorString();
         return;
+    }
 
     QXmlStreamWriter xmlWriter(&elementoMenu);
     //leggibilita XML
@@ -153,7 +149,6 @@ void modello::salvataggioDati(){
     }
     xmlWriter.writeEndElement();
     xmlWriter.writeEndDocument();
-    //datiSalvati = true;
     elementoMenu.commit();
 }
 
@@ -178,7 +173,6 @@ container<piattoBase*>*modello::getLista() const {
         return nullptr;
 }
 //erase modello
-
 void modello::mErase(container<piattoBase*>::iteratore it) {
     piatti->erase(it);
 }

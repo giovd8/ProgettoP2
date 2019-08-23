@@ -1,7 +1,14 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-#include <QApplication>
-#include <QWidget>
+#include<QApplication>
+#include<QWidget>
+#include<QLayout>
+#include<QVBoxLayout>
+#include<QHBoxLayout>
+#include<QtWidgets>
+#include<QDebug>
+#include<QLabel>
+
 #include"gui/menuprincipale.h"
 #include"gui/modifichedati.h"
 #include"gui/viewpiatti.h"
@@ -9,9 +16,6 @@
 #include"gui/inserimentopiatto.h"
 #include"gui/modificapiatto.h"
 #include"gui/cercapiatto.h"
-//#include"listapcontainer.h"
-
-
 
 class controller: public QWidget {
      Q_OBJECT

@@ -159,6 +159,7 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
     connect(modificaPrezzoBaseP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
     connect(modificaSoiaP,SIGNAL(stateChanged(int)),this,SLOT(showButtonModificaP()));
     connect(modificaCondimentoP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
+    connect(modificaTipoPastaP,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
     connect(modificaIngrediente1P,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
     connect(modificaIngrediente2P,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
     connect(modificaIngrediente3P,SIGNAL(textEdited(QString)),this,SLOT(showButtonModificaP()));
@@ -180,7 +181,7 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
     string nomeNewP=(modificaNomeP->text()).toLocal8Bit().constData();
     string tipoCarnePesceNewP=(modificaTipoCarnePesceP->text()).toLocal8Bit().constData();
     string tipoContornoNewP=(modificaTipoContornoP->text()).toLocal8Bit().constData();
-
+    if(nomeNewP!=pb->getNome()){
         container<piattoBase*>::iteratore it=m->mBegin();
         for(; it!=m->mEnd() && !esistente; ++it) {
             if(nomeNewP==(*it)->getNome()) {
@@ -193,7 +194,7 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
                 }
             }
         }
-
+    }
     //se il piatto non esiste gia imposto i nuovi valori
     if(!esistente) {
         //piatto base
@@ -292,7 +293,7 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
 }
 
 void modificaPiatto::buttonCaricaImmagine(){
-    urlImmagine=QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG)");
+    urlImmagine=QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG;*.JPEG");
     caricaImmagine->setIcon(QIcon(urlImmagine));
 }
 

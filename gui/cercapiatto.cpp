@@ -2,6 +2,7 @@
 
 cercaPiatto::cercaPiatto(modello* mm, viewpiatti* y, QWidget* d):
     QDialog(d),
+    selectB(new QLabel("Seleziona il tipo di piatto che vuoi cercare:",this)),
     //bottoni selezione cerca
     primiB(new QPushButton("Cerca primo",this)),
     secondiB(new QPushButton("Cerca secondo",this)),
@@ -51,13 +52,15 @@ cercaPiatto::cercaPiatto(modello* mm, viewpiatti* y, QWidget* d):
     QGridLayout* mainView = new QGridLayout;
     //widget inserimento
     QWidget* piattoBaseView = new QWidget(this);
+    selectB->setAlignment(Qt::AlignCenter);
+    selectB->setStyleSheet("QLabel { font: 15px; }");
+    mainView->addWidget(selectB,0,0,1,1);
     //tasti selezione tipo prodotto da aggiungere
     QHBoxLayout* x=new QHBoxLayout;
     x->addWidget(primiB);
     x->addWidget(secondiB);
     x->addWidget(contorniB);
     mainView->addLayout(x,1,0,1,1);
-
     //inserisco i widget piatto base nella sottogriglia
     QGridLayout* listaInserimentoPiattoBase = new QGridLayout;
     listaInserimentoPiattoBase->addWidget(nomeP,0,0,1,1);
@@ -130,18 +133,21 @@ void cercaPiatto::buttonCercaPrimi(){
     primiView->show();
     secondiView->hide();
     contorniView->hide();
+    this->adjustSize();
 }
 
 void cercaPiatto::buttonCercaSecondi(){
     primiView->hide();
     secondiView->show();
     contorniView->hide();
+    this->adjustSize();
 }
 
 void cercaPiatto::buttonCercaContorni(){
     primiView->hide();
     secondiView->hide();
     contorniView->show();
+    this->adjustSize();
 }
 
 QPushButton* cercaPiatto::getCercaP() const{

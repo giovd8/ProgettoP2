@@ -1,4 +1,4 @@
-#include "piattobase.h"
+#include"piattobase.h"
 #include"primo.h"
 #include"secondo.h"
 #include"contorno.h"
@@ -70,17 +70,3 @@ string piattoBase::piattoInString(piattoBase* pb) const {
 bool piattoBase::operator==(const piattoBase& p) const{
     return ((nome==p.getNome() || p.getNome()=="") && (vegano==p.isVegano() || p.isVegano()==false) && (glutenFree==p.isGlutenFree() || p.isGlutenFree()==false) && (prezzoBase==p.getPrezzoBase() || p.getPrezzoBase()==0));
 }
-
-//virtual std::ostream& operator<< (std::ostream& OS, const piattoBase& pb) {
-//    if(pb.isGlutenFree())
-//        std::cout<<"Senza glutine: si"<<" ";
-//    else
-//        std::cout<<"Senza glutine: no"<<" ";
-//    if(pb.isVegano())
-//        std::cout<<"Vegano: si"<<" ";
-//    else
-//        std::cout<<"Vegano: no"<<" ";
-//    return OS;
-//}
-
-

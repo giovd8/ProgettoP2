@@ -1,13 +1,16 @@
 #ifndef MODELLO_H
 #define MODELLO_H
+
+#include <QSaveFile>
+#include <QXmlStreamReader>
+#include <QFile>
+#include <QDebug>
+
 #include"gerarchia/container.h"
 #include"gerarchia/piattobase.h"
 #include"gerarchia/primo.h"
 #include"gerarchia/secondo.h"
 #include"gerarchia/contorno.h"
-//#include"inserimentopiatto.h"
-using std::string;
-
 
 class modello {
     private:
@@ -30,11 +33,9 @@ class modello {
         container<piattoBase*>::iteratore mEnd();
         container<piattoBase *>::constIteratore mConstBegin() const;
         container<piattoBase *>::constIteratore mConstEnd() const;
-        //Funzione prendi lista ed elimina oggetto
+        //Funzione get lista ed elimina oggetto
         container<piattoBase*>*getLista() const;
         void mErase(container<piattoBase*>::iteratore it);
-        //container<piattoBase*>::Constiterator mcbegin() const;
-        //container<piattoBase*>::Constiterator mcend() const;
 };
 
 #endif // MODELLO_H
