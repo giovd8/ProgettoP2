@@ -192,7 +192,7 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
     //primo
     if(primiView->isVisible()){
         if(prezzoBaseNewP==0)
-            prezzoBaseNewP=5;
+            prezzoBaseNewP=4;
         bool soiaNewP=false;
         if (insertSoiaP->isChecked())
             soiaNewP=true;
@@ -230,10 +230,7 @@ piattoBase* inserimentoPiatto::insertNuovoPiatto(){
 
 void inserimentoPiatto::buttonCaricaImmagine(){
     urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG;*.JPEG)");
-//    m->nuovoPercorso(urlImmagine.toStdString());
-//    m->caricamentoDati();
-    caricaImmagine->setIcon(QIcon(urlImmagine));
-    caricaImmagine->setIconSize(QSize(200,200));
+    caricaImmagine->setIcon(QIcon(urlImmagine)); 
 }
 
 
@@ -243,7 +240,6 @@ void inserimentoPiatto::buttonAggiungiP(){
         m->getLista()->pushEnd(temp);
         QMessageBox::information(this, "Inserimento completato", "Il nuovo piatto è stato aggiuto correttamente alla lista!");
         m->setSalvataggioEffetuato(false);
-        //m->salvataggioDati();
         inserimentoPiatto::accept();
     }
 }

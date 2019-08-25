@@ -1,6 +1,5 @@
 #ifndef CERCAPIATTO_H
 #define CERCAPIATTO_H
-//#include<QDialog>
 #include<QLabel>
 #include<QLineEdit>
 #include<QCheckBox>

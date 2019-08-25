@@ -8,7 +8,7 @@
     <secondo nome="costata" vegano="false" glutenFree="false" prezzoBase="10" urlImmagine=":/piattiMenu/immagini/costata.jpg" tipoCarnePesce="manzo" tipoPiatto="alla griglia"/>
     <secondo nome="filetto" vegano="false" glutenFree="false" prezzoBase="10" urlImmagine=":/piattiMenu/immagini/filettobranzino.jpg" tipoCarnePesce="branzino" tipoPiatto="alla piastra"/>
     <contorno nome="carciofi" vegano="true" glutenFree="true" prezzoBase="2" urlImmagine=":/piattiMenu/immagini/carciofimarinati.jpg" tipoContorno="marinati"/>
+    <primo nome="pesto e gamberi" vegano="false" glutenFree="false" prezzoBase="5" urlImmagine=":/piattiMenu/immagini/pestogamberi.jpg" soia="false" tipoPasta="calamarta" condimento="pesto" ingrediente1="gamberi" ingrediente2="" ingrediente3=""/>
     <contorno nome="patate" vegano="false" glutenFree="false" prezzoBase="2" urlImmagine=":/piattiMenu/immagini/patatespeziate.jpg" tipoContorno="speziate alle erbe"/>
     <secondo nome="filetto" vegano="false" glutenFree="false" prezzoBase="10" urlImmagine=":/piattiMenu/immagini/filetto.jpg" tipoCarnePesce="manzo" tipoPiatto="alla griglia"/>
-    <primo nome="zz" vegano="false" glutenFree="false" prezzoBase="5" urlImmagine=":/piattiMenu/immagini/vuota.png" soia="false" tipoPasta="ss" condimento="ss" ingrediente1="" ingrediente2="" ingrediente3=""/>
 </root>

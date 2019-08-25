@@ -33,12 +33,8 @@ controller::controller(QWidget *parent):
     x->addWidget(md);
     x->addWidget(mp);
 
-    //viewController->addWidget(x);
-    //parent->setStyleSheet("QVBoxLayout { Background-color: 5d5d5f; }");
-
     connect(mp->getSalva(),SIGNAL(clicked()), this, SLOT(salvaModello()));
     connect(mp->getClose(),SIGNAL(clicked()), this, SLOT(closeApp()));
-
 
     //connect pulsanti visualizzazione sottolista
     connect(viewP->getTuttiPiatti(), SIGNAL(clicked()), this, SLOT(caricaPiatti()));
@@ -78,7 +74,6 @@ void controller::closeApp() {
         switch (choice) {
           case QMessageBox::Save:
                 m->salvataggioDati();
-                //m->setSalvataggioEffetuato(true);
                 QApplication::quit();
           break;
           case QMessageBox::Discard:

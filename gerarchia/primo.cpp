@@ -52,28 +52,28 @@ void primo::setIngrediente3(string i){
 double primo::prezzoFinale() const {
     double prezzoTemp=getPrezzoBase();
     if(condimento == "pesto")
-        prezzoTemp=prezzoTemp+1;
+        prezzoTemp=prezzoTemp+1.5;
     if(condimento == "pomodoro")
-        prezzoTemp=prezzoTemp+0.5;
+        prezzoTemp=prezzoTemp+1;
     if(condimento != "")
         prezzoTemp=prezzoTemp+0.5;
 
     if(ingrediente1 == "gamberi")
-        prezzoTemp=prezzoTemp+2;
+        prezzoTemp=prezzoTemp+3;
     if(ingrediente1 == "pancetta")
         prezzoTemp=prezzoTemp+1.5;
     if(ingrediente1 != "")
         prezzoTemp=prezzoTemp+1;
 
     if(ingrediente2 == "gamberi")
-        prezzoTemp=prezzoTemp+2;
+        prezzoTemp=prezzoTemp+=3;
     if(ingrediente2 == "pancetta")
         prezzoTemp=prezzoTemp+1.5;
     if(ingrediente2 != "")
         prezzoTemp=prezzoTemp+1;
 
     if(ingrediente3 == "gamberi")
-        prezzoTemp=prezzoTemp+2;
+        prezzoTemp=prezzoTemp+3;
     if(ingrediente3 == "pancetta")
         prezzoTemp=prezzoTemp+1.5;
     if(ingrediente3 != "")

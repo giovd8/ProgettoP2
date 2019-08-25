@@ -293,8 +293,11 @@ bool modificaPiatto::modificaPiattoCorrente(piattoBase* mod){
 }
 
 void modificaPiatto::buttonCaricaImmagine(){
-    urlImmagine=QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG;*.JPEG");
+    urlImmagine = QFileDialog::getOpenFileName(this, tr("Scegli File"), ":/piattiMenu", "File immagine(*.JPG;*.PNG;*.JPEG)");
     caricaImmagine->setIcon(QIcon(urlImmagine));
+    string isNewURL=urlImmagine.toStdString();
+    if(isNewURL!=pb->getUrlImmagine())
+        showButtonModificaP();
 }
 
 void modificaPiatto::buttonModificaP(){

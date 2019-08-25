@@ -12,7 +12,7 @@ class primo: public piattoBase {
         string ingrediente3;
     public:
         //costruttore primi
-        primo(string="", bool=false, bool=false, double=5, string="", bool=false, string="", string="", string="", string="", string="");
+        primo(string="", bool=false, bool=false, double=4, string="", bool=false, string="", string="", string="", string="", string="");
 
         //costruttore di copia
         primo(const primo &);

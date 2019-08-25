@@ -23,7 +23,6 @@ void modello::setSalvataggioEffetuato(bool b) {
 void modello::nuovoPercorso(string p) {
     xmlFile = p;
     delete piatti;
-    //salvataggioEffetuato=false;
     piatti=new container<piattoBase*>();
 }
 
