@@ -108,6 +108,8 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
 
     //setto i qlineedit in base al tipo di piatto che sto modificando
     primo* x=dynamic_cast<primo*>(pMod);
+    secondo* y=dynamic_cast<secondo*>(pMod);
+    contorno* z=dynamic_cast<contorno*>(pMod);
     if(x) {
         if(x->isSoia())
             modificaSoiaP->setCheckState(Qt::CheckState(true));
@@ -122,16 +124,14 @@ modificaPiatto::modificaPiatto(modello* mm, piattoBase* pMod, QWidget* d):
         secondiView->hide();
         contorniView->hide();
     }
-    secondo* y=dynamic_cast<secondo*>(pMod);
-    if(y){
+    else if(y){
         modificaTipoCarnePesceP->setText(QString::fromStdString(y->getTipoCarnePesce()));
         modificaTipoPiattoP->setText(QString::fromStdString(y->getTipoPiatto()));
         primiView->hide();
         secondiView->show();
         contorniView->hide();
     }
-    contorno* z=dynamic_cast<contorno*>(pMod);
-    if(z){
+    else    if(z){
         modificaTipoContornoP->setText(QString::fromStdString(z->getTipoContorno()));
         primiView->hide();
         secondiView->hide();
